@@ -1,0 +1,77 @@
+{
+  "collectionName": "components_solutions_solution_items",
+  "info": {
+    "displayName": "Solution Item",
+    "description": "Individual solution with all its content and images"
+  },
+  "options": {},
+  "attributes": {
+    "number": {
+      "type": "string",
+      "required": true,
+      "maxLength": 10
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "subtitle": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "shortDescription": {
+      "type": "text",
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "MonitorCog"
+    },
+    "cardImage": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "pageTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "pageDescription": {
+      "type": "text",
+      "required": false
+    },
+    "pageImage": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "capabilitiesTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 255,
+      "default": "Our Core Capabilities:"
+    },
+    "capabilities": {
+      "type": "json",
+      "required": false
+    },
+    "additionalContent": {
+      "type": "json",
+      "required": false
+    }
+  }
+}

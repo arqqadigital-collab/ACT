@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_applications",
+  "info": {
+    "singularName": "job-application",
+    "pluralName": "job-applications",
+    "displayName": "Job Application",
+    "description": "Job applications submitted by candidates"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "firstName": {
+      "type": "string",
+      "required": true
+    },
+    "lastName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string"
+    },
+    "yearsOfExperience": {
+      "type": "integer",
+      "required": true
+    },
+    "expectedSalary": {
+      "type": "string"
+    },
+    "cv": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["files"]
+    },
+    "coverLetter": {
+      "type": "text"
+    },
+    "jobOpening": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::career.career"
+    },
+    "additionalFields": {
+      "type": "json",
+      "description": "Dynamic form field responses"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["New", "Under Review", "Interviewed", "Accepted", "Rejected"],
+      "default": "New"
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}

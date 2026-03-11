@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_careers_application_fields",
+  "info": {
+    "displayName": "Application Field",
+    "description": "Dynamic form field for job applications"
+  },
+  "options": {},
+  "attributes": {
+    "fieldName": {
+      "type": "string",
+      "required": true
+    },
+    "fieldLabel": {
+      "type": "string",
+      "required": true
+    },
+    "fieldType": {
+      "type": "enumeration",
+      "enum": ["text", "email", "number", "textarea", "select", "file"],
+      "default": "text",
+      "required": true
+    },
+    "placeholder": {
+      "type": "string"
+    },
+    "isRequired": {
+      "type": "boolean",
+      "default": false
+    },
+    "options": {
+      "type": "json",
+      "description": "For select fields - array of options"
+    },
+    "validationRules": {
+      "type": "json",
+      "description": "Custom validation rules"
+    }
+  }
+}

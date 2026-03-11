@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "hotels_physical_securities",
+  "info": {
+    "singularName": "hotels-physical-security",
+    "pluralName": "hotels-physical-securities",
+    "displayName": "Hotels Physical Security",
+    "description": "Physical Security & Smart Solutions section for the Hotels & Resorts page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "required": false,
+      "default": "Physical Security & Smart Solutions"
+    },
+    "sectionDescription": {
+      "type": "text",
+      "required": false
+    },
+    "systems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.security-system-item"
+    }
+  }
+}

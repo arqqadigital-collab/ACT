@@ -1,0 +1,26 @@
+{
+  "kind": "singleType",
+  "collectionName": "hotels_benefits",
+  "info": {
+    "singularName": "hotels-benefits",
+    "pluralName": "hotels-benefits-data",
+    "displayName": "Hotels Benefits",
+    "description": "Benefits section for the Hotels & Resorts page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "required": false,
+      "default": "Benefits for Hotels & Resorts"
+    },
+    "benefits": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.benefit-item"
+    }
+  }
+}

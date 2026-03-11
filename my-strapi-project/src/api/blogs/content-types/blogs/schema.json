@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "blogs_page",
+  "info": {
+    "singularName": "blogs",
+    "pluralName": "blog-posts",
+    "displayName": "Blogs Page",
+    "description": "All blog posts with their dynamic content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "blogs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.blog-item"
+    }
+  }
+}

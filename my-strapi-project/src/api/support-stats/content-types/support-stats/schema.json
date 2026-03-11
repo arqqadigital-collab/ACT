@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "support_stats",
+  "info": {
+    "singularName": "support-stats",
+    "pluralName": "support-stats-data",
+    "displayName": "Support Stats",
+    "description": "Statistics displayed on the support page"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": ""
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "default": "Our Support in Numbers"
+    },
+    "sectionDescription": {
+      "type": "string",
+      "default": "Delivering excellence across regions with measurable impact."
+    },
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.support-stat-item"
+    }
+  }
+}

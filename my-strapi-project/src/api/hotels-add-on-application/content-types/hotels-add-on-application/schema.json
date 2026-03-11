@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "hotels_add_on_applications",
+  "info": {
+    "singularName": "hotels-add-on-application",
+    "pluralName": "hotels-add-on-applications",
+    "displayName": "Hotels Add-On Applications",
+    "description": "Add-On Applications section for the Hotels & Resorts page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "required": false,
+      "default": "Add-On Applications"
+    },
+    "sectionDescription": {
+      "type": "text",
+      "required": false
+    },
+    "applications": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.add-on-app-item"
+    }
+  }
+}

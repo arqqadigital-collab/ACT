@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_professional_services",
+  "info": {
+    "displayName": "Professional Service",
+    "description": "A professional service item with title, description and image"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    }
+  }
+}

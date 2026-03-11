@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_intelligence_feature_items",
+  "info": {
+    "displayName": "Intelligence Feature Item",
+    "description": "A single business intelligence feature with id, title, description and image",
+    "icon": "chartLine"
+  },
+  "options": {},
+  "attributes": {
+    "featureId": {
+      "type": "string",
+      "required": true,
+      "unique": false
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "kind": "singleType",
+  "collectionName": "hospitality_why_chooses",
+  "info": {
+    "singularName": "hospitality-why-choose",
+    "pluralName": "hospitality-why-chooses",
+    "displayName": "Hospitality Why Choose ACT",
+    "description": "Why Choose ACT section for the hospitality page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "badge": {
+      "type": "string",
+      "required": false,
+      "default": "Why ACT"
+    },
+    "heading": {
+      "type": "string",
+      "required": false,
+      "default": "Why Choose ACT for"
+    },
+    "headingHighlight": {
+      "type": "string",
+      "required": false,
+      "default": "Hospitality Technology"
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.why-choose-item"
+    }
+  }
+}

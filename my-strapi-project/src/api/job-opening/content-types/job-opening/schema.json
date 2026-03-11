@@ -1,0 +1,81 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_openings",
+  "info": {
+    "singularName": "job-opening",
+    "pluralName": "job-openings",
+    "displayName": "Job Opening",
+    "description": "Career opportunities at ACT"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "department": {
+      "type": "string",
+      "required": true
+    },
+    "location": {
+      "type": "string",
+      "required": true
+    },
+    "employmentType": {
+      "type": "enumeration",
+      "enum": ["Full Time", "Part Time", "Contract", "Internship"],
+      "default": "Full Time",
+      "required": true
+    },
+    "experienceLevel": {
+      "type": "enumeration",
+      "enum": ["Entry Level", "Mid Level", "Senior Level", "Lead/Manager"],
+      "required": true
+    },
+    "summary": {
+      "type": "text",
+      "required": true
+    },
+    "description": {
+      "type": "richtext",
+      "required": true
+    },
+    "responsibilities": {
+      "type": "richtext",
+      "required": true
+    },
+    "requirements": {
+      "type": "richtext",
+      "required": true
+    },
+    "qualifications": {
+      "type": "richtext"
+    },
+    "benefits": {
+      "type": "richtext"
+    },
+    "salaryRange": {
+      "type": "string"
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "applicationDeadline": {
+      "type": "date"
+    },
+    "formFields": {
+      "type": "component",
+      "repeatable": true,
+      "component": "careers.application-field"
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "kind": "singleType",
+  "collectionName": "services_page_hero",
+  "info": {
+    "singularName": "services-page-hero",
+    "pluralName": "services-page-heroes",
+    "displayName": "Services Page Hero",
+    "description": "Hero section content for the services page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "badge": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100,
+      "default": "Our IT Services"
+    },
+    "headline": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500,
+      "default": "Building Smarter, Safer, and Scalable IT with ACT"
+    },
+    "highlightText": {
+      "type": "string",
+      "required": false,
+      "maxLength": 100,
+      "default": "Scalable IT",
+      "description": "Text to highlight with gradient (should be part of headline)"
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "default": "Supporting Your Business Every Step of the Way with Reliable, Secure, and Scalable Services"
+    },
+    "subDescription": {
+      "type": "text",
+      "required": false,
+      "default": "ACT delivers end-to-end IT services tailored to your business needs, from infrastructure management and digital transformation to cybersecurity and managed operations."
+    },
+    "ctaText": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "default": "Let's Talk"
+    },
+    "ctaLink": {
+      "type": "string",
+      "required": true,
+      "default": "/contact"
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"],
+      "description": "Hero background image"
+    }
+  }
+}

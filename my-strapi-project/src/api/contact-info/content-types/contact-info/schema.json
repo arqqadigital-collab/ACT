@@ -1,0 +1,37 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_info",
+  "info": {
+    "singularName": "contact-info",
+    "pluralName": "contact-infos",
+    "displayName": "Contact Information",
+    "description": "Contact information including hotline, email, and offices"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "hotline": {
+      "type": "string",
+      "required": true
+    },
+    "hotlineDescription": {
+      "type": "string",
+      "default": "24/7 Support Available"
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "emailDescription": {
+      "type": "string",
+      "default": "Get response within 24 hours"
+    },
+    "offices": {
+      "type": "component",
+      "repeatable": true,
+      "component": "contact.office"
+    }
+  }
+}

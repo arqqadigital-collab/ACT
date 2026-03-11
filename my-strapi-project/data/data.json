@@ -1,0 +1,555 @@
+{
+  "global": {
+    "siteName": "Strapi Blog",
+    "defaultSeo": {
+      "metaTitle": "Page",
+      "metaDescription": "A blog made with Strapi",
+      "shareImage": null
+    },
+    "siteDescription": "A Blog made with Strapi",
+    "favicon": null
+  },
+  "about": {
+    "title": "About the strapi blog",
+    "blocks": [
+      {
+        "__component": "shared.quote",
+        "title": "Thelonius Monk",
+        "body": "You've got to dig it to dig it, you dig?"
+      },
+      {
+        "__component": "shared.rich-text",
+        "body": "## Dedit imago conspicuus cum capillis totidem inhibere\n\nLorem markdownum **rerum**, est limine: columbas: ab infelix hostem arbore nudis\ncrudelis. Videtur reliquit ambo ferrum dote sub amne fatis **illuc**, in magis,\nnec."
+      },
+      {
+        "__component": "shared.media",
+        "file": "coffee-art.jpg"
+      }
+    ]
+  },
+  "hero-section": {
+    "headline": "Empowering Organizations with Trusted Technology Solutions in Egypt & Beyond",
+    "description": "Since 1988, ACT has been at the forefront of Egypt's ICT sector, delivering innovative technology solutions and trusted services that empower businesses, governments, and communities to thrive.",
+    "videoUrl": "/videos/hero-bg.mp4"
+  },
+  "solutions-page-hero": {
+    "badge": "Our Solutions",
+    "headline": "Smart, Secure, and Scalable Solutions, Tailored for the Digital Future",
+    "highlightText": "Scalable Solutions,",
+    "description": "At ACT, we deliver holistic technology ecosystems designed to empower enterprises, governments, and industries.",
+    "subDescription": "From digital modernization and hybrid IT to AI-powered networking and Zero Trust cybersecurity, our solutions ensure your operations are always connected, protected, and ready for what's next.",
+    "ctaText": "Let's Talk",
+    "ctaLink": "/contact"
+  },
+  "solution": {
+    "solutions": [
+      {
+        "number": "01",
+        "title": "Digital Solutions Section",
+        "slug": "digital",
+        "subtitle": "AI & Automation",
+        "shortDescription": "AI-powered platforms, automation tools, and data analytics that drive smarter decisions and better customer experiences. We help organizations unlock efficiency, speed, and competitive advantage through intelligent digital transformation.",
+        "icon": "MonitorCog",
+        "cardImage": "../assets/solutions/digital-solutions.jpg",
+        "pageImage": "../assets/solutions/digital-solutions.jpg",
+        "order": 1,
+        "pageTitle": "Streamline operations, unlock agility, and drive innovation.",
+        "pageDescription": "ACT's Digital Solutions empower enterprises to transform how they work through smarter systems, automated platforms, and real-time insights. From virtualization and disaster recovery to IoT connectivity and AI-driven monitoring, we help organizations modernize their digital core and stay resilient in a rapidly changing world.",
+        "capabilitiesTitle": "Our Core Capabilities:",
+        "capabilities": [
+          "Virtualization & DR",
+          "Data Management",
+          "Monitoring & Control",
+          "Container Management",
+          "IoT Platform"
+        ]
+      },
+      {
+        "number": "02",
+        "title": "Networking Solutions Section",
+        "slug": "networking",
+        "subtitle": "Enterprise Networks",
+        "shortDescription": "Enterprise-grade networks designed for mobility, IoT readiness, and agile business operations. Our solution ensure network security, uptime, and business continuity at every stage of growth.",
+        "icon": "Network",
+        "cardImage": "../assets/solutions/networking-solutions.jpg",
+        "pageImage": "../assets/solutions/networking-solutions.jpg",
+        "order": 2,
+        "pageTitle": "AI-Powered Networking Solutions for a Connected, Secure, and Scalable Future",
+        "pageDescription": "ACT delivers enterprise-grade networking solutions that empower organizations to stay connected, secure, and future-ready. We design intelligent, cloud-ready infrastructures that combine performance, visibility, and automation, all built on partnerships with Cisco, HPE Aruba, Altai, and Nokia. From campuses and data centers to industrial sites and hybrid clouds, ACT ensures seamless communication and resilience across every environment.",
+        "capabilitiesTitle": "Our Core Capabilities:",
+        "capabilities": [
+          "Networking Architecture",
+          "Enterprise Switching",
+          "Data Center Networking",
+          "Wireless & Mobility",
+          "SD-WAN",
+          "GPON Solutions"
+        ]
+      },
+      {
+        "number": "03",
+        "title": "Hybrid IT section",
+        "slug": "hybrid-it",
+        "subtitle": "Cloud & On-Premises",
+        "shortDescription": "Future-ready infrastructure that balances flexibility, cost-efficiency, and scalability. ACT enables seamless cloud migration while maintaining secure on-premises systems for critical workloads.",
+        "icon": "Cloud",
+        "cardImage": "../assets/solutions/hybrid-it.jpg",
+        "pageImage": "../assets/solutions/hybrid-it.jpg",
+        "order": 3,
+        "pageTitle": "Powering Business Agility with Intelligent, Scalable Infrastructure",
+        "pageDescription": "ACT's Hybrid IT Solutions enable enterprises to modernize their IT foundations with the right balance of on-premises performance, cloud flexibility, and edge scalability. We help organizations design and deploy resilient compute, storage, and endpoint systems that deliver seamless integration, operational efficiency, and long-term value.",
+        "capabilitiesTitle": "Our Core Capabilities:",
+        "capabilities": [
+          "Compute",
+          "Storage",
+          "Endpoint Solutions"
+        ]
+      },
+      {
+        "number": "04",
+        "title": "Cybersecurity Solutions Section",
+        "slug": "cybersecurity",
+        "subtitle": "Security & Compliance",
+        "shortDescription": "Advanced security against evolving digital threats. ACT's cybersecurity services comply with ISO, NTRA, and GDPR standards to safeguard enterprises, banks, and government organizations.",
+        "icon": "Shield",
+        "cardImage": "../assets/solutions/cyber-security.jpg",
+        "pageImage": "../assets/solutions/cyber-security.jpg",
+        "order": 4,
+        "pageTitle": "Zero Trust Security for a Borderless World",
+        "pageDescription": "In today's hyperconnected world, trust must be earned, not assumed. At ACT, we empower organizations to safeguard their digital ecosystems through next-generation cybersecurity solutions rooted in a Zero Trust framework. By integrating AI, machine learning, and threat intelligence, we help enterprises continuously protect users, data, and applications wherever they operate.",
+        "capabilitiesTitle": "Our Security Portfolio",
+        "capabilities": [
+          "Network Security",
+          "Endpoint Security",
+          "Cloud Security",
+          "Data Security",
+          "Vulnerability Management",
+          "Identity Security",
+          "Application Security",
+          "SOC & Analytics",
+          "OT & IoT Security"
+        ],
+        "additionalContent": "<p>ACT's Zero Trust model secures every digital interaction, validating identity, assessing context, and protecting assets across your IT environment.</p><p>This adaptive approach ensures that every user, device, and application interaction is continuously verified, minimizing risk and maximizing business continuity.</p>"
+      }
+    ]
+  },
+  "services-page-hero": {
+    "badge": "Our IT Services",
+    "headline": "Building Smarter, Safer, and Scalable IT with ACT",
+    "highlightText": "Scalable IT",
+    "description": "Supporting Your Business Every Step of the Way with Reliable, Secure, and Scalable Services.",
+    "subDescription": "ACT delivers end-to-end IT services tailored to your business needs, from infrastructure management and digital transformation to cybersecurity and managed operations.",
+    "ctaText": "Let's Talk",
+    "ctaLink": "/contact"
+  },
+  "service": {
+    "services": [
+      {
+        "label": "Infrastructure Services",
+        "slug": "infrastructure",
+        "description": "Enterprise-grade infrastructure solutions",
+        "href": "/services#infrastructure",
+        "icon": "server",
+        "order": 1,
+        "pageTitle": "The Foundation of Every IT Environment",
+        "pageDescription": "Ensuring your business runs smoothly, securely, and efficiently with enterprise-grade infrastructure.",
+        "pageImage": "../assets/services/infrastructure.jpg",
+        "items": [
+          {
+            "icon": "Server",
+            "title": "Computing",
+            "description": "High-performance servers and storage powering critical applications."
+          },
+          {
+            "icon": "Monitor",
+            "title": "Operating Systems (O.S.)",
+            "description": "Expert management of Windows, Linux & hybrid environments."
+          },
+          {
+            "icon": "Users",
+            "title": "Active Directory (AD)",
+            "description": "Centralized identity & permissions management."
+          },
+          {
+            "icon": "CloudCog",
+            "title": "Virtualization",
+            "description": "Maximize resources with virtualized systems to cut costs."
+          },
+          {
+            "icon": "Layers",
+            "title": "VDI",
+            "description": "Secure remote desktop access for a mobile workforce."
+          }
+        ]
+      },
+      {
+        "label": "Digital Transformation Services",
+        "slug": "digital-transformation",
+        "description": "Modernize your business operations",
+        "href": "/services#digital-transformation",
+        "icon": "cpu",
+        "order": 2,
+        "pageTitle": "Empowering Your Digital Future",
+        "pageDescription": "Transform your business with cutting-edge digital solutions and automation.",
+        "pageImage": "../assets/services/digital-transformation.jpg",
+        "items": [
+          {
+            "icon": "Shield",
+            "title": "Data Protection & Continuity",
+            "description": "Ensure business continuity with robust data protection strategies."
+          },
+          {
+            "icon": "Gauge",
+            "title": "Application Performance Monitoring (APM)",
+            "description": "Monitor and optimize application performance in real-time."
+          },
+          {
+            "icon": "Activity",
+            "title": "IT Operations Management (ITOM)",
+            "description": "Streamline IT operations with intelligent management tools."
+          },
+          {
+            "icon": "BrainCircuit",
+            "title": "Automation & AI Workflows",
+            "description": "Automate processes with AI-powered workflow solutions."
+          },
+          {
+            "icon": "Bot",
+            "title": "AI Powered Chatbots",
+            "description": "Enhance customer experience with intelligent chatbot solutions."
+          }
+        ]
+      },
+      {
+        "label": "Security Services",
+        "slug": "security",
+        "description": "Comprehensive security solutions",
+        "href": "/services#security",
+        "icon": "shield",
+        "order": 3,
+        "pageTitle": "Protecting What Matters Most",
+        "pageDescription": "World-class cybersecurity services to protect your business from evolving threats.",
+        "pageImage": "../assets/services/security.jpg",
+        "items": [
+          {
+            "icon": "AlertTriangle",
+            "title": "Red Team Services",
+            "description": "Ethical hacking and penetration testing to identify vulnerabilities."
+          },
+          {
+            "icon": "Lock",
+            "title": "Firewalls & NAC",
+            "description": "Network access control and advanced firewall protection."
+          },
+          {
+            "icon": "Eye",
+            "title": "24/7 SOC",
+            "description": "Around-the-clock security operations center monitoring."
+          },
+          {
+            "icon": "Mail",
+            "title": "Mail Security",
+            "description": "Protect your email communications from threats."
+          },
+          {
+            "icon": "Radar",
+            "title": "Endpoint Detection (EDR/XDR)",
+            "description": "Advanced endpoint detection and response capabilities."
+          },
+          {
+            "icon": "ShieldCheck",
+            "title": "SIEM & SOAR Solutions",
+            "description": "Security information and event management with orchestration."
+          },
+          {
+            "icon": "Globe",
+            "title": "DNS Security",
+            "description": "Protect your DNS infrastructure from attacks."
+          },
+          {
+            "icon": "CloudCog",
+            "title": "SASE",
+            "description": "Cloud-based secure access service edge solutions."
+          }
+        ]
+      },
+      {
+        "label": "Data Center Services",
+        "slug": "data-center",
+        "description": "Secure and scalable data management",
+        "href": "/services#data-center",
+        "icon": "database",
+        "order": 4,
+        "pageTitle": "Mission-Critical Infrastructure",
+        "pageDescription": "Build and maintain world-class data centers with best-in-class infrastructure.",
+        "pageImage": "../assets/services/data-center.jpg",
+        "items": [
+          {
+            "icon": "Zap",
+            "title": "Power & Backup Systems",
+            "description": "Reliable power infrastructure with backup solutions."
+          },
+          {
+            "icon": "Cable",
+            "title": "Civil Preparation & Cabling",
+            "description": "Professional infrastructure setup and cabling services."
+          },
+          {
+            "icon": "Flame",
+            "title": "Fire Protection & Suppression",
+            "description": "Advanced fire detection and suppression systems."
+          },
+          {
+            "icon": "Fingerprint",
+            "title": "Access Control & CCTV",
+            "description": "Comprehensive security monitoring and access management."
+          },
+          {
+            "icon": "Wind",
+            "title": "Cooling & Lighting Systems",
+            "description": "Optimal environmental control for data centers."
+          }
+        ]
+      },
+      {
+        "label": "Managed Operations",
+        "slug": "managed-operations",
+        "description": "End-to-end operational excellence",
+        "href": "/services#managed-operations",
+        "icon": "settings",
+        "order": 5,
+        "pageTitle": "Focus on Growth, We Handle IT",
+        "pageDescription": "Comprehensive managed services that reduce costs and complexity.",
+        "pageImage": "../assets/services/managed-operations.jpg",
+        "items": [
+          {
+            "icon": "Headset",
+            "title": "Fully Managed Services",
+            "description": "End-to-end IT outsourcing."
+          },
+          {
+            "icon": "UserPlus",
+            "title": "Co-Managed Services",
+            "description": "Augment your existing IT team."
+          },
+          {
+            "icon": "Briefcase",
+            "title": "Professional Services",
+            "description": "On-demand project-based support."
+          }
+        ]
+      }
+    ]
+  },
+  "categories": [
+    {
+      "name": "news",
+      "slug": "news"
+    },
+    {
+      "name": "tech",
+      "slug": "tech"
+    },
+    {
+      "name": "food",
+      "slug": "food"
+    },
+    {
+      "name": "nature",
+      "slug": "nature"
+    },
+    {
+      "name": "story",
+      "slug": "story"
+    }
+  ],
+  "authors": [
+    {
+      "name": "David Doe",
+      "email": "daviddoe@strapi.io",
+      "avatar": "daviddoe@strapi.io.jpg"
+    },
+    {
+      "name": "Sarah Baker",
+      "email": "sarahbaker@strapi.io",
+      "avatar": "sarahbaker@strapi.io.jpg"
+    }
+  ],
+  "articles": [
+    {
+      "title": "The internet's Own boy",
+      "slug": "the-internet-s-own-boy",
+      "category": {
+        "id": 5
+      },
+      "author": {
+        "id": 1
+      },
+      "description": "Follow the story of Aaron Swartz, the boy who could change the world",
+      "cover": null,
+      "blocks": [
+        {
+          "__component": "shared.rich-text",
+          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Thelonius Monk",
+          "body": "You've got to dig it to dig it, you dig?"
+        },
+        {
+          "__component": "shared.media",
+          "file": "coffee-art.jpg"
+        },
+        {
+          "__component": "shared.rich-text",
+          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
+        },
+        {
+          "__component": "shared.slider",
+          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
+        }
+      ]
+    },
+    {
+      "title": "This shrimp is awesome",
+      "slug": "this-shrimp-is-awesome",
+      "category": {
+        "id": 4
+      },
+      "author": {
+        "id": 1
+      },
+      "description": "Mantis shrimps, or stomatopods, are marine crustaceans of the order Stomatopoda.",
+      "cover": null,
+      "blocks": [
+        {
+          "__component": "shared.rich-text",
+          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Thelonius Monk",
+          "body": "You've got to dig it to dig it, you dig?"
+        },
+        {
+          "__component": "shared.media",
+          "file": "coffee-art.jpg"
+        },
+        {
+          "__component": "shared.rich-text",
+          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
+        },
+        {
+          "__component": "shared.slider",
+          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
+        }
+      ]
+    },
+    {
+      "title": "A bug is becoming a meme on the internet",
+      "slug": "a-bug-is-becoming-a-meme-on-the-internet",
+      "category": {
+        "id": 2
+      },
+      "author": {
+        "id": 2
+      },
+      "description": "How a bug on MySQL is becoming a meme on the internet",
+      "cover": null,
+      "blocks": [
+        {
+          "__component": "shared.rich-text",
+          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Thelonius Monk",
+          "body": "You've got to dig it to dig it, you dig?"
+        },
+        {
+          "__component": "shared.media",
+          "file": "coffee-art.jpg"
+        },
+        {
+          "__component": "shared.rich-text",
+          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
+        },
+        {
+          "__component": "shared.slider",
+          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
+        }
+      ]
+    },
+    {
+      "title": "Beautiful picture",
+      "slug": "beautiful-picture",
+      "category": {
+        "id": 4
+      },
+      "author": {
+        "id": 2
+      },
+      "description": "Description of a beautiful picture",
+      "cover": null,
+      "blocks": [
+        {
+          "__component": "shared.rich-text",
+          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Thelonius Monk",
+          "body": "You've got to dig it to dig it, you dig?"
+        },
+        {
+          "__component": "shared.media",
+          "file": "coffee-art.jpg"
+        },
+        {
+          "__component": "shared.rich-text",
+          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
+        },
+        {
+          "__component": "shared.slider",
+          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
+        }
+      ]
+    },
+    {
+      "title": "What's inside a Black Hole",
+      "slug": "what-s-inside-a-black-hole",
+      "category": {
+        "id": 1
+      },
+      "author": {
+        "id": 2
+      },
+      "description": "Maybe the answer is in this article, or not...",
+      "cover": null,
+      "blocks": [
+        {
+          "__component": "shared.rich-text",
+          "body": "## Probant \n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. \n\n## Abit sua\n\nse Lorem markdownum negat. Argo *saxa* videnda cornuaque hunc qui tanta spes teneas! Obliquis est dicenti est salutat ille tamen iuvenum nostrae dolore. - Colores nocituraque comitata eripiunt - Addit quodcunque solum cui et dextram illis - Nulli meus nec extemplo ille ferebat pressit Se blandita fulvae vox gravem Pittheus cesserunt sanguine herbis tu comitum tenuit. Sui in ruunt; Doridaque maculosae fuissem! Et loqui. "
+        },
+        {
+          "__component": "shared.quote",
+          "title": "Thelonius Monk",
+          "body": "You've got to dig it to dig it, you dig?"
+        },
+        {
+          "__component": "shared.media",
+          "file": "coffee-art.jpg"
+        },
+        {
+          "__component": "shared.rich-text",
+          "body": "## Spatiantia astra \n\nFoeda, medio silva *errandum*: onus formam munere. Mutata bibulis est auxiliare arces etiamnunc verbis virgineo Priamidas illa Thescelus, nam fit locis lucis auras. Exitus hospes gratulor ut pondere [speslimite](http://www.curas.io/figuram); quid habent, Avernales faciente de. Pervenit Ino sonabile supplex cognoscenti vires, Bacchumque errat miserarum venandi dignabere dedisti. Discrimina iuncosaque virgaque tot sine superest [fissus](http://quos.org/sitet.aspx). Non color esset potest non sumit, sed vix arserat. Nisi immo silva tantum pectusque quos pennis quisquam artus!"
+        },
+        {
+          "__component": "shared.slider",
+          "files": ["coffee-art.jpg", "coffee-beans.jpg"]
+        }
+      ]
+    }
+  ]
+}

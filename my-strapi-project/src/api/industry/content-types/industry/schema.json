@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "industries_page",
+  "info": {
+    "singularName": "industry",
+    "pluralName": "industries",
+    "displayName": "Industries Page",
+    "description": "All industries with their dynamic content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "industries": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.industry-item"
+    }
+  }
+}

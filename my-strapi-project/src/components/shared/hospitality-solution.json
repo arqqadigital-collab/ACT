@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_shared_hospitality_solutions",
+  "info": {
+    "displayName": "Hospitality Solution",
+    "description": "A hospitality solution card with label, title, description, icon and image"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "required": false,
+      "default": "Hotel"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "kind": "singleType",
+  "collectionName": "solutions_page_hero",
+  "info": {
+    "singularName": "solutions-page-hero",
+    "pluralName": "solutions-page-heroes",
+    "displayName": "Solutions Page Hero",
+    "description": "Hero section content for the solutions page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "badge": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100,
+      "default": "Our Solutions"
+    },
+    "headline": {
+      "type": "string",
+      "required": true,
+      "maxLength": 500,
+      "default": "Smart, Secure, and Scalable Solutions, Tailored for the Digital Future"
+    },
+    "highlightText": {
+      "type": "string",
+      "required": false,
+      "maxLength": 100,
+      "default": "Scalable Solutions,",
+      "description": "Text to highlight with gradient (should be part of headline)"
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "default": "At ACT, we deliver holistic technology ecosystems designed to empower enterprises, governments, and industries."
+    },
+    "subDescription": {
+      "type": "text",
+      "required": false,
+      "default": "From digital modernization and hybrid IT to AI-powered networking and Zero Trust cybersecurity, our solutions ensure your operations are always connected, protected, and ready for what's next."
+    },
+    "ctaText": {
+      "type": "string",
+      "required": true,
+      "maxLength": 50,
+      "default": "Let's Talk"
+    },
+    "ctaLink": {
+      "type": "string",
+      "required": true,
+      "default": "/contact"
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"],
+      "description": "Hero background image"
+    }
+  }
+}

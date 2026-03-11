@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "case_studies_page",
+  "info": {
+    "singularName": "case-studies",
+    "pluralName": "case-studies-collection",
+    "displayName": "Case Studies Page",
+    "description": "All case studies with their dynamic content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "caseStudies": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.case-study-item"
+    }
+  }
+}

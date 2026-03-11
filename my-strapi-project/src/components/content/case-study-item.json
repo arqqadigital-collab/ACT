@@ -1,0 +1,87 @@
+{
+  "collectionName": "components_content_case_study_items",
+  "info": {
+    "displayName": "Case Study Item",
+    "description": "Individual case study entry"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "excerpt": {
+      "type": "text",
+      "required": false
+    },
+    "category": {
+      "type": "string",
+      "required": true
+    },
+    "industry": {
+      "type": "string",
+      "required": true
+    },
+    "client": {
+      "type": "string",
+      "required": false
+    },
+    "coverImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "backgroundImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "iconName": {
+      "type": "string",
+      "required": false,
+      "default": "Building"
+    },
+    "challenge": {
+      "type": "richtext",
+      "required": false
+    },
+    "solution": {
+      "type": "richtext",
+      "required": false
+    },
+    "results": {
+      "type": "richtext",
+      "required": false
+    },
+    "testimonial": {
+      "type": "richtext",
+      "required": false
+    },
+    "technologies": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.tag-item"
+    },
+    "metrics": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.metric-item"
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

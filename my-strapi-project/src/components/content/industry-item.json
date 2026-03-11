@@ -1,0 +1,61 @@
+{
+  "collectionName": "components_content_industry_items",
+  "info": {
+    "displayName": "Industry Item",
+    "description": "Complete industry entry with all sections"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": true
+    },
+    "shortDescription": {
+      "type": "text",
+      "required": true
+    },
+    "cardImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "heroSection": {
+      "type": "component",
+      "repeatable": false,
+      "component": "sections.hero-section"
+    },
+    "ourExpertise": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.feature-item"
+    },
+    "technologySolutions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.solution-item"
+    },
+    "whyChooseUs": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.feature-item"
+    },
+    "partners": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.partner"
+    },
+    "successStoriesText": {
+      "type": "richtext",
+      "required": false
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

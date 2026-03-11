@@ -1,0 +1,58 @@
+{
+  "collectionName": "components_services_service_items",
+  "info": {
+    "displayName": "Service Item",
+    "description": "Individual service with all its content and images"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "slug": {
+      "type": "string",
+      "required": true,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "href": {
+      "type": "string",
+      "required": true,
+      "maxLength": 255
+    },
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "server"
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    },
+    "pageTitle": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "pageDescription": {
+      "type": "text",
+      "required": false
+    },
+    "pageImage": {
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    "items": {
+      "type": "json",
+      "required": false,
+      "description": "Array of service detail items with icon, title, and description"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "collectionName": "components_shared_stat_items",
+  "info": {
+    "displayName": "Stat Item",
+    "description": "Individual statistic item"
+  },
+  "options": {},
+  "attributes": {
+    "end": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "suffix": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "Calendar"
+    },
+    "iconSize": {
+      "type": "integer",
+      "required": true,
+      "default": 32
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    }
+  }
+}

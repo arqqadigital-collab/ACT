@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_shared_success_story_items",
+  "info": {
+    "displayName": "Success Story Item",
+    "description": "A single success story with category, title, subtitle and image",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "category": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "subtitle": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

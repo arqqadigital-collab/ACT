@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_shared_add_on_app_items",
+  "info": {
+    "displayName": "Add-On App Item",
+    "description": "A single add-on application card with icon, title, description and optional sub-items list",
+    "icon": "puzzle-piece"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "Users"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "subItems": {
+      "type": "json",
+      "required": false
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

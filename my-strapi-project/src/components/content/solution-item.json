@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_content_solution_items",
+  "info": {
+    "displayName": "Solution Item",
+    "description": "Solution with title, description and optional features list"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "icon": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "iconName": {
+      "type": "string",
+      "required": false,
+      "default": "Cpu"
+    },
+    "features": {
+      "type": "richtext",
+      "required": false
+    }
+  }
+}

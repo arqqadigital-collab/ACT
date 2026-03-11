@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "stats_section",
+  "info": {
+    "singularName": "stats-section",
+    "pluralName": "stats-sections",
+    "displayName": "Stats Section",
+    "description": "Statistics for the counter section"
+  },
+  "options": {
+    "draftAndPublish": true,
+    "comment": ""
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.stat-item"
+    }
+  }
+}

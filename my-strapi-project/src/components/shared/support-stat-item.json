@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_support_stat_items",
+  "info": {
+    "displayName": "Support Stat Item",
+    "description": "A single stat item for the support page"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true
+    },
+    "value": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

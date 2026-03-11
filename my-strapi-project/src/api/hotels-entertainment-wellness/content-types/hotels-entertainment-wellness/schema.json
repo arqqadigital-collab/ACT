@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "hotels_entertainment_wellnesses",
+  "info": {
+    "singularName": "hotels-entertainment-wellness",
+    "pluralName": "hotels-entertainment-wellnesses",
+    "displayName": "Hotels Entertainment & Wellness",
+    "description": "Entertainment & Wellness stacking cards section for Hotels & Resorts page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "badge": {
+      "type": "string",
+      "required": false,
+      "default": "Entertainment & Wellness Segment"
+    },
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": "Entertainment & Wellness Segment"
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "cards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.entertainment-wellness-item"
+    }
+  }
+}

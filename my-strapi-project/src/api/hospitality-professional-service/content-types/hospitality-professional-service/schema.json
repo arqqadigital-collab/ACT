@@ -1,0 +1,35 @@
+{
+  "kind": "singleType",
+  "collectionName": "hospitality_professional_services",
+  "info": {
+    "singularName": "hospitality-professional-service",
+    "pluralName": "hospitality-professional-services",
+    "displayName": "Hospitality Professional Services",
+    "description": "Professional services section for the hospitality page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "badge": {
+      "type": "string",
+      "required": false,
+      "default": "Professional Services"
+    },
+    "heading": {
+      "type": "text",
+      "required": false
+    },
+    "headingHighlight": {
+      "type": "string",
+      "required": false,
+      "default": "we ensure it performs to perfection."
+    },
+    "services": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.professional-service"
+    }
+  }
+}

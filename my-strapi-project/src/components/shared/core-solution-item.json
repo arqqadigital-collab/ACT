@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_shared_core_solution_items",
+  "info": {
+    "displayName": "Core Solution Item",
+    "description": "A single core solution card with icon, title, description and features list",
+    "icon": "layer"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "Building2"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "features": {
+      "type": "json",
+      "required": false
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

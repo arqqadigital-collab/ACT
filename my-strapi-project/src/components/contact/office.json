@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_contact_offices",
+  "info": {
+    "displayName": "Office",
+    "description": "Office location information"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "address": {
+      "type": "text",
+      "required": true
+    },
+    "fax": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

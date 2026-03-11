@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_content_technology_tags",
+  "info": {
+    "displayName": "Technology Tag",
+    "description": "Technology or tag label"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

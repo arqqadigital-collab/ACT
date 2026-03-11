@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hotels_demo_requests",
+  "info": {
+    "singularName": "hotels-demo-request",
+    "pluralName": "hotels-demo-requests",
+    "displayName": "Hotels Demo Request",
+    "description": "Demo requests from Hotels & Resorts page"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "businessType": {
+      "type": "enumeration",
+      "enum": ["hotel", "resort", "boutique"],
+      "required": false
+    },
+    "roomCount": {
+      "type": "enumeration",
+      "enum": ["less_than_100", "between_100_and_300", "more_than_300"],
+      "required": false
+    },
+    "services": {
+      "type": "json",
+      "required": false
+    },
+    "businessName": {
+      "type": "string",
+      "required": true
+    },
+    "contactName": {
+      "type": "string",
+      "required": false
+    },
+    "mobile": {
+      "type": "string",
+      "required": false
+    },
+    "email": {
+      "type": "email",
+      "required": false
+    },
+    "submittedAt": {
+      "type": "datetime",
+      "default": null
+    }
+  }
+}

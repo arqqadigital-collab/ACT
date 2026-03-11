@@ -1,0 +1,34 @@
+{
+  "collectionName": "components_shared_security_system_items",
+  "info": {
+    "displayName": "Security System Item",
+    "description": "A single physical security system with icon, title, image and items list",
+    "icon": "shield"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "Camera"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "items": {
+      "type": "json",
+      "required": false
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

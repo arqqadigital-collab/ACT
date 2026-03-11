@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "solutions_content",
+  "info": {
+    "singularName": "solution",
+    "pluralName": "solutions",
+    "displayName": "Solutions Content",
+    "description": "All solutions content for the website"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "solutions": {
+      "type": "component",
+      "repeatable": true,
+      "required": true,
+      "component": "solutions.solution-item"
+    }
+  }
+}

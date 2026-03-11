@@ -1,0 +1,29 @@
+{
+  "collectionName": "components_shared_hospitality_stats",
+  "info": {
+    "displayName": "Hospitality Stat",
+    "description": "Hospitality statistics item"
+  },
+  "options": {},
+  "attributes": {
+    "value": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "suffix": {
+      "type": "string",
+      "required": false,
+      "default": ""
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    }
+  }
+}

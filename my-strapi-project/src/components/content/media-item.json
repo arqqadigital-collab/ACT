@@ -1,0 +1,48 @@
+{
+  "collectionName": "components_content_media_items",
+  "info": {
+    "displayName": "Media Item",
+    "description": "Individual media/news entry"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "string",
+      "required": false
+    },
+    "excerpt": {
+      "type": "text",
+      "required": false
+    },
+    "link": {
+      "type": "string",
+      "required": true
+    },
+    "thumbnail": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "date": {
+      "type": "date",
+      "required": false
+    },
+    "category": {
+      "type": "string",
+      "required": false
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

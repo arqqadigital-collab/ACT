@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "fnb_hardware_solutions",
+  "info": {
+    "singularName": "fnb-hardware-solution",
+    "pluralName": "fnb-hardware-solutions",
+    "displayName": "FnB Hardware Solutions",
+    "description": "Hardware Solutions section for the F&B page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "required": false,
+      "default": "Restaurant Hardware Solutions"
+    },
+    "sectionDescription": {
+      "type": "text",
+      "required": false
+    },
+    "hardwareFeatures": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.hardware-feature-item"
+    }
+  }
+}

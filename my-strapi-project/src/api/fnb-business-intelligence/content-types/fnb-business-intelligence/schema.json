@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "fnb_business_intelligence",
+  "info": {
+    "singularName": "fnb-business-intelligence",
+    "pluralName": "fnb-business-intelligences",
+    "displayName": "FnB Business Intelligence",
+    "description": "Business Intelligence & Control section for the F&B page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "required": false,
+      "default": "Business Intelligence & Control"
+    },
+    "sectionDescription": {
+      "type": "text",
+      "required": false
+    },
+    "intelligenceFeatures": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.intelligence-feature-item"
+    }
+  }
+}

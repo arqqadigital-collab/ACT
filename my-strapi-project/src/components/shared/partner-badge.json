@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_shared_partner_badges",
+  "info": {
+    "displayName": "Partner Badge",
+    "description": "A partner badge with logo and alt text"
+  },
+  "options": {},
+  "attributes": {
+    "alt": {
+      "type": "string",
+      "required": true
+    },
+    "logo": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "order": {
+      "type": "integer",
+      "required": true,
+      "default": 1
+    }
+  }
+}

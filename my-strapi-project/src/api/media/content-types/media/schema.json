@@ -1,0 +1,21 @@
+{
+  "kind": "singleType",
+  "collectionName": "media_page",
+  "info": {
+    "singularName": "media",
+    "pluralName": "media-posts",
+    "displayName": "Media Page",
+    "description": "All media items with their dynamic content"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "mediaItems": {
+      "type": "component",
+      "repeatable": true,
+      "component": "content.media-item"
+    }
+  }
+}

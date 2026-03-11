@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_shared_entertainment_wellness_items",
+  "info": {
+    "displayName": "Entertainment Wellness Item",
+    "description": "A single entertainment & wellness stacking card item",
+    "icon": "heart"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "Ticket"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

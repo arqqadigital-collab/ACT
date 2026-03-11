@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_hardware_feature_items",
+  "info": {
+    "displayName": "Hardware Feature Item",
+    "description": "A single hardware feature card with icon, title, and description",
+    "icon": "monitor"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "Monitor"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "desc": {
+      "type": "text",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

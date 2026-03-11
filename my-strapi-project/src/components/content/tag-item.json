@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_content_tag_items",
+  "info": {
+    "displayName": "Tag Item",
+    "description": "Simple tag or label"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

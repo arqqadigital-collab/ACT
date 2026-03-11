@@ -1,0 +1,22 @@
+{
+  "kind": "singleType",
+  "collectionName": "hospitality_stats",
+  "info": {
+    "singularName": "hospitality-stat",
+    "pluralName": "hospitality-statistics",
+    "displayName": "Hospitality Stats",
+    "description": "Statistics for the hospitality page"
+  },
+  "options": {
+    "draftAndPublish": true,
+    "comment": ""
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "stats": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.hospitality-stat"
+    }
+  }
+}

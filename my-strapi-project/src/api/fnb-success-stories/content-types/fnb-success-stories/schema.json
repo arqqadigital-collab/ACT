@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "fnb_success_stories",
+  "info": {
+    "singularName": "fnb-success-stories",
+    "pluralName": "fnb-success-stories-list",
+    "displayName": "FnB Success Stories",
+    "description": "Success Stories section for the F&B page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "required": false,
+      "default": "Success Stories"
+    },
+    "sectionSubtitle": {
+      "type": "text",
+      "required": false
+    },
+    "successStories": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.success-story-item"
+    }
+  }
+}

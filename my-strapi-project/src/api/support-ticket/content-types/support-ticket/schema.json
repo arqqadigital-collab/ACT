@@ -1,0 +1,71 @@
+{
+  "kind": "collectionType",
+  "collectionName": "support_tickets",
+  "info": {
+    "singularName": "support-ticket",
+    "pluralName": "support-tickets",
+    "displayName": "Support Ticket",
+    "description": "Support ticket submissions from the support page"
+  },
+  "options": {
+    "draftAndPublish": false,
+    "comment": ""
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "fullName": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone": {
+      "type": "string",
+      "required": true
+    },
+    "company": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string"
+    },
+    "actId": {
+      "type": "string"
+    },
+    "selectedSystems": {
+      "type": "json"
+    },
+    "otherSystem": {
+      "type": "string"
+    },
+    "subject": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": ["low", "medium", "high"],
+      "default": "medium"
+    },
+    "responseMethod": {
+      "type": "enumeration",
+      "enum": ["email", "phone", "whatsapp"],
+      "default": "email"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["open", "in_progress", "resolved", "closed"],
+      "default": "open"
+    },
+    "submittedAt": {
+      "type": "datetime",
+      "default": null
+    }
+  }
+}

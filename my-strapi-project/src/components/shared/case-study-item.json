@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shared_case_study_items",
+  "info": {
+    "displayName": "Case Study Item",
+    "description": "Individual case study with title, metric, and description"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "metric": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

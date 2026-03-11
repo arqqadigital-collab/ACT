@@ -1,0 +1,46 @@
+{
+  "kind": "singleType",
+  "collectionName": "hospitality_solutions",
+  "info": {
+    "singularName": "hospitality-solution",
+    "pluralName": "hospitality-solutions",
+    "displayName": "Hospitality Solutions",
+    "description": "Solutions section for the hospitality page (stacking cards)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "badge": {
+      "type": "string",
+      "required": false,
+      "default": "Next-Gen Hospitality"
+    },
+    "title": {
+      "type": "string",
+      "required": false,
+      "default": "Solutions for Hotels & Resorts"
+    },
+    "titleHighlight": {
+      "type": "string",
+      "required": false,
+      "default": "Hotels & Resorts"
+    },
+    "description": {
+      "type": "text",
+      "required": false,
+      "default": "Smart technology to streamline operations and redefine guest satisfaction."
+    },
+    "supportingText": {
+      "type": "string",
+      "required": false,
+      "default": "Supporting 500+ Properties Globally"
+    },
+    "solutions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.hospitality-solution"
+    }
+  }
+}

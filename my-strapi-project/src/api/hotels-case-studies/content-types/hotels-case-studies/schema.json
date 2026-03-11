@@ -1,0 +1,29 @@
+{
+  "kind": "singleType",
+  "collectionName": "hotels_case_studies",
+  "info": {
+    "singularName": "hotels-case-studies",
+    "pluralName": "hotels-case-studies-data",
+    "displayName": "Hotels Case Studies",
+    "description": "Case studies section for the Hotels & Resorts page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "default": "Success Stories"
+    },
+    "sectionSubtitle": {
+      "type": "text",
+      "default": "Real results from hospitality leaders who trusted ACT"
+    },
+    "caseStudies": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.case-study-item"
+    }
+  }
+}

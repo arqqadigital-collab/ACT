@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_why_choose_items",
+  "info": {
+    "displayName": "Why Choose Item",
+    "description": "A single reason/item for the Why Choose ACT section",
+    "icon": "check-circle"
+  },
+  "options": {},
+  "attributes": {
+    "icon": {
+      "type": "string",
+      "required": true,
+      "default": "Award"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text",
+      "required": true
+    },
+    "order": {
+      "type": "integer",
+      "default": 0
+    }
+  }
+}

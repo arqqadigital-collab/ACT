@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "hotels_core_solutions",
+  "info": {
+    "singularName": "hotels-core-solution",
+    "pluralName": "hotels-core-solutions",
+    "displayName": "Hotels Core Solutions",
+    "description": "Core Solutions section for the Hotels & Resorts page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "sectionTitle": {
+      "type": "string",
+      "required": false,
+      "default": "Core Solutions"
+    },
+    "sectionDescription": {
+      "type": "text",
+      "required": false
+    },
+    "solutions": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.core-solution-item"
+    }
+  }
+}

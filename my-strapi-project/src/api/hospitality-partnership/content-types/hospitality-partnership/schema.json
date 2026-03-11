@@ -1,0 +1,30 @@
+{
+  "kind": "singleType",
+  "collectionName": "hospitality_partnerships",
+  "info": {
+    "singularName": "hospitality-partnership",
+    "pluralName": "hospitality-partnerships",
+    "displayName": "Hospitality Partnerships",
+    "description": "Global partnerships section for the hospitality page"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true,
+      "default": "Our Global Partnerships"
+    },
+    "description": {
+      "type": "text",
+      "required": false
+    },
+    "badges": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.partner-badge"
+    }
+  }
+}
