@@ -1,4 +1,6 @@
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://positive-actor-b87a792057.strapiapp.com';
+const STRAPI_URL =
+  import.meta.env.VITE_STRAPI_URL ||
+  (import.meta.env.DEV ? '/strapi' : 'https://positive-actor-b87a792057.strapiapp.com');
 
 export interface HeroSection {
   id: number;
