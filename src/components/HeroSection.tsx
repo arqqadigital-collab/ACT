@@ -138,7 +138,7 @@ const HeroSection = () => {
         >
           <Button variant="hero" size="xl" className="group" asChild>
             <Link to="/solutions">
-              Explore Our Solutions
+              Explore Our 
               <ArrowRight
                 className="ml-2 group-hover:translate-x-1 transition-transform"
                 size={20}
