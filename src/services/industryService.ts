@@ -64,10 +64,14 @@ export interface Industry {
 
 export const getStrapiImageUrl = (path?: string): string => {
   if (!path) return "";
-  if (path.startsWith("http")) {
+  if (path.startsWith("http")) return path;
+  // If this is a local bundled asset URL (Vite) or a normal site-relative URL,
+  // do NOT prefix it with the Strapi proxy.
+  if (path.startsWith("/src/") || path.startsWith("/assets/") || path.startsWith("/")) {
     return path;
   }
-  return `${STRAPI_URL}${path}`;
+  // Strapi media paths are often returned as relative paths without leading slash
+  return `${STRAPI_URL}/${path}`;
 };
 
 export const fetchIndustries = async (): Promise<Industry[]> => {

@@ -28,7 +28,7 @@ interface StrapiPartnerBadge {
 export const fetchHospitalityTechnologyPartners = async (): Promise<HospitalityTechnologyPartnersData | null> => {
   try {
     const response = await fetch(
-      `${STRAPI_URL}/api/hospitality-technology-partners?populate[partners][populate]=logo`
+      `${STRAPI_URL}/api/hospitality-technology-partner?populate[partners][populate]=logo`
     );
 
     if (!response.ok) {

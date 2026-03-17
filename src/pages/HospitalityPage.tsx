@@ -1257,7 +1257,7 @@ const HospitalityPage = () => {
                 <img
                   src={partner.logoUrl}
                   alt={partner.name}
-                  className="h-10 md:h-12 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity brightness-0 invert"
+                  className="h-10 md:h-12 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity"
                 />
               </div>
             ))}

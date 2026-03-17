@@ -21,9 +21,7 @@ const HeroSection = () => {
   const description =
     heroData?.description ||
     "Since 1988, ACT has been at the forefront of Egypt's ICT sector, delivering innovative technology solutions and trusted services that empower businesses, governments, and communities to thrive.";
-  const videoUrl = heroData?.backgroundVideo?.url
-    ? `${import.meta.env.VITE_STRAPI_URL || "https://positive-actor-b87a792057.strapiapp.com"}${heroData.backgroundVideo.url}`
-    : heroData?.videoUrl || "/videos/hero-bg.mp4";
+  const videoUrl = heroData?.backgroundVideo?.url || heroData?.videoUrl || "/videos/hero-bg.mp4";
 
   useEffect(() => {
     const loadHeroData = async () => {
@@ -36,6 +34,14 @@ const HeroSection = () => {
 
     loadHeroData();
   }, []);
+
+  // Update video element when videoUrl changes
+  useEffect(() => {
+    const videoElement = document.getElementById('hero-video') as HTMLVideoElement;
+    if (videoElement) {
+      videoElement.load();
+    }
+  }, [videoUrl]);
   const { displayedText, isComplete } = useTypewriter({
     text: headline,
     speed: 40,
@@ -85,11 +91,13 @@ const HeroSection = () => {
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
+          id="hero-video"
           autoPlay
           loop
           muted
           playsInline
           className="w-full h-full object-cover"
+          key={videoUrl}
         >
           <source src={videoUrl} type="video/mp4" />
         </video>

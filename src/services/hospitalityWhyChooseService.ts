@@ -25,7 +25,7 @@ interface StrapiWhyChooseItem {
 export const fetchHospitalityWhyChoose = async (): Promise<HospitalityWhyChooseData | null> => {
   try {
     const response = await fetch(
-      `${STRAPI_URL}/api/hospitality-why-chooses?populate=items`
+      `${STRAPI_URL}/api/hospitality-why-choose?populate=items`
     );
 
     if (!response.ok) {
