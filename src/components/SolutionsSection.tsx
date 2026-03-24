@@ -105,7 +105,7 @@ const SolutionsSection = () => {
             <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-4">
               Our Technology Solutions
             </span>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
               Building the Foundation for{" "}
               <span className="text-gradient">Digital Success</span>
             </h2>

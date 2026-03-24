@@ -228,7 +228,7 @@ const ProfessionalServicesSection = ({
                   }`}
                 >
                   <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-display font-medium tracking-tight text-foreground">
+                    <h3 className="text-base font-display font-medium tracking-tight text-foreground">
                       {service.title}
                     </h3>
                     <ArrowRight
@@ -245,7 +245,7 @@ const ProfessionalServicesSection = ({
                     className={`lg:hidden overflow-hidden transition-all duration-500 ${
                       activeId === service.id
                         ? "max-h-40 mt-4 opacity-100"
-                        : "max-h-0 opacity-1"
+                        : "max-h-0 opacity-0"
                     }`}
                   >
                     <p className="text-muted-foreground text-sm leading-relaxed">
@@ -264,7 +264,7 @@ const ProfessionalServicesSection = ({
                   className={`absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                     activeId === service.id
                       ? "opacity-100 scale-100 translate-y-0"
-                      : "opacity-1 scale-110 translate-y-4 pointer-events-none"
+                      : "opacity-0 scale-110 translate-y-4 pointer-events-none"
                   }`}
                 >
                   {/* Background Image */}
@@ -283,7 +283,7 @@ const ProfessionalServicesSection = ({
                       className={`transition-all duration-500 delay-100 ${
                         activeId === service.id
                           ? "translate-y-0 opacity-100"
-                          : "translate-y-8 opacity-1"
+                          : "translate-y-8 opacity-0"
                       }`}
                     >
                       <h3 className="text-3xl font-display font-bold text-white mb-4">
@@ -918,9 +918,9 @@ const HospitalityPage = () => {
             }`}
           >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Delivering technology that transforms{" "}
+              Delivering Technology That Transforms{" "}
               <span className="text-primary">
-                hospitality operations across continents.
+                Hospitality Operations Across Continents.
               </span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl mx-auto">
@@ -951,12 +951,6 @@ const HospitalityPage = () => {
             >
               ACT at a Glance
             </Badge>
-            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
-              Delivering technology that transforms{" "}
-              <span className="text-primary">
-                hospitality operations across continents.
-              </span>
-            </h2>
           </div>
 
           <div className="grid grid-cols-3 md:grid-cols-6 gap-6">
@@ -1525,12 +1519,12 @@ const HospitalityPage = () => {
                 Office Locations
               </div>
             </div>
-            <div className="text-center p-4 rounded-xl glass-card hover:scale-105 transition-transform flex-1">
+            {/* <div className="text-center p-4 rounded-xl glass-card hover:scale-105 transition-transform flex-1">
               <div className="text-3xl font-bold text-primary mb-1">24/7</div>
               <div className="text-xs text-muted-foreground">
                 Support Available
               </div>
-            </div>
+            </div> */}
             {/* <div className="text-center p-4 rounded-xl glass-card hover:scale-105 transition-transform">
               <div className="text-3xl font-bold text-primary mb-1">WorldWide</div>
               <div className="text-xs text-muted-foreground">

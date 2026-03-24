@@ -31,8 +31,8 @@ const Footer = () => {
   const socialLinks = [
     { icon: Facebook, href: 'https://facebook.com/act.eg', label: 'Facebook' },
     { icon: Instagram, href: 'https://www.instagram.com/act_hospitality?igsh=dzFvb2l3anJ5MWpi', label: 'Instagram' },
-    { icon: Linkedin, href: 'https://linkedin.com/company/act-eg', label: 'LinkedIn' },
-    { icon: Youtube, href: 'https://youtube.com/@actegypt', label: 'YouTube' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/company/advanced-computer-technology/', label: 'LinkedIn' },
+    { icon: Youtube, href: 'https://www.youtube.com/@advancedcomputertechnology7729', label: 'YouTube' },
   ];
 
   return (

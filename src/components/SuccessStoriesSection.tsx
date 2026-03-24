@@ -30,7 +30,7 @@ const fallbackStories = [
   {
     icon: Building,
     category: "Oil & Gas",
-    title: "AGIBA Data Center Renovation",
+    title: "How ACT Delivered a Full Data Center Renovation for AGIBA with Zero Business Disruption",
     excerpt: "IT Migration and Business Continuity Without Downtime",
     backgroundImage: agibaBg,
     logo: agibaLogo,
@@ -39,7 +39,7 @@ const fallbackStories = [
   {
     icon: Ship,
     category: "Public Sector",
-    title: "Red Sea Container Terminal",
+    title: "How ACT Delivered a Cloud VOIP Solution for Red Sea Container Terminal S.A.E",
     excerpt:
       "Cloud VOIP Solution with Cisco to Boost Efficiency and Scalability",
     backgroundImage: redseaBg,
@@ -49,7 +49,7 @@ const fallbackStories = [
   {
     icon: Radio,
     category: "Telecom",
-    title: "Telecom Egypt Data Backup",
+    title: "How ACT Enabled Telecom Egypt to Activate Data Beyond Backup",
     excerpt: "Cloud Integration Success with Commvault",
     backgroundImage: telecomBg,
     logo: telecomLogo,
@@ -58,7 +58,7 @@ const fallbackStories = [
   {
     icon: GraduationCap,
     category: "Education",
-    title: "El Sewedy Education's Knowledge Hub",
+    title: "El Sewedy Education's The Knowledge Hub Transforms Connectivity with ACT's HPE Aruba Network Solution",
     excerpt: "Transforms Connectivity with ACT's HPE Aruba Network Solution",
     backgroundImage: sewedyBg,
     logo: sewedyLogo,
@@ -125,13 +125,9 @@ const SuccessStoriesSection = () => {
           <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-4">
             Success Stories
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Driving{" "}
-            <span className="text-gradient">Digital Transformation</span>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
+            Our Success Stories
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Real results from our partnerships with leading organizations
-          </p>
         </div>
 
         {/* Mobile Horizontal Slider */}

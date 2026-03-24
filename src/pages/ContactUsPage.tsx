@@ -200,10 +200,13 @@ const ContactUsPage = () => {
         </section>
 
         {/* Form Section */}
-        <section className="py-16 md:py-24">
+        <section className="py-16 md:py-24 relative overflow-hidden">
+          {/* Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
+          
           <div
             ref={formRef}
-            className={`container-width px-4 md:px-8 transition-all duration-1000 ${
+            className={`container-width px-4 md:px-8 relative z-10 transition-all duration-1000 ${
               isFormInView
                 ? "opacity-100 translate-y-0"
                 : "opacity-1 translate-y-10"
@@ -211,10 +214,15 @@ const ContactUsPage = () => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               {/* Form */}
-              <div>
-                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-                  Send Us a Message
-                </h2>
+              <div className="bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl rounded-2xl p-6 md:p-8 border border-border/50 shadow-2xl shadow-primary/5">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-white" />
+                  </div>
+                  <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
+                    Send Us a Message
+                  </h2>
+                </div>
                 <p className="text-muted-foreground mb-8">
                   For inquiries regarding sales, IT support, or partnerships,
                   please fill out our contact form. Our experts will respond
@@ -229,7 +237,7 @@ const ContactUsPage = () => {
                         id="firstName"
                         placeholder="John"
                         {...register("firstName")}
-                        className="bg-card/50 border-border/50 focus:border-primary"
+                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
                       />
                       {errors.firstName && (
                         <p className="text-sm text-destructive">
@@ -243,7 +251,7 @@ const ContactUsPage = () => {
                         id="lastName"
                         placeholder="Doe"
                         {...register("lastName")}
-                        className="bg-card/50 border-border/50 focus:border-primary"
+                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
                       />
                       {errors.lastName && (
                         <p className="text-sm text-destructive">
@@ -261,7 +269,7 @@ const ContactUsPage = () => {
                         type="email"
                         placeholder="john@company.com"
                         {...register("email")}
-                        className="bg-card/50 border-border/50 focus:border-primary"
+                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
                       />
                       {errors.email && (
                         <p className="text-sm text-destructive">
@@ -275,7 +283,7 @@ const ContactUsPage = () => {
                         id="country"
                         placeholder="Egypt"
                         {...register("country")}
-                        className="bg-card/50 border-border/50 focus:border-primary"
+                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
                       />
                       {errors.country && (
                         <p className="text-sm text-destructive">
@@ -292,7 +300,7 @@ const ContactUsPage = () => {
                         id="jobTitle"
                         placeholder="IT Manager"
                         {...register("jobTitle")}
-                        className="bg-card/50 border-border/50 focus:border-primary"
+                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
                       />
                     </div>
                     <div className="space-y-2">
@@ -301,7 +309,7 @@ const ContactUsPage = () => {
                         id="company"
                         placeholder="Your Company"
                         {...register("company")}
-                        className="bg-card/50 border-border/50 focus:border-primary"
+                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
                       />
                     </div>
                   </div>
@@ -313,7 +321,7 @@ const ContactUsPage = () => {
                       placeholder="How can we help you?"
                       rows={5}
                       {...register("message")}
-                      className="bg-card/50 border-border/50 focus:border-primary resize-none"
+                      className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all resize-none"
                     />
                     {errors.message && (
                       <p className="text-sm text-destructive">

@@ -121,6 +121,68 @@ const InsightsPage = () => {
         </div>
       </section>
 
+      {/* Media Section - News & Media First */}
+      <section ref={mediaRef} id="media" className="py-20 md:py-28 bg-card/30">
+        <div className="container-width px-4 md:px-8">
+          <div
+            className={`flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-12 transition-all duration-700 ${isMediaInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-10"}`}
+          >
+            <div>
+              <Badge
+                variant="outline"
+                className="mb-4 border-primary/50 text-primary"
+              >
+                <Newspaper className="w-3 h-3 mr-1" />
+                Media
+              </Badge>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
+                News & Media
+              </h2>
+            </div>
+            <Button asChild variant="hero" size="lg" className="group">
+              <Link to="/media">
+                View All Media
+                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {displayedMedia.map((item, idx) => (
+              <Card
+                key={idx}
+                className={`group border-border/50 bg-card/50 hover:border-primary/50 transition-all duration-500 overflow-hidden ${
+                  isMediaInView
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-1 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${idx * 100}ms` }}
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={
+                      getMediaImageUrl(item.thumbnail?.url) || mediaThumbnail
+                    }
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <CardContent className="p-4">
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-display font-semibold text-foreground hover:text-primary transition-colors line-clamp-3 cursor-pointer"
+                  >
+                    {item.title}
+                  </a>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Blog Section */}
       <section ref={blogRef} id="blog" className="py-20 md:py-28">
         <div className="container-width px-4 md:px-8">
@@ -193,68 +255,6 @@ const InsightsPage = () => {
         </div>
       </section>
 
-      {/* Media Section */}
-      <section ref={mediaRef} id="media" className="py-20 md:py-28 bg-card/30">
-        <div className="container-width px-4 md:px-8">
-          <div
-            className={`flex flex-col md:flex-row items-start md:items-end justify-between gap-4 mb-12 transition-all duration-700 ${isMediaInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-10"}`}
-          >
-            <div>
-              <Badge
-                variant="outline"
-                className="mb-4 border-primary/50 text-primary"
-              >
-                <Newspaper className="w-3 h-3 mr-1" />
-                Media
-              </Badge>
-              <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-                News & Media
-              </h2>
-            </div>
-            <Button asChild variant="hero" size="lg" className="group">
-              <Link to="/media">
-                View All Media
-                <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {displayedMedia.map((item, idx) => (
-              <Card
-                key={idx}
-                className={`group border-border/50 bg-card/50 hover:border-primary/50 transition-all duration-500 overflow-hidden ${
-                  isMediaInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
-                }`}
-                style={{ transitionDelay: `${idx * 100}ms` }}
-              >
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={
-                      getMediaImageUrl(item.thumbnail?.url) || mediaThumbnail
-                    }
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <CardContent className="p-4">
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-display font-semibold text-foreground hover:text-primary transition-colors line-clamp-3 cursor-pointer"
-                  >
-                    {item.title}
-                  </a>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Case Studies & Success Stories Section */}
       <section
         ref={caseStudiesRef}
@@ -307,6 +307,16 @@ const InsightsPage = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    {/* Client Logo Overlay */}
+                    {study.logo && (
+                      <div className="absolute top-3 right-3 w-12 h-12 rounded-lg bg-white/90 backdrop-blur-sm p-1.5 shadow-lg">
+                        <img
+                          src={getCaseStudyImageUrl(study.logo?.url)}
+                          alt={study.client || "Client logo"}
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    )}
                     <div className="absolute bottom-3 left-3">
                       <Badge className="bg-primary/90 text-white border-0">
                         {study.industry}

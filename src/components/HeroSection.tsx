@@ -140,7 +140,7 @@ const HeroSection = () => {
 
         {/* CTA Buttons */}
         <div
-          className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-200 ${
+          className={`flex flex-col sm:flex-row items-center justify-center gap-4 pb-16 transition-all duration-700 delay-200 ${
             isComplete ? "opacity-100 translate-y-0" : "opacity-1 translate-y-4"
           }`}
         >
@@ -160,7 +160,7 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground z-10">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground z-10">
         <span className="text-xs uppercase tracking-widest">Scroll</span>
         <div className="w-6 h-10 rounded-full border-2 border-primary/50 flex justify-center pt-2">
           <div className="w-1.5 h-3 rounded-full bg-primary animate-bounce" />

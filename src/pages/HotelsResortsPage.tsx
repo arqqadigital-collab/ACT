@@ -887,9 +887,9 @@ const HotelsResortsPage = () => {
             )}
           </div>
 
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col lg:flex-row gap-8">
             {/* Left Side - Tabs */}
-            <div className="flex w-full space-y-0">
+            <div className="lg:w-1/3 flex flex-col space-y-0">
               {(physicalSecurityData?.systems &&
               physicalSecurityData.systems.length > 0
                 ? physicalSecurityData.systems
@@ -900,7 +900,7 @@ const HotelsResortsPage = () => {
                   <button
                     key={system.title}
                     onClick={() => setActiveSecurityTab(index)}
-                    className={`w-full text-left py-4 px-2 border-b border-border/30 transition-all ${
+                    className={`text-left py-4 px-4 border-b border-border/30 transition-all ${
                       activeSecurityTab === index
                         ? "text-primary font-semibold"
                         : "text-muted-foreground hover:text-foreground"
@@ -913,7 +913,7 @@ const HotelsResortsPage = () => {
             </div>
 
             {/* Right Side - Content */}
-            <div className="w-full">
+            <div className="lg:w-2/3">
               <motion.div
                 key={activeSecurityTab}
                 initial={{ opacity: 0, x: 20 }}
@@ -1336,12 +1336,6 @@ const HotelsResortsPage = () => {
             new revenue streams.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/support">
-              <Button variant="accent" size="lg" className="group">
-                Get Started Today
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
             <Link to="/contact">
               <Button variant="outline" size="lg">
                 Contact Us

@@ -590,7 +590,7 @@ const FnBPage = () => {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold">
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold">
               {businessIntelligenceData?.sectionTitle ||
                 "Business Intelligence & Control"}
             </h2>
@@ -629,7 +629,7 @@ const FnBPage = () => {
                         className={`text-primary transition-all duration-500 ${
                           activeIntelligenceId === feature.id
                             ? "translate-x-0 opacity-100"
-                            : "-translate-x-4 opacity-1"
+                            : "-translate-x-4 opacity-0"
                         }`}
                         size={32}
                       />
@@ -639,7 +639,7 @@ const FnBPage = () => {
                       className={`lg:hidden overflow-hidden transition-all duration-500 ${
                         activeIntelligenceId === feature.id
                           ? "max-h-40 mt-4 opacity-100"
-                          : "max-h-0 opacity-1"
+                          : "max-h-0 opacity-0"
                       }`}
                     >
                       <p className="text-muted-foreground text-sm leading-relaxed">
@@ -658,12 +658,12 @@ const FnBPage = () => {
                     className={`absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${
                       activeIntelligenceId === feature.id
                         ? "opacity-100 scale-100 translate-y-0"
-                        : "opacity-1 scale-110 translate-y-4 pointer-events-none"
+                        : "opacity-0 scale-110 translate-y-4 pointer-events-none"
                     }`}
                   >
                     {/* Background Image */}
                     <img
-                      src={`https://positive-actor-b87a792057.strapiapp.com${feature.image?.url || ""}`}
+                      src={`/api/strapi${feature.image?.url || ""}`}
                       alt={feature.title}
                       className="w-full h-full object-cover"
                     />
@@ -674,7 +674,7 @@ const FnBPage = () => {
                         className={`transition-all duration-500 delay-100 ${
                           activeIntelligenceId === feature.id
                             ? "translate-y-0 opacity-100"
-                            : "translate-y-8 opacity-1"
+                            : "translate-y-8 opacity-0"
                         }`}
                       >
                         <h3 className="text-3xl font-display font-bold text-primary mb-4">
@@ -882,7 +882,7 @@ const FnBPage = () => {
               >
                 {/* Background Image */}
                 <img
-                  src={`https://positive-actor-b87a792057.strapiapp.com${story.image.url}`}
+                  src={`/api/strapi${story.image?.url || ""}`}
                   alt={story.title}
                   className="absolute inset-0 w-full h-full object-cover"
                 />

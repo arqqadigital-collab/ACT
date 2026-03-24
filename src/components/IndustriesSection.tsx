@@ -120,9 +120,8 @@ const IndustriesSection = () => {
           <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-4">
             Industries We Empower
           </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Industries We Empower with{" "}
-            <span className="text-gradient">Technology</span>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
+            Our Industries
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
             ACT Combines Global Partnerships With Local Expertise to Deliver
