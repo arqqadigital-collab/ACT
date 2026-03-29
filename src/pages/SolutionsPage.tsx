@@ -124,7 +124,7 @@ const SolutionsPage = () => {
               className={`relative ${isReversed ? "order-2 lg:order-1" : "order-2"} transition-all duration-700 delay-200 ${
                 isInView
                   ? "opacity-100 translate-x-0"
-                  : `opacity-1 ${isReversed ? "-translate-x-10" : "translate-x-10"}`
+                  : `opacity-0 ${isReversed ? "-translate-x-10" : "translate-x-10"}`
               }`}
             >
               <div className="aspect-[4/3] rounded-2xl overflow-hidden">
@@ -147,7 +147,7 @@ const SolutionsPage = () => {
               className={`${isReversed ? "order-1 lg:order-2" : "order-1"} transition-all duration-700 ${
                 isInView
                   ? "opacity-100 translate-x-0"
-                  : `opacity-1 ${isReversed ? "translate-x-10" : "-translate-x-10"}`
+                  : `opacity-0 ${isReversed ? "translate-x-10" : "-translate-x-10"}`
               }`}
             >
               <div className="flex items-center gap-3 mb-4">
@@ -245,7 +245,7 @@ const SolutionsPage = () => {
               className={`relative z-10 container-width px-4 md:px-8 text-center transition-all duration-1000 ${
                 isHeroInView
                   ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-10"
+                  : "opacity-0 translate-y-10"
               }`}
             >
               <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-6">
@@ -282,7 +282,7 @@ const SolutionsPage = () => {
                 className={`text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed transition-all duration-700 delay-500 ${
                   isComplete
                     ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-4"
+                    : "opacity-0 translate-y-4"
                 }`}
               >
                 {heroData?.description}
@@ -299,7 +299,7 @@ const SolutionsPage = () => {
                 className={`mt-8 transition-all duration-700 delay-700 ${
                   isComplete
                     ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-4"
+                    : "opacity-0 translate-y-4"
                 }`}
               >
                 <Button variant="accent" size="lg" asChild>

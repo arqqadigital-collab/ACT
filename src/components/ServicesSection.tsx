@@ -77,10 +77,10 @@ const ServicesSection = () => {
             isInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-8"
           }`}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full glass-card text-accent text-sm font-semibold mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full glass-card text-accent text-base font-semibold mb-4">
             Our IT Services
           </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Supporting Your Business{" "}
             <span className="text-gradient-orange">Every Step of the Way</span>
           </h2>

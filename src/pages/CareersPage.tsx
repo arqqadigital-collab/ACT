@@ -21,13 +21,13 @@ import {
   BookOpen,
   TrendingUp,
   Sparkles,
-  Star,
   Puzzle,
   Search,
   MapPin,
   Clock,
   Quote,
   Loader2,
+  Star,
 } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import { useTypewriter } from "@/hooks/useTypewriter";
@@ -69,40 +69,6 @@ const CareersPage = () => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Auto-scroll for reviews
-  useEffect(() => {
-    const scrollContainer = reviewsScrollRef.current;
-    if (!scrollContainer) return;
-
-    let animationId: number;
-    let scrollPosition = 0;
-
-    const scroll = () => {
-      scrollPosition += 0.5;
-      if (scrollPosition >= scrollContainer.scrollWidth / 2) {
-        scrollPosition = 0;
-      }
-      scrollContainer.scrollLeft = scrollPosition;
-      animationId = requestAnimationFrame(scroll);
-    };
-
-    animationId = requestAnimationFrame(scroll);
-
-    const handleMouseEnter = () => cancelAnimationFrame(animationId);
-    const handleMouseLeave = () => {
-      animationId = requestAnimationFrame(scroll);
-    };
-
-    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
-    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
-      scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
-    };
   }, []);
 
   const culturePoints = [
@@ -239,6 +205,51 @@ const CareersPage = () => {
   const displayReviews = employeeReviews.length > 0 ? employeeReviews : defaultReviews;
 
   const duplicatedReviews = [...displayReviews, ...displayReviews];
+
+  // Auto-scroll for reviews - runs after reviews data is ready
+  useEffect(() => {
+    // Only start auto-scroll when reviews are loaded and not loading
+    if (isLoadingReviews || !displayReviews.length) return;
+    
+    const scrollContainer = reviewsScrollRef.current;
+    if (!scrollContainer) return;
+
+    let scrollPosition = scrollContainer.scrollLeft;
+    // Check if currently hovered
+    let isPaused = scrollContainer.matches(':hover');
+
+    let animationId: number;
+
+    const scroll = () => {
+      if (!isPaused) {
+        scrollPosition += 0.5;
+        if (scrollPosition >= scrollContainer.scrollWidth / 2) {
+          scrollPosition = 0;
+        }
+        scrollContainer.scrollLeft = scrollPosition;
+      }
+      animationId = requestAnimationFrame(scroll);
+    };
+
+    animationId = requestAnimationFrame(scroll);
+
+    const handleMouseEnter = () => {
+      isPaused = true;
+    };
+
+    const handleMouseLeave = () => {
+      isPaused = false;
+    };
+
+    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
+    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      cancelAnimationFrame(animationId);
+      scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
+      scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [isLoadingReviews, displayReviews]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -686,16 +697,6 @@ const CareersPage = () => {
                   key={index}
                   className="flex-shrink-0 w-[350px] md:w-[400px] p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300"
                 >
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(review.rating || 5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="h-5 w-5 fill-primary text-primary"
-                      />
-                    ))}
-                  </div>
-
                   {/* Quote */}
                   <p className="text-foreground mb-6 leading-relaxed">
                     "{review.quote}"
@@ -713,10 +714,10 @@ const CareersPage = () => {
                         {review.name}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        {review.jobTitle || (review as any).title}
+                        {(review as any).jobTitle || (review as any).title}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {review.yearsAtCompany || (review as any).years}
+                        {(review as any).yearsAtCompany || (review as any).years}
                       </p>
                     </div>
                   </div>

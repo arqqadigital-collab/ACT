@@ -117,10 +117,10 @@ const IndustriesSection = () => {
             isInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-8"
           }`}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-4">
+          <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-base font-semibold mb-4">
             Industries We Empower
           </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Our Industries
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -162,7 +162,7 @@ const IndustriesSection = () => {
                     <h3 className="font-display text-base font-bold text-white mb-1">
                       {industry.title}
                     </h3>
-                    <p className="text-white/80 text-xs line-clamp-2">
+                    <p className="text-white/80 text-xs line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {industry.shortDescription}
                     </p>
                   </div>
@@ -196,7 +196,7 @@ const IndustriesSection = () => {
                   <h3 className="font-display text-base font-bold text-white mb-1">
                     {industry.title}
                   </h3>
-                  <p className="text-white/80 text-xs line-clamp-2">
+                  <p className="text-white/80 text-xs line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     {industry.shortDescription}
                   </p>
                 </div>
@@ -251,7 +251,7 @@ const IndustriesSection = () => {
                     className={`text-white/80 text-sm transition-all duration-500 ${
                       activeIndex === index
                         ? "opacity-100 max-h-20"
-                        : "opacity-1 max-h-0"
+                        : "opacity-0 max-h-0"
                     }`}
                   >
                     {industry.shortDescription}

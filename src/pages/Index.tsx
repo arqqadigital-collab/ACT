@@ -7,9 +7,9 @@ import IndustriesSection from '@/components/IndustriesSection';
 import SuccessStoriesSection from '@/components/SuccessStoriesSection';
 import PartnersSection from '@/components/PartnersSection';
 import GlobalMapSection from '@/components/GlobalMapSection';
-import NewsletterSection from '@/components/NewsletterSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
+import NewsletterSection from '@/components/NewsletterSection';
 
 const Index = () => {
   return (
@@ -24,9 +24,9 @@ const Index = () => {
         <SuccessStoriesSection />
         <PartnersSection />
         <GlobalMapSection />
-        <NewsletterSection />
         <CTASection />
       </main>
+      <NewsletterSection />
       <Footer />
     </div>
   );

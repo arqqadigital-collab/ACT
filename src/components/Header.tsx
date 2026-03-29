@@ -200,6 +200,9 @@ const Header = () => {
     { label: "F&B", href: "/fnb" },
     { label: "Support", href: "/support" },
     { label: "FAQ", href: "/faq" },
+    { label: "Who We Are", href: "/about" },
+    { label: "Careers", href: "/careers" },
+    { label: "Insights", href: "/insights" },
   ];
 
   // Check if current route is a hospitality-related page
@@ -556,30 +559,32 @@ const Header = () => {
                 <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-6">
                   Categories
                 </h3>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {/* Services Category - Hover to show, Click to navigate */}
                   <button
                     onClick={(e) => handleCategoryClick("services", e)}
                     onMouseEnter={() => handleCategoryHover("services")}
                     className={`w-full group flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${
                       activeCategory === "services"
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-border/50 bg-card/30 hover:bg-muted/50 hover:border-border"
+                        ? "border-[#FF6B35]/50 bg-[#FF6B35]/5"
+                        : "border-border/50 bg-card/30 hover:bg-muted/50 hover:border-[#FF6B35]/30"
                     }`}
                   >
                     <div className="flex items-center gap-4">
                       <div
                         className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
                           activeCategory === "services"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted/50 text-muted-foreground group-hover:bg-muted"
+                            ? "bg-[#FF6B35] text-white"
+                            : "bg-muted/50 text-[#FF6B35] group-hover:bg-[#FF6B35]/20"
                         }`}
                       >
                         <Server size={22} />
                       </div>
                       <div className="text-left">
                         <h4
-                          className={`font-semibold transition-colors ${activeCategory === "services" ? "text-primary" : "text-foreground"}`}
+                          className={`font-semibold transition-colors ${
+                            activeCategory === "services" ? "text-[#FF6B35]" : "text-foreground group-hover:text-[#FF6B35]"
+                          }`}
                         >
                           Services
                         </h4>
@@ -590,7 +595,9 @@ const Header = () => {
                     </div>
                     <ChevronRight
                       size={20}
-                      className={`transition-all duration-300 ${activeCategory === "services" ? "text-primary" : "text-muted-foreground"}`}
+                      className={`transition-all duration-300 ${
+                        activeCategory === "services" ? "text-[#FF6B35]" : "text-muted-foreground"
+                      }`}
                     />
                   </button>
 
@@ -600,23 +607,25 @@ const Header = () => {
                     onMouseEnter={() => handleCategoryHover("solutions")}
                     className={`w-full group flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${
                       activeCategory === "solutions"
-                        ? "border-primary bg-primary/10 text-primary"
-                        : "border-border/50 bg-card/30 hover:bg-muted/50 hover:border-border"
+                        ? "border-[#FF6B35]/50 bg-[#FF6B35]/5"
+                        : "border-border/50 bg-card/30 hover:bg-muted/50 hover:border-[#FF6B35]/30"
                     }`}
                   >
                     <div className="flex items-center gap-4">
                       <div
                         className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
                           activeCategory === "solutions"
-                            ? "bg-primary text-primary-foreground"
-                            : "bg-muted/50 text-muted-foreground group-hover:bg-muted"
+                            ? "bg-[#FF6B35] text-white"
+                            : "bg-muted/50 text-[#FF6B35] group-hover:bg-[#FF6B35]/20"
                         }`}
                       >
                         <Shield size={22} />
                       </div>
                       <div className="text-left">
                         <h4
-                          className={`font-semibold transition-colors ${activeCategory === "solutions" ? "text-primary" : "text-foreground"}`}
+                          className={`font-semibold transition-colors ${
+                            activeCategory === "solutions" ? "text-[#FF6B35]" : "text-foreground group-hover:text-[#FF6B35]"
+                          }`}
                         >
                           Solutions
                         </h4>
@@ -627,7 +636,9 @@ const Header = () => {
                     </div>
                     <ChevronRight
                       size={20}
-                      className={`transition-all duration-300 ${activeCategory === "solutions" ? "text-primary" : "text-muted-foreground"}`}
+                      className={`transition-all duration-300 ${
+                        activeCategory === "solutions" ? "text-[#FF6B35]" : "text-muted-foreground"
+                      }`}
                     />
                   </button>
                 </div>
@@ -637,55 +648,91 @@ const Header = () => {
               <div className="pl-0 lg:pl-8 pt-6 lg:pt-0">
                 {activeCategory === "services" && (
                   <div className="animate-fade-in">
-                    <h3 className="text-xs font-semibold text-primary uppercase tracking-wider mb-6">
+                    <h3 className="text-xs font-semibold text-[#FF6B35] uppercase tracking-wider mb-6">
                       Services
                     </h3>
-                    <div className="space-y-2">
-                      {services.map((item) => (
-                        <Link
-                          key={item.label}
-                          to={item.href}
-                          className="group flex items-center gap-4 p-3 rounded-lg hover:bg-muted/30 transition-all duration-300"
-                          onClick={() => setIsMegaMenuOpen(false)}
-                        >
-                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                            <item.icon size={18} />
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-foreground group-hover:text-primary transition-colors">
-                              {item.label}
-                            </h4>
-                            <p className="text-sm text-muted-foreground">
-                              {item.description}
-                            </p>
-                          </div>
-                        </Link>
-                      ))}
+                    <div className="space-y-3">
+                      {services.map((item, index) => {
+                        const isFirst = index === 0;
+                        return (
+                          <Link
+                            key={item.label}
+                            to={item.href}
+                            className={`group flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 ${
+                              isFirst
+                                ? "border-[#FF6B35]/50 bg-[#FF6B35]/5 hover:bg-[#FF6B35]/10"
+                                : "border-border/50 bg-card/30 hover:bg-muted/50 hover:border-[#FF6B35]/30"
+                            }`}
+                            onClick={() => setIsMegaMenuOpen(false)}
+                          >
+                            <div
+                              className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                                isFirst
+                                  ? "bg-[#FF6B35] text-white"
+                                  : "bg-muted/50 text-[#FF6B35] group-hover:bg-[#FF6B35]/20"
+                              }`}
+                            >
+                              <item.icon size={18} />
+                            </div>
+                            <div className="flex-1">
+                              <h4
+                                className={`font-medium transition-colors ${
+                                  isFirst ? "text-[#FF6B35]" : "text-foreground group-hover:text-[#FF6B35]"
+                                }`}
+                              >
+                                {item.label}
+                              </h4>
+                              <p className="text-sm text-muted-foreground line-clamp-1">
+                                {item.description}
+                              </p>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
 
                 {activeCategory === "solutions" && (
                   <div className="animate-fade-in">
-                    <h3 className="text-xs font-semibold text-primary uppercase tracking-wider mb-6">
+                    <h3 className="text-xs font-semibold text-[#FF6B35] uppercase tracking-wider mb-6">
                       Solutions
                     </h3>
-                    <div className="space-y-2">
-                      {solutions.map((item) => (
-                        <Link
-                          key={item.label}
-                          to={item.href}
-                          className="group flex items-center gap-4 p-3 rounded-lg hover:bg-muted/30 transition-all duration-300"
-                          onClick={() => setIsMegaMenuOpen(false)}
-                        >
-                          <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                            <item.icon size={18} />
-                          </div>
-                          <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                            {item.label}
-                          </span>
-                        </Link>
-                      ))}
+                    <div className="space-y-3">
+                      {solutions.map((item, index) => {
+                        const isFirst = index === 0;
+                        return (
+                          <Link
+                            key={item.label}
+                            to={item.href}
+                            className={`group flex items-center gap-4 p-3 rounded-xl border transition-all duration-300 ${
+                              isFirst
+                                ? "border-[#FF6B35]/50 bg-[#FF6B35]/5 hover:bg-[#FF6B35]/10"
+                                : "border-border/50 bg-card/30 hover:bg-muted/50 hover:border-[#FF6B35]/30"
+                            }`}
+                            onClick={() => setIsMegaMenuOpen(false)}
+                          >
+                            <div
+                              className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
+                                isFirst
+                                  ? "bg-[#FF6B35] text-white"
+                                  : "bg-muted/50 text-[#FF6B35] group-hover:bg-[#FF6B35]/20"
+                              }`}
+                            >
+                              <item.icon size={18} />
+                            </div>
+                            <div className="flex-1">
+                              <h4
+                                className={`font-medium transition-colors ${
+                                  isFirst ? "text-[#FF6B35]" : "text-foreground group-hover:text-[#FF6B35]"
+                                }`}
+                              >
+                                {item.label}
+                              </h4>
+                            </div>
+                          </Link>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
@@ -704,34 +751,53 @@ const Header = () => {
         >
           <div className="container-width px-4 md:px-8 py-8">
             <div className="max-w-md mx-auto">
-              <h3 className="text-xs font-semibold text-primary uppercase tracking-wider mb-6">
+              <h3 className="text-xs font-semibold text-[#FF6B35] uppercase tracking-wider mb-6">
                 Industries We Serve
               </h3>
-              <div className="space-y-2">
-                {industries.map((item) => (
-                  <Link
-                    key={item.label}
-                    to={item.href}
-                    className="group flex items-center gap-4 p-4 rounded-xl border border-border/50 bg-card/30 hover:bg-muted/50 hover:border-primary/50 transition-all duration-300"
-                    onClick={() => setIsIndustriesMenuOpen(false)}
-                  >
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                      <item.icon size={22} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                        {item.label}
-                      </h4>
-                      <p className="text-sm text-muted-foreground">
-                        {item.description}
-                      </p>
-                    </div>
-                    <ChevronRight
-                      size={20}
-                      className="ml-auto text-muted-foreground group-hover:text-primary transition-colors"
-                    />
-                  </Link>
-                ))}
+              <div className="space-y-3">
+                {industries.map((item, index) => {
+                  const isFirst = index === 0;
+                  return (
+                    <Link
+                      key={item.label}
+                      to={item.href}
+                      className={`group flex items-center gap-4 p-4 rounded-xl border transition-all duration-300 ${
+                        isFirst
+                          ? "border-[#FF6B35]/50 bg-[#FF6B35]/5 hover:bg-[#FF6B35]/10"
+                          : "border-border/50 bg-card/30 hover:bg-muted/50 hover:border-[#FF6B35]/30"
+                      }`}
+                      onClick={() => setIsIndustriesMenuOpen(false)}
+                    >
+                      <div
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                          isFirst
+                            ? "bg-[#FF6B35] text-white"
+                            : "bg-muted/50 text-[#FF6B35] group-hover:bg-[#FF6B35]/20"
+                        }`}
+                      >
+                        <item.icon size={22} />
+                      </div>
+                      <div className="flex-1">
+                        <h4
+                          className={`font-semibold transition-colors ${
+                            isFirst ? "text-[#FF6B35]" : "text-foreground group-hover:text-[#FF6B35]"
+                          }`}
+                        >
+                          {item.label}
+                        </h4>
+                        <p className="text-sm text-muted-foreground line-clamp-1">
+                          {item.description}
+                        </p>
+                      </div>
+                      <ChevronRight
+                        size={20}
+                        className={`transition-colors ${
+                          isFirst ? "text-[#FF6B35]" : "text-muted-foreground group-hover:text-[#FF6B35]"
+                        }`}
+                      />
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
