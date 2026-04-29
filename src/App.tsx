@@ -28,6 +28,7 @@ import FnBPage from "./pages/FnBPage";
 import SupportPage from "./pages/SupportPage";
 import FAQPage from "./pages/FAQPage";
 import NotFound from "./pages/NotFound";
+import TermsConditionsPage from "./pages/TermsConditionsPage";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +68,7 @@ const App = () => (
           <Route path="/team/:memberId" element={<TeamMemberPage />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
+          <Route path="/terms-conditions" element={<TermsConditionsPage />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
