@@ -1,67 +1,27 @@
-import { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { ArrowLeft, Calendar, Clock, Share2 } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  fetchBlogBySlug,
-  getStrapiImageUrl,
-  Blog,
-} from "@/services/blogsService";
-import { useInView } from "@/hooks/useInView";
-import insightsHeroBg from "@/assets/insights/insights-hero-bg.jpg";
+import { useParams, Link } from 'react-router-dom';
+import { ArrowLeft, Calendar, Clock, Share2 } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { blogPosts } from '@/data/blogData';
+import { useInView } from '@/hooks/useInView';
+import insightsHeroBg from '@/assets/insights/insights-hero-bg.jpg';
 
 const BlogDetailPage = () => {
   const { blogId } = useParams<{ blogId: string }>();
   const [heroRef, isHeroInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
-  const [contentRef, isContentInView] = useInView<HTMLDivElement>({
-    threshold: 0.1,
-  });
-  const [blog, setBlog] = useState<Blog | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [contentRef, isContentInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
 
-  useEffect(() => {
-    const loadBlog = async () => {
-      if (!blogId) return;
-
-      try {
-        const data = await fetchBlogBySlug(blogId);
-        setBlog(data);
-      } catch (error) {
-        console.error("Error loading blog:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadBlog();
-  }, [blogId]);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <div className="container-width px-4 md:px-8 py-32 text-center">
-          <p className="text-muted-foreground text-lg">Loading blog post...</p>
-        </div>
-        <Footer />
-      </div>
-    );
-  }
+  const blog = blogPosts.find((post) => post.id === blogId);
 
   if (!blog) {
     return (
       <div className="min-h-screen bg-background">
         <Header />
         <div className="container-width px-4 md:px-8 py-32 text-center">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
-            Blog Not Found
-          </h1>
-          <p className="text-muted-foreground mb-8">
-            The blog post you're looking for doesn't exist.
-          </p>
+          <h1 className="text-4xl font-bold text-foreground mb-4">Blog Not Found</h1>
+          <p className="text-muted-foreground mb-8">The blog post you're looking for doesn't exist.</p>
           <Button asChild variant="hero">
             <Link to="/insights">Back to Insights</Link>
           </Button>
@@ -70,6 +30,11 @@ const BlogDetailPage = () => {
       </div>
     );
   }
+
+  // Get related posts (same category, excluding current)
+  const relatedPosts = blogPosts
+    .filter((post) => post.category === blog.category && post.id !== blog.id)
+    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,9 +58,7 @@ const BlogDetailPage = () => {
         <div className="container-width px-4 md:px-8 relative z-10">
           <div
             className={`max-w-4xl mx-auto transition-all duration-700 ${
-              isHeroInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isHeroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             {/* Back Button */}
@@ -110,10 +73,7 @@ const BlogDetailPage = () => {
               </Link>
             </Button>
 
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               {blog.category}
             </Badge>
 
@@ -124,20 +84,12 @@ const BlogDetailPage = () => {
             <div className="flex flex-wrap items-center gap-4 text-muted-foreground">
               <span className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                {new Date(blog.date).toLocaleDateString()}
+                {blog.date}
               </span>
-              {blog.readTime && (
-                <span className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  {blog.readTime}
-                </span>
-              )}
-              {blog.author && (
-                <span className="flex items-center gap-2">
-                  By {blog.author}
-                  {blog.authorRole && ` - ${blog.authorRole}`}
-                </span>
-              )}
+              <span className="flex items-center gap-2">
+                <Clock className="w-4 h-4" />
+                {blog.readTime}
+              </span>
               <Button variant="ghost" size="sm" className="ml-auto">
                 <Share2 className="w-4 h-4 mr-2" />
                 Share
@@ -152,44 +104,59 @@ const BlogDetailPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`max-w-4xl mx-auto transition-all duration-700 ${
-              isContentInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isContentInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            {/* Cover Image */}
-            {blog.coverImage && (
-              <div className="mb-10 rounded-2xl overflow-hidden">
-                <img
-                  src={getStrapiImageUrl(blog.coverImage.url)}
-                  alt={blog.title}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-            )}
-
             {/* Article Content */}
             <article className="prose prose-lg prose-invert max-w-none">
-              <div
-                className="text-muted-foreground leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: blog.content }}
-              />
+              {blog.content.split('\n\n').map((paragraph, idx) => {
+                if (paragraph.startsWith('## ')) {
+                  return (
+                    <h2
+                      key={idx}
+                      className="font-display text-2xl md:text-3xl font-bold text-foreground mt-10 mb-4"
+                    >
+                      {paragraph.replace('## ', '')}
+                    </h2>
+                  );
+                }
+                if (paragraph.startsWith('### ')) {
+                  return (
+                    <h3
+                      key={idx}
+                      className="font-display text-xl md:text-2xl font-semibold text-foreground mt-8 mb-3"
+                    >
+                      {paragraph.replace('### ', '')}
+                    </h3>
+                  );
+                }
+                if (paragraph.startsWith('- ')) {
+                  const items = paragraph.split('\n').filter((line) => line.startsWith('- '));
+                  return (
+                    <ul key={idx} className="list-disc list-inside space-y-2 text-muted-foreground my-4">
+                      {items.map((item, i) => (
+                        <li key={i}>{item.replace('- ', '')}</li>
+                      ))}
+                    </ul>
+                  );
+                }
+                if (/^\d+\./.test(paragraph)) {
+                  const items = paragraph.split('\n').filter((line) => /^\d+\./.test(line));
+                  return (
+                    <ol key={idx} className="list-decimal list-inside space-y-2 text-muted-foreground my-4">
+                      {items.map((item, i) => (
+                        <li key={i}>{item.replace(/^\d+\.\s*/, '')}</li>
+                      ))}
+                    </ol>
+                  );
+                }
+                return (
+                  <p key={idx} className="text-muted-foreground leading-relaxed mb-6">
+                    {paragraph}
+                  </p>
+                );
+              })}
             </article>
-
-            {/* Tags */}
-            {blog.tags && blog.tags.length > 0 && (
-              <div className="mt-10 flex flex-wrap gap-2">
-                {blog.tags.map((tag, idx) => (
-                  <Badge
-                    key={idx}
-                    variant="secondary"
-                    className="bg-card/50 text-foreground border border-border/50"
-                  >
-                    {tag.label}
-                  </Badge>
-                ))}
-              </div>
-            )}
 
             {/* CTA */}
             <div className="mt-16 p-8 rounded-2xl bg-card/50 border border-border/50 text-center">
@@ -197,8 +164,7 @@ const BlogDetailPage = () => {
                 Ready to Transform Your Business?
               </h3>
               <p className="text-muted-foreground mb-6">
-                Contact ACT today to learn how we can help you leverage
-                technology for growth.
+                Contact ACT today to learn how we can help you leverage technology for growth.
               </p>
               <Button asChild variant="hero" size="lg">
                 <Link to="/contact">Get In Touch</Link>
@@ -207,6 +173,34 @@ const BlogDetailPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Related Posts */}
+      {relatedPosts.length > 0 && (
+        <section className="py-16 md:py-24 bg-card/30">
+          <div className="container-width px-4 md:px-8">
+            <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-8">
+              Related Articles
+            </h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  to={`/blog/${post.id}`}
+                  className="group block p-6 rounded-xl bg-card/50 border border-border/50 hover:border-primary/50 transition-all duration-300"
+                >
+                  <Badge variant="secondary" className="mb-3 bg-primary/10 text-primary border-0">
+                    {post.category}
+                  </Badge>
+                  <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm line-clamp-2">{post.excerpt}</p>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <Footer />
     </div>

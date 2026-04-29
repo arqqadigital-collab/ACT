@@ -1,20 +1,7 @@
-import { useState, useEffect } from "react";
 import { useInView } from "@/hooks/useInView";
 import { Button } from "@/components/ui/button";
-import {
-  ArrowRight,
-  Building,
-  Ship,
-  Radio,
-  GraduationCap,
-  LucideIcon,
-} from "lucide-react";
+import { ArrowRight, Building, Ship, Radio, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
-import {
-  fetchCaseStudies,
-  getStrapiImageUrl,
-  CaseStudy,
-} from "@/services/caseStudiesService";
 
 import agibaBg from "@/assets/success-stories/agiba-bg.jpg";
 import agibaLogo from "@/assets/success-stories/agiba-logo.png";
@@ -25,93 +12,50 @@ import telecomLogo from "@/assets/success-stories/telecom-logo.png";
 import sewedyBg from "@/assets/success-stories/sewedy-bg.jpg";
 import sewedyLogo from "@/assets/success-stories/sewedy-logo.jpg";
 
-// Fallback static data
-const fallbackStories = [
+const stories = [
   {
     icon: Building,
     category: "Oil & Gas",
-    title: "How ACT Delivered a Full Data Center Renovation for AGIBA with Zero Business Disruption",
-    excerpt: "IT Migration and Business Continuity Without Downtime",
+    title: "AGIBA Data Center Renovation",
+    subtitle: "IT Migration and Business Continuity Without Downtime",
     backgroundImage: agibaBg,
     logo: agibaLogo,
-    slug: "agiba-data-center",
+    caseStudyId: "agiba-data-center",
   },
   {
     icon: Ship,
     category: "Public Sector",
-    title: "How ACT Delivered a Cloud VOIP Solution for Red Sea Container Terminal S.A.E",
-    excerpt:
-      "Cloud VOIP Solution with Cisco to Boost Efficiency and Scalability",
+    title: "Red Sea Container Terminal",
+    subtitle: "Cloud VOIP Solution with Cisco to Boost Efficiency and Scalability",
     backgroundImage: redseaBg,
     logo: redseaLogo,
-    slug: "redsea-container-voip",
+    caseStudyId: "redsea-container-voip",
   },
   {
     icon: Radio,
     category: "Telecom",
-    title: "How ACT Enabled Telecom Egypt to Activate Data Beyond Backup",
-    excerpt: "Cloud Integration Success with Commvault",
+    title: "Telecom Egypt Data Backup",
+    subtitle: "Cloud Integration Success with Commvault",
     backgroundImage: telecomBg,
     logo: telecomLogo,
-    slug: "telecom-egypt-data",
+    caseStudyId: "telecom-egypt-data",
   },
   {
     icon: GraduationCap,
     category: "Education",
-    title: "El Sewedy Education's The Knowledge Hub Transforms Connectivity with ACT's HPE Aruba Network Solution",
-    excerpt: "Transforms Connectivity with ACT's HPE Aruba Network Solution",
+    title: "El Sewedy Education's Knowledge Hub",
+    subtitle: "Transforms Connectivity with ACT's HPE Aruba Network Solution",
     backgroundImage: sewedyBg,
     logo: sewedyLogo,
-    slug: "knowledge-hub-aruba",
+    caseStudyId: "knowledge-hub-aruba",
   },
 ];
 
-// Icon mapping for dynamic data
-const iconMap: Record<string, LucideIcon> = {
-  Building,
-  Ship,
-  Radio,
-  GraduationCap,
-};
-
 const SuccessStoriesSection = () => {
   const [sectionRef, isInView] = useInView<HTMLElement>({ threshold: 0.1 });
-  const [stories, setStories] = useState<any[]>(fallbackStories);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const loadCaseStudies = async () => {
-      try {
-        const data = await fetchCaseStudies();
-        if (data && data.length > 0) {
-          // Map API data to component format
-          const mappedStories = data.slice(0, 4).map((cs: CaseStudy) => ({
-            icon: iconMap[cs.iconName || "Building"] || Building,
-            category: cs.category,
-            title: cs.title,
-            excerpt: cs.excerpt || "",
-            backgroundImage: getStrapiImageUrl(cs.backgroundImage?.url),
-            logo: getStrapiImageUrl(cs.logo?.url),
-            slug: cs.slug,
-          }));
-          setStories(mappedStories);
-        }
-      } catch (error) {
-        console.error("Error loading case studies:", error);
-        // Keep fallback data
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadCaseStudies();
-  }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className="section-padding bg-card/30 relative overflow-hidden"
-    >
+    <section ref={sectionRef} className="section-padding bg-card/30 relative overflow-hidden">
       {/* Gradient Line */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
@@ -119,15 +63,18 @@ const SuccessStoriesSection = () => {
         {/* Section Header */}
         <div
           className={`text-center mb-16 transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-8"
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-4">
+          <span className="inline-block px-5 py-2 rounded-full glass-card text-primary text-base md:text-lg font-semibold mb-4">
             Success Stories
           </span>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-            Our Success Stories
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Our <span className="text-gradient">Success Stories</span>
           </h2>
+          {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Real results from our partnerships with leading organizations
+          </p> */}
         </div>
 
         {/* Mobile Horizontal Slider */}
@@ -136,11 +83,9 @@ const SuccessStoriesSection = () => {
             {stories.map((story, index) => (
               <Link
                 key={index}
-                to={`/case-study/${story.slug}`}
+                to={`/case-study/${story.caseStudyId}`}
                 className={`group relative rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer w-[280px] flex-shrink-0 ${
-                  isInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-8"
+                  isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
@@ -159,11 +104,7 @@ const SuccessStoriesSection = () => {
                   {/* Logo Top Right */}
                   <div className="absolute top-4 right-4 z-20">
                     <div className="w-14 h-14 bg-white/95 rounded-xl p-2 flex items-center justify-center shadow-lg">
-                      <img
-                        src={story.logo}
-                        alt={`${story.title} logo`}
-                        className="w-full h-full object-contain"
-                      />
+                      <img src={story.logo} alt={`${story.title} logo`} className="w-full h-full object-contain" />
                     </div>
                   </div>
 
@@ -179,12 +120,8 @@ const SuccessStoriesSection = () => {
 
                   {/* Content at Bottom */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-                    <h3 className="font-display text-lg font-bold text-white mb-2">
-                      {story.title}
-                    </h3>
-                    <p className="text-sm text-white/80 leading-relaxed">
-                      {story.excerpt}
-                    </p>
+                    <h3 className="font-display text-lg font-bold text-white mb-2">{story.title}</h3>
+                    <p className="text-sm text-white/80 leading-relaxed">{story.subtitle}</p>
 
                     {/* Arrow */}
                     <div className="mt-4 flex items-center gap-2 text-white/60">
@@ -203,11 +140,9 @@ const SuccessStoriesSection = () => {
           {stories.map((story, index) => (
             <Link
               key={index}
-              to={`/case-study/${story.slug}`}
+              to={`/case-study/${story.caseStudyId}`}
               className={`group relative rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer hover:scale-[1.02] ${
-                isInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-8"
+                isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -226,11 +161,7 @@ const SuccessStoriesSection = () => {
                 {/* Logo Top Right */}
                 <div className="absolute top-4 right-4 z-20">
                   <div className="w-14 h-14 md:w-16 md:h-16 bg-white/95 rounded-xl p-2 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
-                    <img
-                      src={story.logo}
-                      alt={`${story.title} logo`}
-                      className="w-full h-full object-contain"
-                    />
+                    <img src={story.logo} alt={`${story.title} logo`} className="w-full h-full object-contain" />
                   </div>
                 </div>
 
@@ -249,9 +180,7 @@ const SuccessStoriesSection = () => {
                   <h3 className="font-display text-lg font-bold text-white mb-2 group-hover:translate-x-1 transition-transform">
                     {story.title}
                   </h3>
-                  <p className="text-sm text-white/80 leading-relaxed">
-                    {story.excerpt}
-                  </p>
+                  <p className="text-sm text-white/80 leading-relaxed">{story.subtitle}</p>
 
                   {/* Arrow */}
                   <div className="mt-4 flex items-center gap-2 text-white/60 group-hover:text-white transition-colors">
@@ -267,7 +196,7 @@ const SuccessStoriesSection = () => {
         {/* CTA */}
         <div
           className={`text-center mt-12 transition-all duration-700 delay-500 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-8"
+            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
           <Button asChild variant="outline" size="lg" className="group">

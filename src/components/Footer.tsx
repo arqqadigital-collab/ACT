@@ -1,57 +1,53 @@
-import { Link } from 'react-router-dom';
-import { Linkedin, Facebook, Instagram, Youtube } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { Linkedin, Facebook, Instagram, Youtube } from "lucide-react";
 
-import actLogo from '@/assets/logo.png';
+import actLogo from "@/assets/logo.png";
 
 const Footer = () => {
   const exploreLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Who We Are', href: '/about' },
-    { label: 'Services', href: '/services' },
-    { label: 'Solutions', href: '/solutions' },
-    { label: 'Insights', href: '/insights' },
-    { label: 'Career', href: '/careers' },
-    { label: 'Contact', href: '/contact' },
+    { label: "Home", href: "/" },
+    { label: "Who We Are", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Solutions", href: "/solutions" },
+    { label: "Insights", href: "/insights" },
+    { label: "Career", href: "/careers" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const hospitalityLinks = [
-    { label: 'Home', href: '/hospitality' },
-    { label: 'Hotels & Resorts', href: '/hotels-resorts' },
-    { label: 'F&B', href: '/fnb' },
-    { label: 'Support', href: '/support' },
+    { label: "Home", href: "/hospitality" },
+    { label: "Hotels & Resorts", href: "/hotels-resorts" },
+    { label: "F&B", href: "/fnb" },
+    { label: "Support", href: "/support" },
   ];
 
   const industriesLinks = [
-    { label: 'Telecom', href: '/industries/telecom' },
-    { label: 'Oil & Gas', href: '/industries/oil-gas' },
-    { label: 'Public Sector', href: '/industries/public-sector' },
-    { label: 'Education', href: '/industries/education' },
+    { label: "Telecom", href: "/industries/telecom" },
+    { label: "Oil & Gas", href: "/industries/oil-gas" },
+    { label: "Public Sector", href: "/industries/public-sector" },
+    { label: "Education", href: "/industries/education" },
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: 'https://facebook.com/act.eg', label: 'Facebook' },
-    { icon: Instagram, href: 'https://www.instagram.com/act_hospitality?igsh=dzFvb2l3anJ5MWpi', label: 'Instagram' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/company/advanced-computer-technology/', label: 'LinkedIn' },
-    { icon: Youtube, href: 'https://www.youtube.com/@advancedcomputertechnology7729', label: 'YouTube' },
+    { icon: Facebook, href: "https://facebook.com/act.eg", label: "Facebook" },
+    { icon: Instagram, href: "https://www.instagram.com/act_hospitality?igsh=dzFvb2l3anJ5MWpi", label: "Instagram" },
+    { icon: Linkedin, href: "https://www.linkedin.com/company/advanced-computer-technology/", label: "LinkedIn" },
+    { icon: Youtube, href: "https://www.youtube.com/@advancedcomputertechnology7729 ", label: "YouTube" },
   ];
 
   return (
     <footer className="bg-card/50 backdrop-blur-xl border-t border-border/50">
-
       {/* Main Footer */}
       <div className="container-width px-4 md:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Logo, Description & Social */}
           <div className="col-span-2 md:col-span-1">
             <div className="mb-4">
-              <img 
-                src={actLogo} 
-                alt="ACT Logo" 
-                className="h-16 w-auto"
-              />
+              <img src={actLogo} alt="ACT Logo" className="h-16 w-auto" />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              Since 1988, empowering organizations with trusted technology solutions across Egypt, the Middle East, and beyond.
+              Since 1988, empowering organizations with trusted technology solutions across Egypt, the Middle East, and
+              beyond.
             </p>
             {/* Social Links */}
             <div className="flex gap-3">
@@ -76,18 +72,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {exploreLinks.map((link) => (
                 <li key={link.label}>
-                  {link.href.startsWith('/') ? (
-                    <Link 
-                      to={link.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
+                  {link.href.startsWith("/") ? (
+                    <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                       {link.label}
                     </Link>
                   ) : (
-                    <a 
-                      href={link.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                    >
+                    <a href={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                       {link.label}
                     </a>
                   )}
@@ -102,10 +92,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {hospitalityLinks.map((link) => (
                 <li key={link.label}>
-                  <Link 
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -119,10 +106,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {industriesLinks.map((link) => (
                 <li key={link.label}>
-                  <Link 
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
+                  <Link to={link.href} className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -138,8 +122,12 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>© {new Date().getFullYear()} ACT. All rights reserved.</p>
             <div className="flex gap-6">
-              <a href="/Privacypolicypage" className="hover:text-foreground transition-colors">Privacy Policy</a>
-              <a href="/Privacypolicypage" className="hover:text-foreground transition-colors">Terms of Service</a>
+              <a href="/privacy-policy" className="hover:text-foreground transition-colors">
+                Privacy Policy
+              </a>
+              <a href="/terms-conditions" className="hover:text-foreground transition-colors">
+                Terms of Service
+              </a>
             </div>
           </div>
         </div>

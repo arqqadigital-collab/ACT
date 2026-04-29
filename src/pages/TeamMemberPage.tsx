@@ -23,7 +23,7 @@ const TeamMemberPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-
+      
       <main className="pt-24 pb-20">
         <section ref={ref} className="py-12 relative overflow-hidden">
           {/* Background Elements */}
@@ -32,8 +32,8 @@ const TeamMemberPage = () => {
 
           <div className="container-width px-4 md:px-8 relative z-10">
             {/* Back Link */}
-            <Link
-              to="/management-team"
+            <Link 
+              to="/management-team" 
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft size={20} />
@@ -41,19 +41,17 @@ const TeamMemberPage = () => {
             </Link>
 
             {/* Member Content */}
-            <div
+            <div 
               className={`max-w-5xl mx-auto glass-card rounded-2xl p-8 md:p-12 lg:p-16 transition-all duration-700 ${
-                isInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-8"
+                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
             >
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                 {/* Left Side - Photo */}
                 <div className="lg:col-span-4 flex flex-col items-center">
                   <div className="aspect-square w-full max-w-sm rounded-2xl overflow-hidden mb-6">
-                    <img
-                      src={member.image}
+                    <img 
+                      src={member.image} 
                       alt={member.name}
                       className="w-full h-full object-cover object-top"
                     />
@@ -80,25 +78,20 @@ const TeamMemberPage = () => {
             {/* Navigation to other members */}
             <div className="max-w-5xl mx-auto mt-8 flex justify-between items-center">
               {prevMember ? (
-                <Link
+                <Link 
                   to={`/team/${prevMember.id}`}
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
                 >
-                  <ArrowLeft
-                    size={20}
-                    className="group-hover:-translate-x-1 transition-transform"
-                  />
+                  <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
                   <div className="text-right">
                     <p className="text-xs uppercase tracking-wider">Previous</p>
                     <p className="font-medium">{prevMember.name}</p>
                   </div>
                 </Link>
-              ) : (
-                <div />
-              )}
-
+              ) : <div />}
+              
               {nextMember ? (
-                <Link
+                <Link 
                   to={`/team/${nextMember.id}`}
                   className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors group"
                 >
@@ -106,14 +99,9 @@ const TeamMemberPage = () => {
                     <p className="text-xs uppercase tracking-wider">Next</p>
                     <p className="font-medium">{nextMember.name}</p>
                   </div>
-                  <ArrowLeft
-                    size={20}
-                    className="rotate-180 group-hover:translate-x-1 transition-transform"
-                  />
+                  <ArrowLeft size={20} className="rotate-180 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              ) : (
-                <div />
-              )}
+              ) : <div />}
             </div>
           </div>
         </section>

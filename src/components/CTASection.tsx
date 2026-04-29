@@ -7,7 +7,7 @@ const CTASection = () => {
   const [sectionRef, isInView] = useInView<HTMLElement>({ threshold: 0.2 });
 
   return (
-    <section
+    <section 
       ref={sectionRef}
       className="section-padding bg-background relative overflow-hidden"
     >
@@ -16,22 +16,22 @@ const CTASection = () => {
       <div className="absolute bottom-0 right-1/4 w-40 sm:w-56 md:w-80 h-40 sm:h-56 md:h-80 rounded-full bg-accent/10 blur-[120px]" />
 
       <div className="container-width relative z-10">
-        <div
+        <div 
           className={`relative rounded-3xl overflow-hidden transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-8"
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           {/* Glass Background */}
           <div className="absolute inset-0 glass-card" />
           <div className="absolute inset-0 glow-border rounded-3xl" />
-
+          
           {/* Animated Grid Background */}
           <div className="absolute inset-0 opacity-5">
-            <div
+            <div 
               className="absolute inset-0"
               style={{
                 backgroundImage: `linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)`,
-                backgroundSize: "40px 40px",
+                backgroundSize: '40px 40px'
               }}
             />
           </div>
@@ -41,14 +41,10 @@ const CTASection = () => {
               {/* Left Content */}
               <div>
                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-                  Start Your{" "}
-                  <span className="text-gradient">Digital Transformation</span>{" "}
-                  with ACT!
+                  Start Your <span className="text-gradient">Digital Transformation</span> with ACT!
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Ready to transform your business with innovative technology
-                  solutions? Let's discuss how ACT can help you achieve your
-                  goals.
+                  Ready to transform your business with innovative technology solutions? Let's discuss how ACT can help you achieve your goals.
                 </p>
                 <Button variant="hero" size="xl" className="group" asChild>
                   <Link to="/contact">
@@ -67,12 +63,9 @@ const CTASection = () => {
                       <MapPin className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-display font-bold text-foreground mb-1">
-                        ACT Headquarters
-                      </h3>
+                      <h3 className="font-display font-bold text-foreground mb-1">ACT Headquarters</h3>
                       <p className="text-sm text-muted-foreground">
-                        Smart Villages Company, Building B92 - A13
-                        <br />
+                        Smart Villages Company, Building B92 - A13<br />
                         Al Giza Desert, Giza Governorate
                       </p>
                     </div>
@@ -86,12 +79,8 @@ const CTASection = () => {
                       <Phone className="w-6 h-6 text-accent-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-display font-bold text-foreground mb-1">
-                        Service Desk 24/7
-                      </h3>
-                      <p className="text-2xl font-display font-bold text-accent">
-                        19488
-                      </p>
+                      <h3 className="font-display font-bold text-foreground mb-1">Service Desk 24/7</h3>
+                      <p className="text-2xl font-display font-bold text-accent">19488</p>
                     </div>
                   </div>
                 </div>
@@ -103,13 +92,8 @@ const CTASection = () => {
                       <Mail className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <div>
-                      <h3 className="font-display font-bold text-foreground mb-1">
-                        Email
-                      </h3>
-                      <a
-                        href="mailto:CX@act.eg"
-                        className="text-lg text-primary hover:text-primary/80 transition-colors"
-                      >
+                      <h3 className="font-display font-bold text-foreground mb-1">Email</h3>
+                      <a href="mailto:CX@act.eg" className="text-lg text-primary hover:text-primary/80 transition-colors">
                         CX@act.eg
                       </a>
                     </div>

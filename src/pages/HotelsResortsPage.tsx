@@ -1,34 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import {
-  fetchHotelsCoreSolutions,
-  HotelsCoreSolutionsData,
-} from "@/services/hotelsCoreSolutionsService";
-import {
-  fetchHotelsEntertainmentWellness,
-  HotelsEntertainmentWellnessData,
-} from "@/services/hotelsEntertainmentWellnessService";
-import {
-  fetchHotelsAddOnApplications,
-  HotelsAddOnApplicationsData,
-  AddOnAppItem,
-} from "@/services/hotelsAddOnApplicationsService";
-import {
-  fetchHotelsPhysicalSecurity,
-  HotelsPhysicalSecurityData,
-} from "@/services/hotelsPhysicalSecurityService";
-import {
-  fetchHotelsBenefits,
-  HotelsBenefitsData,
-} from "@/services/hotelsBenefitsService";
-import {
-  fetchCaseStudies,
-  getStrapiImageUrl,
-  CaseStudy,
-} from "@/services/caseStudiesService";
-import { submitHotelsDemoRequest } from "@/services/hotelsDemoRequestService";
-import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 import {
   Building2,
   Utensils,
@@ -58,6 +31,7 @@ import {
   Home,
   Lock,
   Zap,
+  Loader2,
 } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -67,6 +41,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useInView } from "@/hooks/useInView";
+import { useToast } from "@/hooks/use-toast";
 
 // Partner logos
 import ciscoLogo from "@/assets/partners/cisco.png";
@@ -93,60 +68,26 @@ import ipTelephoneImg from "@/assets/hotels/ip-telephone.png";
 import parkingImg from "@/assets/hotels/parking-management.png";
 
 import { LucideIcon } from "lucide-react";
-import {
-  StackingCardsSection,
-  StackingCardData,
-} from "@/components/StackingCards";
+import { StackingCardsSection, StackingCardData } from "@/components/StackingCards";
+// Case study images
+import cityHotelImg from "@/assets/case-studies/city-hotel.jpg";
+import luxuryResortImg from "@/assets/case-studies/luxury-resort.jpg";
+import madenImg from "@/assets/case-studies/maden-hotels.jpg";
+import rotanaImg from "@/assets/case-studies/rotana.jpg";
 
-// Icon map for dynamic core solutions
-const coreSolutionIconMap: Record<string, LucideIcon> = {
-  Building2,
-  Utensils,
-  Settings,
-  Users,
-  FileText,
-  Sparkles,
-  Dumbbell,
-  Ticket,
-  Heart,
-  Shield,
-  Wifi,
-  Camera,
-  Bell,
-  Volume2,
-  Tv,
-  Phone,
-  Car,
-  CheckCircle2,
-  ArrowRight,
-  ChevronRight,
-  CreditCard,
-  BarChart3,
-  Key,
-  Fingerprint,
-  Gauge,
-  Home,
-  Lock,
-  Zap,
-};
+// Core Solutions images
+import pmsImg from "@/assets/hotels/pms.webp";
+import restaurantMgmtImg from "@/assets/hotels/restaurant-management.webp";
+import inventoryMgmtImg from "@/assets/hotels/inventory-management.webp";
+import accountingImg from "@/assets/hotels/accounting-system.webp";
+import maestroHcmImg from "@/assets/hotels/maestro-hcm.webp";
+import automationImg from "@/assets/hotels/automation-solutions.png";
 
 const HotelsResortsPage = () => {
+  const { toast } = useToast();
   const [heroRef, heroInView] = useInView<HTMLDivElement>();
   const [activeSecurityTab, setActiveSecurityTab] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { toast } = useToast();
-  const [coreSolutionsData, setCoreSolutionsData] =
-    useState<HotelsCoreSolutionsData | null>(null);
-  const [entertainmentData, setEntertainmentData] =
-    useState<HotelsEntertainmentWellnessData | null>(null);
-  const [addOnData, setAddOnData] =
-    useState<HotelsAddOnApplicationsData | null>(null);
-  const [physicalSecurityData, setPhysicalSecurityData] =
-    useState<HotelsPhysicalSecurityData | null>(null);
-  const [benefitsData, setBenefitsData] = useState<HotelsBenefitsData | null>(
-    null,
-  );
-  const [dynamicStories, setDynamicStories] = useState<CaseStudy[]>([]);
   const [formData, setFormData] = useState({
     businessType: "",
     roomCount: "",
@@ -167,6 +108,7 @@ const HotelsResortsPage = () => {
   const coreSolutions = [
     {
       icon: Building2,
+      image: pmsImg,
       title: "Property Management Systems (PMS)",
       description:
         "Oracle Hospitality OPERA PMS centralizes hotel operations—covering reservations, front desk, housekeeping, billing, and guest preferences with powerful reporting and analytics.",
@@ -180,63 +122,43 @@ const HotelsResortsPage = () => {
     },
     {
       icon: Utensils,
+      image: restaurantMgmtImg,
       title: "Restaurant Management System",
       description:
         "Oracle Simphony is a cloud-based POS system managing transactions across restaurants, bars, spas with seamless OPERA Cloud integration and mobile ordering.",
-      features: [
-        "Cloud-based POS",
-        "Room charging integration",
-        "Mobile ordering",
-        "Multi-outlet management",
-      ],
+      features: ["Cloud-based POS", "Room charging integration", "Mobile ordering", "Multi-outlet management"],
     },
     {
       icon: BarChart3,
+      image: inventoryMgmtImg,
       title: "Inventory Management System",
       description:
         "Track stock, manage purchasing, and streamline procurement. Improve cost control, reduce waste, and boost operational efficiency.",
-      features: [
-        "Stock tracking",
-        "Purchasing management",
-        "Procurement streamlining",
-        "Cost control",
-      ],
+      features: ["Stock tracking", "Purchasing management", "Procurement streamlining", "Cost control"],
     },
     {
       icon: CreditCard,
+      image: accountingImg,
       title: "Accounting System",
       description:
         "Manage revenues, expenses, payroll, and reporting with complete financial visibility across your property.",
-      features: [
-        "Revenue management",
-        "Expense tracking",
-        "Payroll integration",
-        "Financial reporting",
-      ],
+      features: ["Revenue management", "Expense tracking", "Payroll integration", "Financial reporting"],
     },
     {
       icon: Settings,
+      image: automationImg,
       title: "Automation Solutions",
       description:
         "Automate every step from check-in to check-out with comprehensive solutions designed to deliver the finest guest experience.",
-      features: [
-        "Self check-in/out",
-        "Smart room controls",
-        "Automated workflows",
-        "Guest service automation",
-      ],
+      features: ["Self check-in/out", "Smart room controls", "Automated workflows", "Guest service automation"],
     },
     {
       icon: Users,
+      image: maestroHcmImg,
       title: "Maestro HCM",
       description:
         "Simplify HR from hire to retire with powerful analytics, smart dashboards, and an easy-to-use interface.",
-      features: [
-        "HR analytics",
-        "Smart dashboards",
-        "Employee lifecycle",
-        "Performance management",
-      ],
+      features: ["HR analytics", "Smart dashboards", "Employee lifecycle", "Performance management"],
     },
   ];
 
@@ -279,8 +201,15 @@ const HotelsResortsPage = () => {
     },
   ];
 
-  // Add-On Applications with detailed content (fallback)
-  const addOnApplications: AddOnAppItem[] = [
+  // Add-On Applications with detailed content
+  interface AddOnApp {
+    icon: LucideIcon;
+    title: string;
+    description: string;
+    subItems?: string[];
+  }
+
+  const addOnApplications: AddOnApp[] = [
     {
       icon: Users,
       title: "CRM & Loyalty",
@@ -392,11 +321,7 @@ const HotelsResortsPage = () => {
       icon: Tv,
       title: "IPTV Solution",
       image: iptvImg,
-      items: [
-        "Hospitality Screens",
-        "IPTV server Middleware",
-        "Integration With PMS",
-      ],
+      items: ["Hospitality Screens", "IPTV server Middleware", "Integration With PMS"],
     },
     {
       icon: Phone,
@@ -413,39 +338,26 @@ const HotelsResortsPage = () => {
   ];
 
   const benefits = [
-    {
-      icon: Sparkles,
-      text: "Elevate Guest Satisfaction with personalized, seamless service",
-    },
-    {
-      icon: Zap,
-      text: "Boost Efficiency by connecting PMS, POS, and operations",
-    },
-    {
-      icon: BarChart3,
-      text: "Maximize Revenue with distribution, revenue management & analytics",
-    },
-    {
-      icon: Settings,
-      text: "Streamline Events with mobile sales & catering management",
-    },
+    { icon: Sparkles, text: "Elevate Guest Satisfaction with personalized, seamless service" },
+    { icon: Zap, text: "Boost Efficiency by connecting PMS, POS, and operations" },
+    { icon: BarChart3, text: "Maximize Revenue with distribution, revenue management & analytics" },
+    { icon: Settings, text: "Streamline Events with mobile sales & catering management" },
     { icon: Lock, text: "Secure & Compliant with e-invoice & ID integration" },
   ];
 
   const caseStudies = [
     {
-      id: "rotana-hotels",
+      id: "rotana-cloud-finance",
       title: "Rotana Hotels & Resorts",
       metric: "25%",
       description:
         "Increased guest satisfaction through seamless PMS integration and smart automation across properties.",
     },
     {
-      id: "maden-hotels",
+      id: "maden-hotels-cloud",
       title: "Maden Hotels",
       metric: "30%",
-      description:
-        "Unified access control & spa management - improved membership sales and operational efficiency.",
+      description: "Unified access control & spa management - improved membership sales and operational efficiency.",
     },
   ];
 
@@ -454,28 +366,22 @@ const HotelsResortsPage = () => {
       id: "city-hotel-hospitality",
       category: "Urban Hospitality",
       title: "City Hotel",
-      subtitle:
-        "Reduced check-in times by 40% through self-service kiosks & smart integration.",
-      image:
-        "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&q=80&w=800",
+      subtitle: "Reduced check-in times by 40% through self-service kiosks & smart integration.",
+      image: cityHotelImg,
     },
     {
       id: "luxury-resort-hospitality",
       category: "Hospitality",
       title: "Luxury Resort",
-      subtitle:
-        "Boosted guest satisfaction by 25% with OPERA PMS & automation.",
-      image:
-        "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&q=80&w=800",
+      subtitle: "Boosted guest satisfaction by 25% with OPERA PMS & automation.",
+      image: luxuryResortImg,
     },
     {
       id: "maden-hotels-cloud",
       category: "Leisure & Wellness",
       title: "Maden Hotels",
-      subtitle:
-        "Increased membership revenue by 30% using Spa & Access Control solutions.",
-      image:
-        "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&q=80&w=800",
+      subtitle: "Increased membership revenue by 30% using Spa & Access Control solutions.",
+      image: madenImg,
     },
   ];
 
@@ -486,91 +392,6 @@ const HotelsResortsPage = () => {
     { name: "Fortinet", logo: fortinetLogo },
     { name: "Nutanix", logo: nutanixLogo },
   ];
-
-  // Fetch hotels core solutions from Strapi
-  useEffect(() => {
-    const loadCoreSolutions = async () => {
-      const data = await fetchHotelsCoreSolutions();
-      if (data) {
-        setCoreSolutionsData(data);
-      }
-    };
-    loadCoreSolutions();
-  }, []);
-
-  // Fetch hotels entertainment & wellness from Strapi
-  useEffect(() => {
-    const loadEntertainment = async () => {
-      const data = await fetchHotelsEntertainmentWellness();
-      if (data) {
-        setEntertainmentData(data);
-      }
-    };
-    loadEntertainment();
-  }, []);
-
-  // Fetch hotels add-on applications from Strapi
-  useEffect(() => {
-    const loadAddOns = async () => {
-      const data = await fetchHotelsAddOnApplications();
-      if (data) {
-        setAddOnData(data);
-      }
-    };
-    loadAddOns();
-  }, []);
-
-  // Fetch hotels physical security from Strapi
-  useEffect(() => {
-    const loadPhysicalSecurity = async () => {
-      const data = await fetchHotelsPhysicalSecurity();
-      if (data) {
-        setPhysicalSecurityData(data);
-      }
-    };
-    loadPhysicalSecurity();
-  }, []);
-
-  // Fetch hotels benefits from Strapi
-  useEffect(() => {
-    const loadBenefits = async () => {
-      const data = await fetchHotelsBenefits();
-      if (data) {
-        setBenefitsData(data);
-      }
-    };
-    loadBenefits();
-  }, []);
-
-  // Fetch case studies from Strapi for success stories
-  useEffect(() => {
-    const loadCaseStudies = async () => {
-      try {
-        const data = await fetchCaseStudies();
-        if (data.length > 0) {
-          // Filter for hotels-related case studies
-          const hotelsKeywords = [
-            "hotel",
-            "resort",
-            "hospitality",
-            "accommodation",
-            "leisure",
-          ];
-          const filtered = data.filter((cs) =>
-            hotelsKeywords.some(
-              (kw) =>
-                cs.industry?.toLowerCase().includes(kw) ||
-                cs.category?.toLowerCase().includes(kw),
-            ),
-          );
-          setDynamicStories(filtered.length > 0 ? filtered : data);
-        }
-      } catch (error) {
-        console.error("Error loading case studies:", error);
-      }
-    };
-    loadCaseStudies();
-  }, []);
 
   const handleServiceToggle = (service: string) => {
     setFormData((prev) => ({
@@ -583,24 +404,31 @@ const HotelsResortsPage = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!formData.businessName.trim()) {
-      toast({
-        title: "Business Name Required",
-        description: "Please enter your business name.",
-        variant: "destructive",
-      });
-      return;
-    }
-
     setIsSubmitting(true);
-    const result = await submitHotelsDemoRequest(formData);
 
-    if (result.success) {
+    try {
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID";
+      const templateId = import.meta.env.VITE_EMAILJS_HOTELS_TEMPLATE_ID || "YOUR_HOTELS_TEMPLATE_ID";
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY";
+
+      const templateParams = {
+        business_type: formData.businessType,
+        room_count: formData.roomCount,
+        services: formData.services.join(", ") || "None selected",
+        business_name: formData.businessName,
+        contact_name: formData.contactName || "Not provided",
+        mobile: formData.mobile || "Not provided",
+        email: formData.email,
+        to_email: "sales@act.eg",
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
       toast({
         title: "Request Submitted!",
-        description: "Our team will contact you soon to schedule your demo.",
+        description: "Our hospitality team will contact you soon.",
       });
+
       // Reset form
       setFormData({
         businessType: "",
@@ -611,15 +439,16 @@ const HotelsResortsPage = () => {
         mobile: "",
         email: "",
       });
-    } else {
+    } catch (error) {
+      console.error("Failed to send request:", error);
       toast({
-        title: "Submission Failed",
-        description: result.error || "Please try again later.",
+        title: "Error",
+        description: "Failed to submit request. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsSubmitting(false);
     }
-
-    setIsSubmitting(false);
   };
 
   return (
@@ -627,20 +456,11 @@ const HotelsResortsPage = () => {
       <Header />
 
       {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[90vh] flex items-center justify-center overflow-hidden"
-      >
+      <section ref={heroRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover"
-          >
-            <source src="/videos/hotels-hero.mp4" type="video/mp4" />
+          <video autoPlay muted loop playsInline className="w-full h-full object-cover">
+            <source src="/videos/AC_-_4-2.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
         </div>
@@ -653,13 +473,11 @@ const HotelsResortsPage = () => {
             className="max-w-4xl"
           >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6">
-              Transforming Guest Experiences with{" "}
-              <span className="text-primary">Smart Hotel Technology</span>
+              Transforming Guest Experiences with <span className="text-primary">Smart Hotel Technology</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl">
-              From check-in to check-out, ACT delivers the technology that
-              empowers hotels and resorts to provide seamless, personalized, and
-              connected experiences for every guest.
+              From check-in to check-out, ACT delivers the technology that empowers hotels and resorts to provide
+              seamless, personalized, and connected experiences for every guest.
             </p>
             <Button variant="accent" size="lg" className="group" asChild>
               <Link to="/support">
@@ -680,11 +498,9 @@ const HotelsResortsPage = () => {
                 Why ACT for Hotels & Resorts?
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                The hospitality industry is evolving, and guests expect
-                personalized, effortless, and memorable experiences. ACT helps
-                hotels deliver on these expectations with flexible, scalable,
-                and integrated technology that connects every part of the
-                property into one ecosystem.
+                The hospitality industry is evolving, and guests expect personalized, effortless, and memorable
+                experiences. ACT helps hotels deliver on these expectations with flexible, scalable, and integrated
+                technology that connects every part of the property into one ecosystem.
               </p>
               <ul className="space-y-4">
                 {whyActFeatures.map((feature, index) => (
@@ -697,11 +513,7 @@ const HotelsResortsPage = () => {
             </div>
             <div className="relative">
               <div className="aspect-video rounded-2xl overflow-hidden bg-card border border-border/50">
-                <img
-                  src={whyActImage}
-                  alt="Luxury hotel resort with pool"
-                  className="w-full h-full object-cover"
-                />
+                <img src={whyActImage} alt="Luxury hotel resort with pool" className="w-full h-full object-cover" />
               </div>
             </div>
           </div>
@@ -712,196 +524,121 @@ const HotelsResortsPage = () => {
       <section className="py-20">
         <div className="container-width px-4 md:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              {coreSolutionsData?.sectionTitle || "Core Solutions"}
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Core Solutions</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {coreSolutionsData?.sectionDescription ||
-                "Comprehensive technology solutions designed specifically for hotels and resorts"}
+              Comprehensive technology solutions designed specifically for hotels and resorts
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {coreSolutionsData?.solutions &&
-            coreSolutionsData.solutions.length > 0
-              ? coreSolutionsData.solutions.map((solution, index) => {
-                  const IconComponent =
-                    coreSolutionIconMap[solution.icon] || Building2;
-                  return (
-                    <motion.div
-                      key={solution.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="group bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-6 hover:border-primary/50 transition-all"
-                    >
-                      <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                        <IconComponent className="w-7 h-7 text-primary" />
-                      </div>
-                      <h3 className="font-display text-xl font-bold text-foreground mb-3">
-                        {solution.title}
-                      </h3>
-                      <p className="text-muted-foreground text-sm mb-4">
-                        {solution.description}
-                      </p>
-                      <ul className="space-y-2">
-                        {solution.features.map((feature, i) => (
-                          <li
-                            key={i}
-                            className="flex items-center gap-2 text-sm text-muted-foreground"
-                          >
-                            <ChevronRight className="w-4 h-4 text-primary" />
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </motion.div>
-                  );
-                })
-              : coreSolutions.map((solution, index) => (
-                  <motion.div
-                    key={solution.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="group bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-6 hover:border-primary/50 transition-all"
-                  >
-                    <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                      <solution.icon className="w-7 h-7 text-primary" />
-                    </div>
-                    <h3 className="font-display text-xl font-bold text-foreground mb-3">
-                      {solution.title}
-                    </h3>
-                    <p className="text-muted-foreground text-sm mb-4">
-                      {solution.description}
-                    </p>
-                    <ul className="space-y-2">
-                      {solution.features.map((feature, i) => (
-                        <li
-                          key={i}
-                          className="flex items-center gap-2 text-sm text-muted-foreground"
-                        >
-                          <ChevronRight className="w-4 h-4 text-primary" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                ))}
+            {coreSolutions.map((solution, index) => (
+              <motion.div
+                key={solution.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="group bg-card/50 backdrop-blur-sm border border-border/50 rounded-2xl p-6 hover:border-primary/50 transition-all overflow-hidden"
+              >
+                {solution.image ? (
+                  <div className={`w-full aspect-[4/3] rounded-xl overflow-hidden mb-4 ${solution.title === "Automation Solutions" ? "bg-white shadow-lg" : ""}`}>
+                    <img src={solution.image} alt={solution.title} className={`w-full h-full group-hover:scale-105 transition-transform duration-500 ${solution.title === "Automation Solutions" ? "object-contain scale-110 p-2" : "object-cover"}`} />
+                  </div>
+                ) : (
+                  <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                    <solution.icon className="w-7 h-7 text-primary" />
+                  </div>
+                )}
+                <h3 className="font-display text-xl font-bold text-foreground mb-3">{solution.title}</h3>
+                <p className="text-muted-foreground text-sm mb-4">{solution.description}</p>
+                <ul className="space-y-2">
+                  {solution.features.map((feature, i) => (
+                    <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <ChevronRight className="w-4 h-4 text-primary" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Entertainment & Wellness Section - Scroll Stacking Cards */}
       <StackingCardsSection
-        badge={entertainmentData?.badge || "Entertainment & Wellness Segment"}
-        title={entertainmentData?.title || "Entertainment & Wellness Segment"}
-        description={
-          entertainmentData?.description ||
-          "Elevate guest experiences through intelligent leisure services and seamless wellness integrations."
-        }
-        cards={
-          entertainmentData?.cards && entertainmentData.cards.length > 0
-            ? entertainmentData.cards
-            : entertainmentWellnessData
-        }
+        badge="Entertainment & Wellness Segment"
+        title="Entertainment & Wellness Segment"
+        description="Elevate guest experiences through intelligent leisure services and seamless wellness integrations."
+        cards={entertainmentWellnessData}
       />
 
       {/* Add-On Applications Section */}
       <section className="py-20">
         <div className="container-width px-4 md:px-8">
           <div className="text-center mb-16">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              {addOnData?.sectionTitle || "Add-On Applications"}
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">Add-On Applications</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {addOnData?.sectionDescription ||
-                "Extend your hospitality ecosystem with powerful integrations"}
+              Extend your hospitality ecosystem with powerful integrations
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {(addOnData?.applications && addOnData.applications.length > 0
-              ? addOnData.applications
-              : addOnApplications
-            ).map((app, index) => {
-              const IconComponent = app.icon;
-              return (
-                <motion.div
-                  key={app.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex flex-col gap-4 bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 hover:border-primary/50 transition-all"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <IconComponent className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-display text-xl font-bold text-foreground mb-2">
-                        {app.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">
-                        {app.description}
-                      </p>
-                    </div>
+            {addOnApplications.map((app, index) => (
+              <motion.div
+                key={app.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex flex-col gap-4 bg-card/50 backdrop-blur-sm border border-border/50 rounded-xl p-6 hover:border-primary/50 transition-all"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <app.icon className="w-6 h-6 text-primary" />
                   </div>
-                  {app.subItems && app.subItems.length > 0 && (
-                    <div className="pl-16">
-                      <ul className="space-y-2">
-                        {app.subItems.map((item, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-2 text-sm text-muted-foreground"
-                          >
-                            <ChevronRight className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })}
+                  <div className="flex-1">
+                    <h3 className="font-display text-xl font-bold text-foreground mb-2">{app.title}</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">{app.description}</p>
+                  </div>
+                </div>
+                {app.subItems && app.subItems.length > 0 && (
+                  <div className="pl-16">
+                    <ul className="space-y-2">
+                      {app.subItems.map((item, i) => (
+                        <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <ChevronRight className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Physical Security & Smart Solutions - Horizontal Tabs */}
+      {/* Physical Security & Smart Solutions - Vertical Tabs */}
       <section className="py-20 bg-card/30">
         <div className="container-width px-4 md:px-8">
-          {/* Title */}
-          <div className="mb-8">
+          <div className="mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              {physicalSecurityData?.sectionTitle ||
-                "Physical Security & Smart Solutions"}
+              Physical Security & Smart Solutions
             </h2>
-            {physicalSecurityData?.sectionDescription && (
-              <p className="text-lg text-muted-foreground max-w-2xl">
-                {physicalSecurityData.sectionDescription}
-              </p>
-            )}
           </div>
 
           {/* Horizontal Tabs */}
-          <div className="flex flex-wrap gap-2 mb-8 border-b border-border/30 pb-4">
-            {(physicalSecurityData?.systems &&
-            physicalSecurityData.systems.length > 0
-              ? physicalSecurityData.systems
-              : physicalSecuritySystems
-            ).map((system, index) => (
+          <div className="flex flex-wrap gap-3 mb-8 border-b border-border/30 pb-4">
+            {physicalSecuritySystems.map((system, index) => (
               <button
                 key={system.title}
                 onClick={() => setActiveSecurityTab(index)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                className={`px-5 py-2 rounded-full text-sm font-medium transition-all ${
                   activeSecurityTab === index
                     ? "bg-primary text-primary-foreground"
-                    : "bg-card/50 text-muted-foreground hover:text-foreground hover:bg-card"
+                    : "border border-border/50 text-muted-foreground hover:text-foreground hover:border-foreground/30"
                 }`}
               >
                 {system.title}
@@ -909,57 +646,41 @@ const HotelsResortsPage = () => {
             ))}
           </div>
 
-          {/* Content - Two Column: Text Left, Image Right */}
+          {/* Content - Two columns: text left, image right */}
           <motion.div
             key={activeSecurityTab}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
-            className="grid lg:grid-cols-2 gap-8 items-start"
+            className="flex flex-col md:flex-row gap-8 items-start"
           >
-            {(() => {
-              const activeSystems =
-                physicalSecurityData?.systems &&
-                physicalSecurityData.systems.length > 0
-                  ? physicalSecurityData.systems
-                  : physicalSecuritySystems;
-              const activeSystem = activeSystems[activeSecurityTab];
+            {/* Left - Title & Bullet List */}
+            <div className="md:w-1/2">
+              <h3 className="font-display text-2xl font-bold text-primary mb-6">
+                {physicalSecuritySystems[activeSecurityTab].title}
+              </h3>
+              {physicalSecuritySystems[activeSecurityTab].items.length > 0 && (
+                <ul className="space-y-4">
+                  {physicalSecuritySystems[activeSecurityTab].items.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-foreground">
+                      <div className="w-2.5 h-2.5 rounded-full bg-primary flex-shrink-0 mt-1.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
 
-              return (
-                <>
-                  {/* Left - Text Content */}
-                  <div className="order-2 lg:order-1">
-                    <h3 className="font-display text-2xl font-bold text-primary mb-4">
-                      {activeSystem.title}
-                    </h3>
-                    {activeSystem.items.length > 0 && (
-                      <ul className="space-y-3">
-                        {activeSystem.items.map((item, i) => (
-                          <li
-                            key={i}
-                            className="flex items-start gap-3 text-foreground"
-                          >
-                            <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0 mt-2" />
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-
-                  {/* Right - Image */}
-                  <div className="order-1 lg:order-2">
-                    <div className="aspect-video rounded-xl overflow-hidden bg-muted/50 border border-border/30">
-                      <img
-                        src={activeSystem.image}
-                        alt={activeSystem.title}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  </div>
-                </>
-              );
-            })()}
+            {/* Right - Image */}
+            <div className="md:w-1/2">
+              <div className="rounded-xl overflow-hidden bg-muted/50">
+                <img
+                  src={physicalSecuritySystems[activeSecurityTab].image}
+                  alt={physicalSecuritySystems[activeSecurityTab].title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -969,32 +690,26 @@ const HotelsResortsPage = () => {
         <div className="container-width px-4 md:px-8">
           <div className="text-center mb-16">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              {benefitsData?.sectionTitle || "Benefits for Hotels & Resorts"}
+              Benefits for Hotels & Resorts
             </h2>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
-            {(benefitsData?.benefits && benefitsData.benefits.length > 0
-              ? benefitsData.benefits
-              : benefits
-            ).map((benefit, index) => {
-              const IconComponent = benefit.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-6 text-center hover:border-primary/50 transition-all"
-                >
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="w-6 h-6 text-primary" />
-                  </div>
-                  <p className="text-sm text-foreground">{benefit.text}</p>
-                </motion.div>
-              );
-            })}
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-xl p-6 text-center hover:border-primary/50 transition-all"
+              >
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <benefit.icon className="w-6 h-6 text-primary" />
+                </div>
+                <p className="text-sm text-foreground">{benefit.text}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -1011,87 +726,61 @@ const HotelsResortsPage = () => {
               Success Stories
             </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Real results from hospitality leaders who trusted{" "}
-              <span className="text-gradient">ACT</span>
+              Real results from hospitality leaders who trusted <span className="text-gradient">ACT</span>
             </h2>
           </div>
 
-          {/* Stories Grid - Image Cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {dynamicStories.length > 0
-              ? dynamicStories.map((cs, index) => (
-                  <Link
-                    key={cs.slug}
-                    to={`/case-study/${cs.slug}`}
-                    className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
-                  >
-                    {/* Background Image */}
-                    <img
-                      src={
-                        getStrapiImageUrl(cs.coverImage?.url) ||
-                        getStrapiImageUrl(cs.backgroundImage?.url)
-                      }
-                      alt={cs.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+          {/* Metrics Cards Grid */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {caseStudies.map((study, index) => (
+              <div
+                key={index}
+                className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary/15 via-primary/5 to-card border border-primary/20 p-8 text-center"
+              >
+                <h3 className="font-display text-xl md:text-2xl font-bold text-foreground mb-4">{study.title}</h3>
+                <div className="text-5xl md:text-6xl font-bold text-primary mb-4">{study.metric}</div>
+                <p className="text-muted-foreground text-sm md:text-base">{study.description}</p>
+              </div>
+            ))}
+          </div>
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/90 transition-all duration-300" />
+          {/* Image-Based Success Stories - Below Metrics */}
+          <div className="mt-16">
+            <h3 className="text-2xl md:text-3xl font-bold text-foreground mb-8 text-center">Case Studies</h3>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {successStoriesImages.map((story, index) => (
+                <Link
+                  key={index}
+                  to={`/case-study/${story.id}`}
+                  className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
+                >
+                  {/* Background Image */}
+                  <img
+                    src={story.image}
+                    alt={story.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
 
-                    {/* Category Badge - Top Right */}
-                    <div className="absolute top-4 right-4">
-                      <span className="bg-primary text-primary-foreground border-none text-xs font-semibold px-3 py-1 rounded-full">
-                        {cs.industry}
-                      </span>
-                    </div>
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/90 transition-all duration-300" />
 
-                    {/* Content - Bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="font-display text-xl md:text-2xl font-bold text-primary mb-2 group-hover:text-primary/90 transition-colors">
-                        {cs.title}
-                      </h3>
-                      {cs.excerpt && (
-                        <p className="text-white/90 text-sm leading-relaxed">
-                          {cs.excerpt}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                ))
-              : successStoriesImages.map((story, index) => (
-                  <Link
-                    key={index}
-                    to={`/case-study/${story.id}`}
-                    className="group relative overflow-hidden rounded-2xl aspect-[4/3] cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
-                  >
-                    {/* Background Image */}
-                    <img
-                      src={story.image}
-                      alt={story.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
+                  {/* Category Badge - Top Right */}
+                  <div className="absolute top-4 right-4">
+                    <span className="bg-primary text-primary-foreground border-none text-xs font-semibold px-3 py-1 rounded-full">
+                      {story.category}
+                    </span>
+                  </div>
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent group-hover:from-black/90 transition-all duration-300" />
-
-                    {/* Category Badge - Top Right */}
-                    <div className="absolute top-4 right-4">
-                      <span className="bg-primary text-primary-foreground border-none text-xs font-semibold px-3 py-1 rounded-full">
-                        {story.category}
-                      </span>
-                    </div>
-
-                    {/* Content - Bottom */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="font-display text-xl md:text-2xl font-bold text-primary mb-2 group-hover:text-primary/90 transition-colors">
-                        {story.title}
-                      </h3>
-                      <p className="text-white/90 text-sm leading-relaxed">
-                        {story.subtitle}
-                      </p>
-                    </div>
-                  </Link>
-                ))}
+                  {/* Content - Bottom */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                    <h3 className="font-display text-xl md:text-2xl font-bold text-primary mb-2 group-hover:text-primary/90 transition-colors">
+                      {story.title}
+                    </h3>
+                    <p className="text-white/90 text-sm leading-relaxed">{story.subtitle}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* CTA */}
@@ -1114,36 +803,23 @@ const HotelsResortsPage = () => {
               <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Ready to Transform Your Guest Experience?
               </h2>
-              <p className="text-lg text-muted-foreground">
-                Fill out the form below and our team will contact you
-              </p>
+              <p className="text-lg text-muted-foreground">Fill out the form below and our team will contact you</p>
             </div>
 
             <div className="bg-card/80 backdrop-blur-sm border border-border/50 rounded-2xl p-8">
-              <form onSubmit={handleSubmit}>
-                <div className="grid md:grid-cols-2 gap-8">
+              <form onSubmit={handleSubmit} className="grid md:grid-cols-2 gap-8">
                 {/* Business Type */}
                 <div>
-                  <Label className="text-foreground mb-3 block">
-                    Business Type
-                  </Label>
+                  <Label className="text-foreground mb-3 block">Business Type</Label>
                   <RadioGroup
                     value={formData.businessType}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, businessType: value })
-                    }
+                    onValueChange={(value) => setFormData({ ...formData, businessType: value })}
                     className="flex flex-wrap gap-4"
                   >
                     {["Hotel", "Resort", "Boutique"].map((type) => (
                       <div key={type} className="flex items-center space-x-2">
-                        <RadioGroupItem
-                          value={type.toLowerCase()}
-                          id={type.toLowerCase()}
-                        />
-                        <Label
-                          htmlFor={type.toLowerCase()}
-                          className="text-muted-foreground cursor-pointer"
-                        >
+                        <RadioGroupItem value={type.toLowerCase()} id={type.toLowerCase()} />
+                        <Label htmlFor={type.toLowerCase()} className="text-muted-foreground cursor-pointer">
                           {type}
                         </Label>
                       </div>
@@ -1153,28 +829,17 @@ const HotelsResortsPage = () => {
 
                 {/* Number of Rooms */}
                 <div>
-                  <Label className="text-foreground mb-3 block">
-                    Number of Rooms
-                  </Label>
+                  <Label className="text-foreground mb-3 block">Number of Rooms</Label>
                   <RadioGroup
                     value={formData.roomCount}
-                    onValueChange={(value) =>
-                      setFormData({ ...formData, roomCount: value })
-                    }
+                    onValueChange={(value) => setFormData({ ...formData, roomCount: value })}
                     className="flex flex-wrap gap-4"
                   >
-                    {[
-                      { label: "<100", value: "less_than_100" },
-                      { label: "100-300", value: "between_100_and_300" },
-                      { label: "300+", value: "more_than_300" },
-                    ].map((count) => (
-                      <div key={count.value} className="flex items-center space-x-2">
-                        <RadioGroupItem value={count.value} id={`rooms-${count.value}`} />
-                        <Label
-                          htmlFor={`rooms-${count.value}`}
-                          className="text-muted-foreground cursor-pointer"
-                        >
-                          {count.label}
+                    {["<100", "100-300", "300+"].map((count) => (
+                      <div key={count} className="flex items-center space-x-2">
+                        <RadioGroupItem value={count} id={`rooms-${count}`} />
+                        <Label htmlFor={`rooms-${count}`} className="text-muted-foreground cursor-pointer">
+                          {count}
                         </Label>
                       </div>
                     ))}
@@ -1183,47 +848,32 @@ const HotelsResortsPage = () => {
 
                 {/* Services of Interest */}
                 <div className="md:col-span-2">
-                  <Label className="text-foreground mb-3 block">
-                    Services of Interest
-                  </Label>
+                  <Label className="text-foreground mb-3 block">Services of Interest</Label>
                   <div className="flex flex-wrap gap-4">
-                    {["PMS", "POS", "Revenue Management", "Automation"].map(
-                      (service) => (
-                        <div
-                          key={service}
-                          className="flex items-center space-x-2"
-                        >
-                          <Checkbox
-                            id={service}
-                            checked={formData.services.includes(service)}
-                            onCheckedChange={() => handleServiceToggle(service)}
-                          />
-                          <Label
-                            htmlFor={service}
-                            className="text-muted-foreground cursor-pointer"
-                          >
-                            {service}
-                          </Label>
-                        </div>
-                      ),
-                    )}
+                    {["PMS", "POS", "Revenue Management", "Automation"].map((service) => (
+                      <div key={service} className="flex items-center space-x-2">
+                        <Checkbox
+                          id={service}
+                          checked={formData.services.includes(service)}
+                          onCheckedChange={() => handleServiceToggle(service)}
+                        />
+                        <Label htmlFor={service} className="text-muted-foreground cursor-pointer">
+                          {service}
+                        </Label>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 {/* Business Name */}
                 <div className="md:col-span-2">
-                  <Label
-                    htmlFor="businessName"
-                    className="text-foreground mb-2 block"
-                  >
+                  <Label htmlFor="businessName" className="text-foreground mb-2 block">
                     Business Name <span className="text-primary">*</span>
                   </Label>
                   <Input
                     id="businessName"
                     value={formData.businessName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, businessName: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
                     placeholder="Enter your business name"
                     className="bg-background/50"
                   />
@@ -1231,36 +881,26 @@ const HotelsResortsPage = () => {
 
                 {/* Contact Info */}
                 <div>
-                  <Label
-                    htmlFor="contactName"
-                    className="text-foreground mb-2 block"
-                  >
+                  <Label htmlFor="contactName" className="text-foreground mb-2 block">
                     Contact Name
                   </Label>
                   <Input
                     id="contactName"
                     value={formData.contactName}
-                    onChange={(e) =>
-                      setFormData({ ...formData, contactName: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
                     placeholder="Your name"
                     className="bg-background/50"
                   />
                 </div>
 
                 <div>
-                  <Label
-                    htmlFor="mobile"
-                    className="text-foreground mb-2 block"
-                  >
+                  <Label htmlFor="mobile" className="text-foreground mb-2 block">
                     Mobile
                   </Label>
                   <Input
                     id="mobile"
                     value={formData.mobile}
-                    onChange={(e) =>
-                      setFormData({ ...formData, mobile: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
                     placeholder="Your mobile number"
                     className="bg-background/50"
                   />
@@ -1274,30 +914,28 @@ const HotelsResortsPage = () => {
                     id="email"
                     type="email"
                     value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="Your email address"
                     className="bg-background/50"
                   />
                 </div>
 
                 <div className="md:col-span-2">
-                  <Button
-                    type="submit"
-                    variant="accent"
-                    size="lg"
-                    className="w-full group"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Submitting..." : "Request a Demo"}
-                    {!isSubmitting && (
-                      <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <Button variant="accent" size="lg" className="w-full group" type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 w-5 h-5 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Request a Demo
+                        <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                      </>
                     )}
                   </Button>
                 </div>
-              </div>
-            </form>
+              </form>
             </div>
           </div>
         </div>
@@ -1328,8 +966,7 @@ const HotelsResortsPage = () => {
             Where Hospitality Meets Innovation
           </h2>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Partner with ACT to deliver seamless guest experiences and unlock
-            new revenue streams.
+            Partner with ACT to deliver seamless guest experiences and unlock new revenue streams.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">

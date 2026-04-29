@@ -82,7 +82,7 @@ const PartnersSection = () => {
   const duplicatedPartners = [...partners, ...partners];
 
   return (
-    <section
+    <section 
       ref={sectionRef}
       className="py-20 bg-background relative overflow-hidden"
     >
@@ -91,17 +91,16 @@ const PartnersSection = () => {
 
       <div className="relative z-10">
         {/* Section Header */}
-        <div
+        <div 
           className={`text-center mb-12 px-4 transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-8"
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-4 py-1.5 rounded-full glass-card text-accent text-sm font-semibold mb-4">
+          <span className="inline-block px-5 py-2 rounded-full glass-card text-accent text-base md:text-lg font-semibold mb-4">
             Our Partners
           </span>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-            Trusted Technology{" "}
-            <span className="text-gradient-orange">Partnerships</span>
+            Trusted Technology <span className="text-gradient-orange">Partnerships</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             ACT partners with global leaders to deliver best-in-class solutions
@@ -110,16 +109,12 @@ const PartnersSection = () => {
 
         {/* Full-width Scrolling Slider */}
         <div className="w-full overflow-hidden">
-          <div
+          <div 
             ref={scrollRef}
             className={`w-full overflow-x-auto transition-all duration-700 delay-200 ${
-              isInView ? "opacity-100" : "opacity-1"
+              isInView ? 'opacity-100' : 'opacity-0'
             }`}
-            style={{
-              scrollBehavior: "auto",
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
+            style={{ scrollBehavior: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             <div className="flex items-center gap-8 sm:gap-12 px-4 sm:px-8 py-6 w-max">
               {duplicatedPartners.map((partner, index) => (
@@ -127,8 +122,8 @@ const PartnersSection = () => {
                   key={index}
                   className="group flex-shrink-0 flex items-center justify-center transition-all duration-300 hover:scale-110"
                 >
-                  <img
-                    src={partner.logo}
+                  <img 
+                    src={partner.logo} 
                     alt={partner.name}
                     className="h-6 md:h-8 w-auto object-contain opacity-70 group-hover:opacity-100 transition-opacity"
                   />
@@ -140,8 +135,7 @@ const PartnersSection = () => {
 
         {/* Count */}
         <p className="text-center mt-8 text-muted-foreground px-4">
-          <span className="font-display font-bold text-primary">50+</span>{" "}
-          Global Technology Partners & Alliances
+          <span className="font-display font-bold text-primary">50+</span> Global Technology Partners & Alliances
         </p>
       </div>
     </section>

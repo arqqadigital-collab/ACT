@@ -1,85 +1,61 @@
-import { useState } from "react";
-import { useInView } from "@/hooks/useInView";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Send, CheckCircle, Mail } from "lucide-react";
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Mail, Send } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const NewsletterSection = () => {
-  const [sectionRef, isInView] = useInView<HTMLElement>({ threshold: 0.1 });
-  const [email, setEmail] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [email, setEmail] = useState('');
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setIsSubmitted(true);
-      setEmail("");
-      setTimeout(() => setIsSubmitted(false), 3000);
-    }
+    if (!email) return;
+    toast({ title: "Subscribed!", description: "Thank you for subscribing to our newsletter." });
+    setEmail('');
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className="py-16 relative overflow-hidden border-t border-border/30"
-    >
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-background to-accent/5" />
+    <section className="relative overflow-hidden bg-card/50 border-t border-b border-border/50">
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
+      <div className="absolute top-0 left-1/4 w-48 h-48 rounded-full bg-primary/10 blur-[120px]" />
+      <div className="absolute bottom-0 right-1/4 w-40 h-40 rounded-full bg-accent/10 blur-[100px]" />
 
-      <div className="container-width relative z-10">
-        <div
-          className={`transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-          }`}
-        >
-          {isSubmitted ? (
-            <div className="flex items-center justify-center gap-3 py-6 px-8 rounded-xl bg-green-500/10 border border-green-500/20 max-w-md mx-auto">
-              <CheckCircle className="w-6 h-6 text-green-500" />
-              <span className="text-green-600 font-medium">
-                Thank you for subscribing!
-              </span>
+      <div className="container-width relative z-10 py-10 md:py-14">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+          {/* Left */}
+          <div className="flex items-center gap-4">
+            <div className="w-14 h-14 rounded-xl accent-gradient flex items-center justify-center flex-shrink-0">
+              <Mail className="w-7 h-7 text-white" />
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row items-center justify-between gap-4">
-              {/* Left - Text */}
-              <div className="flex items-center gap-4 lg:max-w-xl">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center flex-shrink-0 shadow-lg shadow-primary/20">
-                  <Mail className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="font-display text-xl md:text-2xl font-bold text-foreground">
-                    Subscribe to our Newsletter
-                  </h2>
-                  <p className="text-sm text-muted-foreground">
-                    Get the latest updates and insights
-                  </p>
-                </div>
-              </div>
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-bold text-foreground">
+                Subscribe to our Newsletter
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Get the latest updates and insights
+              </p>
+            </div>
+          </div>
 
-              {/* Right - Input */}
-              <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto lg:min-w-[450px]">
-                <div className="relative flex-1">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    type="email"
-                    placeholder="Enter your email address"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="h-12 pl-12 pr-4 rounded-xl border-border/60 bg-background/50 backdrop-blur-sm focus:bg-background focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                    required
-                  />
-                </div>
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="h-12 px-6 rounded-xl bg-gradient-to-r from-primary to-accent hover:opacity-90 shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30 whitespace-nowrap"
-                >
-                  Subscribe
-                  <Send className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </form>
-          )}
+          {/* Right */}
+          <form onSubmit={handleSubscribe} className="flex items-center gap-3 w-full md:w-auto">
+            <div className="relative flex-1 md:w-80">
+              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                type="email"
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="pl-10 bg-background/50 border-border/50 h-12 rounded-lg"
+                required
+              />
+            </div>
+            <Button variant="hero" size="lg" type="submit" className="group h-12 px-6">
+              Subscribe
+              <Send className="ml-2 w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform" />
+            </Button>
+          </form>
         </div>
       </div>
     </section>

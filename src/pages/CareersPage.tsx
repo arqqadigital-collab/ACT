@@ -5,251 +5,160 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import {
-  ArrowRight,
-  Users,
-  Heart,
-  Lightbulb,
-  Zap,
-  Target,
-  Handshake,
-  GraduationCap,
-  Briefcase,
-  CheckCircle2,
-  Trophy,
-  Globe,
-  BookOpen,
-  TrendingUp,
-  Sparkles,
-  Puzzle,
-  Search,
-  MapPin,
-  Clock,
-  Quote,
-  Loader2,
-  Star,
-} from "lucide-react";
-import { useInView } from "@/hooks/useInView";
-import { useTypewriter } from "@/hooks/useTypewriter";
-import { fetchJobOpenings, fetchEmployeeReviews, type JobOpening, type EmployeeReview } from "@/services/careersService";
-import careersHero from "@/assets/careers/careers-hero.jpg";
-import cultureImage from "@/assets/careers/culture-image.jpg";
-import whyActImage from "@/assets/careers/why-act.jpg";
-import internshipsImage from "@/assets/careers/internships.jpg";
+import { 
+  ArrowRight, Users, Heart, Lightbulb, Zap, 
+  Target, Handshake, GraduationCap, Briefcase,
+  CheckCircle2, Trophy, Globe, BookOpen,
+  TrendingUp, Sparkles, Star, Puzzle, Search,
+  MapPin, Clock, Quote
+} from 'lucide-react';
+import { useInView } from '@/hooks/useInView';
+import { useTypewriter } from '@/hooks/useTypewriter';
+import careersHero from '@/assets/careers/careers-hero.jpg';
+import cultureImage from '@/assets/careers/culture-image.jpg';
+import whyActImage from '@/assets/careers/why-act.jpg';
+import internshipsImage from '@/assets/careers/internships.jpg';
 
 const CareersPage = () => {
   const [heroRef, isHeroInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
   const [scrollY, setScrollY] = useState(0);
-  const [cultureRef, isCultureInView] = useInView<HTMLElement>({
-    threshold: 0.1,
-  });
-  const [valuesRef, isValuesInView] = useInView<HTMLElement>({
-    threshold: 0.1,
-  });
+  const [cultureRef, isCultureInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const [valuesRef, isValuesInView] = useInView<HTMLElement>({ threshold: 0.1 });
   const [whyRef, isWhyInView] = useInView<HTMLElement>({ threshold: 0.1 });
-  const [openingsRef, isOpeningsInView] = useInView<HTMLElement>({
-    threshold: 0.1,
-  });
-  const [academyRef, isAcademyInView] = useInView<HTMLElement>({
-    threshold: 0.1,
-  });
-  const [reviewsRef, isReviewsInView] = useInView<HTMLElement>({
-    threshold: 0.1,
-  });
+  const [openingsRef, isOpeningsInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const [academyRef, isAcademyInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const [reviewsRef, isReviewsInView] = useInView<HTMLElement>({ threshold: 0.1 });
   const reviewsScrollRef = useRef<HTMLDivElement>(null);
 
   const { displayedText, isComplete } = useTypewriter({
     text: "Life at ACT",
     speed: 60,
     delay: 500,
-    enabled: isHeroInView,
+    enabled: isHeroInView
   });
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const culturePoints = [
-    { icon: Heart, text: "Respect, collaboration, and continuous learning." },
-    {
-      icon: Lightbulb,
-      text: "A community where your ideas matter and your growth is prioritized.",
-    },
-    {
-      icon: Users,
-      text: "An environment designed to empower people across generations.",
-    },
-  ];
-
-  const coreValues = [
-    { title: "Growth Mindset", icon: TrendingUp },
-    { title: "Collaboration for Impact", icon: Handshake },
-    { title: "Innovation with Purpose", icon: Lightbulb },
-    { title: "Customer Centricity", icon: Users },
-    { title: "Service Excellence", icon: Star },
-    { title: "Integrity in Action", icon: Puzzle },
-  ];
-
-  const whyACT = [
-    {
-      icon: Globe,
-      text: "Work with cutting-edge ICT technologies and global tech leaders.",
-    },
-    {
-      icon: Trophy,
-      text: "Be part of 35 years of innovation leadership in Egypt's ICT industry.",
-    },
-    {
-      icon: GraduationCap,
-      text: "Access continuous learning through ACT Graduate Academy, internships, training & coaching.",
-    },
-    {
-      icon: Users,
-      text: "Collaborate in an inclusive environment where your contributions drive real impact.",
-    },
-    {
-      icon: Briefcase,
-      text: "Benefit from competitive compensation and clear growth opportunities.",
-    },
-  ];
-
-  const [departmentFilter, setDepartmentFilter] = useState("");
-  const [jobOpenings, setJobOpenings] = useState<JobOpening[]>([]);
-  const [isLoadingJobs, setIsLoadingJobs] = useState(true);
-  const [employeeReviews, setEmployeeReviews] = useState<EmployeeReview[]>([]);
-  const [isLoadingReviews, setIsLoadingReviews] = useState(true);
-
-  // Fetch job openings
+  // Auto-scroll for reviews
   useEffect(() => {
-    const loadJobs = async () => {
-      setIsLoadingJobs(true);
-      const jobs = await fetchJobOpenings();
-      setJobOpenings(jobs);
-      setIsLoadingJobs(false);
-    };
-    loadJobs();
-  }, []);
-
-  // Fetch employee reviews
-  useEffect(() => {
-    const loadReviews = async () => {
-      setIsLoadingReviews(true);
-      const reviews = await fetchEmployeeReviews();
-      setEmployeeReviews(reviews);
-      setIsLoadingReviews(false);
-    };
-    loadReviews();
-  }, []);
-
-  const departments = [...new Set(jobOpenings.map((job) => job.department))];
-  const filteredOpenings = jobOpenings.filter(
-    (job) => departmentFilter === "" || job.department === departmentFilter,
-  );
-
-  const academyFeatures = [
-    "Structured training & mentorship",
-    "Hands-on projects with real business impact",
-    "Development of technical and soft skills",
-    "Pathway to full-time employment at ACT",
-  ];
-
-  // Fallback reviews if Strapi is not configured
-  const defaultReviews = [
-    {
-      quote:
-        "ACT has given me incredible opportunities to grow both technically and professionally. The mentorship culture here is unmatched.",
-      name: "Ahmed M.",
-      title: "Senior Solutions Architect",
-      years: "5 years at ACT",
-    },
-    {
-      quote:
-        "What I love most about ACT is the collaborative environment. Everyone is willing to help and share knowledge.",
-      name: "Sarah K.",
-      title: "Cybersecurity Engineer",
-      years: "3 years at ACT",
-    },
-    {
-      quote:
-        "The Graduate Academy program was a game-changer for my career. I learned so much in just four months!",
-      name: "Omar H.",
-      title: "Network Engineer",
-      years: "2 years at ACT",
-    },
-    {
-      quote:
-        "ACT invests in its people. From training to certifications, they truly support your professional development.",
-      name: "Mona A.",
-      title: "Project Manager",
-      years: "4 years at ACT",
-    },
-    {
-      quote:
-        "Working with cutting-edge technologies and global partners has accelerated my learning beyond expectations.",
-      name: "Youssef R.",
-      title: "Cloud Solutions Specialist",
-      years: "3 years at ACT",
-    },
-    {
-      quote:
-        "The work-life balance and supportive management make ACT an amazing place to build a career.",
-      name: "Nadia F.",
-      title: "Data Analyst",
-      years: "2 years at ACT",
-    },
-  ];
-
-  // Use dynamic reviews if available, otherwise use defaults
-  const displayReviews = employeeReviews.length > 0 ? employeeReviews : defaultReviews;
-
-  const duplicatedReviews = [...displayReviews, ...displayReviews];
-
-  // Auto-scroll for reviews - runs after reviews data is ready
-  useEffect(() => {
-    // Only start auto-scroll when reviews are loaded and not loading
-    if (isLoadingReviews || !displayReviews.length) return;
-    
     const scrollContainer = reviewsScrollRef.current;
     if (!scrollContainer) return;
 
-    let scrollPosition = scrollContainer.scrollLeft;
-    // Check if currently hovered
-    let isPaused = scrollContainer.matches(':hover');
-
     let animationId: number;
+    let scrollPosition = 0;
 
     const scroll = () => {
-      if (!isPaused) {
-        scrollPosition += 0.5;
-        if (scrollPosition >= scrollContainer.scrollWidth / 2) {
-          scrollPosition = 0;
-        }
-        scrollContainer.scrollLeft = scrollPosition;
+      scrollPosition += 0.5;
+      if (scrollPosition >= scrollContainer.scrollWidth / 2) {
+        scrollPosition = 0;
       }
+      scrollContainer.scrollLeft = scrollPosition;
       animationId = requestAnimationFrame(scroll);
     };
 
     animationId = requestAnimationFrame(scroll);
 
-    const handleMouseEnter = () => {
-      isPaused = true;
-    };
+    const handleMouseEnter = () => cancelAnimationFrame(animationId);
+    const handleMouseLeave = () => { animationId = requestAnimationFrame(scroll); };
 
-    const handleMouseLeave = () => {
-      isPaused = false;
-    };
-
-    scrollContainer.addEventListener("mouseenter", handleMouseEnter);
-    scrollContainer.addEventListener("mouseleave", handleMouseLeave);
+    scrollContainer.addEventListener('mouseenter', handleMouseEnter);
+    scrollContainer.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
       cancelAnimationFrame(animationId);
-      scrollContainer.removeEventListener("mouseenter", handleMouseEnter);
-      scrollContainer.removeEventListener("mouseleave", handleMouseLeave);
+      scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
+      scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
     };
-  }, [isLoadingReviews, displayReviews]);
+  }, []);
+
+  const culturePoints = [
+    { icon: Heart, text: 'Respect, collaboration, and continuous learning.' },
+    { icon: Lightbulb, text: 'A community where your ideas matter and your growth is prioritized.' },
+    { icon: Users, text: 'An environment designed to empower people across generations.' },
+  ];
+
+  const coreValues = [
+    { title: 'Growth Mindset', icon: TrendingUp },
+    { title: 'Collaboration for Impact', icon: Handshake },
+    { title: 'Innovation with Purpose', icon: Lightbulb },
+    { title: 'Customer Centricity', icon: Users },
+    { title: 'Service Excellence', icon: Star },
+    { title: 'Integrity in Action', icon: Puzzle },
+  ];
+
+  const whyACT = [
+    { icon: Globe, text: 'Work with cutting-edge ICT technologies and global tech leaders.' },
+    { icon: Trophy, text: 'Be part of 35 years of innovation leadership in Egypt\'s ICT industry.' },
+    { icon: GraduationCap, text: 'Access continuous learning through ACT Graduate Academy, internships, training & coaching.' },
+    { icon: Users, text: 'Collaborate in an inclusive environment where your contributions drive real impact.' },
+    { icon: Briefcase, text: 'Benefit from competitive compensation and clear growth opportunities.' },
+  ];
+
+  const [departmentFilter, setDepartmentFilter] = useState('');
+
+  const currentOpenings = [
+    { title: 'Senior Security Engineer', department: 'Cybersecurity', location: 'Cairo, Egypt', type: 'Full Time' },
+    { title: 'Data Analysts', department: 'Digital Solutions', location: 'Cairo, Egypt', type: 'Full Time' },
+    { title: 'Network Administrator', department: 'Infrastructure', location: 'Alexandria, Egypt', type: 'Full Time' },
+  ];
+
+  const departments = [...new Set(currentOpenings.map(job => job.department))];
+
+  const filteredOpenings = currentOpenings.filter(job => 
+    departmentFilter === '' || job.department === departmentFilter
+  );
+
+  const academyFeatures = [
+    'Structured training & mentorship',
+    'Hands-on projects with real business impact',
+    'Development of technical and soft skills',
+    'Pathway to full-time employment at ACT',
+  ];
+
+  const employeeReviews = [
+    {
+      quote: "ACT has given me incredible opportunities to grow both technically and professionally. The mentorship culture here is unmatched.",
+      name: "Ahmed M.",
+      title: "Senior Solutions Architect",
+      years: "5 years at ACT"
+    },
+    {
+      quote: "What I love most about ACT is the collaborative environment. Everyone is willing to help and share knowledge.",
+      name: "Sarah K.",
+      title: "Cybersecurity Engineer",
+      years: "3 years at ACT"
+    },
+    {
+      quote: "The Graduate Academy program was a game-changer for my career. I learned so much in just four months!",
+      name: "Omar H.",
+      title: "Network Engineer",
+      years: "2 years at ACT"
+    },
+    {
+      quote: "ACT invests in its people. From training to certifications, they truly support your professional development.",
+      name: "Mona A.",
+      title: "Project Manager",
+      years: "4 years at ACT"
+    },
+    {
+      quote: "Working with cutting-edge technologies and global partners has accelerated my learning beyond expectations.",
+      name: "Youssef R.",
+      title: "Cloud Solutions Specialist",
+      years: "3 years at ACT"
+    },
+    {
+      quote: "The work-life balance and supportive management make ACT an amazing place to build a career.",
+      name: "Nadia F.",
+      title: "Data Analyst",
+      years: "2 years at ACT"
+    },
+  ];
+
+  const duplicatedReviews = [...employeeReviews, ...employeeReviews];
 
   return (
     <div className="min-h-screen bg-background">
@@ -258,13 +167,13 @@ const CareersPage = () => {
         {/* Hero Section */}
         <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden pt-20">
           {/* Background Image with Parallax */}
-          <div
+          <div 
             className="absolute inset-0 z-0"
             style={{ transform: `translateY(${scrollY * 0.3}px)` }}
           >
-            <img
-              src={careersHero}
-              alt="Life at ACT"
+            <img 
+              src={careersHero} 
+              alt="Life at ACT" 
               className="w-full h-[120%] object-cover object-center"
             />
             {/* Dark Overlay - reduced opacity for better image visibility */}
@@ -274,18 +183,16 @@ const CareersPage = () => {
           </div>
 
           {/* Content */}
-          <div
+          <div 
             ref={heroRef}
             className={`relative z-10 container-width px-4 md:px-8 text-center transition-all duration-1000 ${
-              isHeroInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isHeroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-6">
               Careers
             </span>
-
+            
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6 max-w-5xl mx-auto min-h-[1.2em]">
               <span className="text-gradient">{displayedText}</span>
               {!isComplete && (
@@ -293,53 +200,42 @@ const CareersPage = () => {
               )}
             </h1>
 
-            <p
-              className={`text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed transition-all duration-700 delay-500 ${
-                isComplete
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-4"
-              }`}
-            >
-              At ACT, our people are at the heart of everything we do. We
-              believe in cultivating a workplace where every individual feels
-              valued, empowered, and inspired to grow.
+            <p className={`text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed transition-all duration-700 delay-500 ${
+              isComplete ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+            }`}>
+              At ACT, our people are at the heart of everything we do. We believe in cultivating a workplace 
+              where every individual feels valued, empowered, and inspired to grow.
             </p>
+
           </div>
 
           {/* Parallax Transition */}
-          <div
+          <div 
             className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent z-10"
             style={{ transform: `translateY(${scrollY * 0.1}px)` }}
           />
         </section>
 
         {/* Our Culture Section */}
-        <section ref={cultureRef} className="py-20">
+        <section 
+          ref={cultureRef}
+          className="py-20"
+        >
           <div className="container-width px-4 md:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div
-                className={`transition-all duration-700 ${
-                  isCultureInView
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-1 -translate-x-10"
-                }`}
-              >
-                <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-                  Our Culture
-                </span>
+              <div className={`transition-all duration-700 ${
+                isCultureInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}>
+                <span className="text-primary font-semibold text-sm uppercase tracking-wider">Our Culture</span>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-6">
-                  "We ACT" isn't just our tagline,{" "}
-                  <span className="text-gradient">it's who we are.</span>
+                  "We ACT" isn't just our tagline, <span className="text-gradient">it's who we are.</span>
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  We're a team of passionate innovators united by the vision of
-                  being the First-choice technology partner.
+                  We're a team of passionate innovators united by the vision of being the First-choice technology partner.
                 </p>
-
+                
                 <div className="space-y-4">
-                  <h3 className="font-semibold text-foreground">
-                    What makes our culture unique:
-                  </h3>
+                  <h3 className="font-semibold text-foreground">What makes our culture unique:</h3>
                   {culturePoints.map((point, idx) => (
                     <div key={idx} className="flex items-start gap-3">
                       <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
@@ -351,22 +247,17 @@ const CareersPage = () => {
                 </div>
 
                 <p className="mt-8 text-foreground font-medium">
-                  Join ACT and be part of how "We ACT" — for our customers, for
-                  our communities, and for the future.
+                  Join ACT and be part of how "We ACT" — for our customers, for our communities, and for the future.
                 </p>
               </div>
 
-              <div
-                className={`relative transition-all duration-700 delay-200 ${
-                  isCultureInView
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-1 translate-x-10"
-                }`}
-              >
+              <div className={`relative transition-all duration-700 delay-200 ${
+                isCultureInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}>
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img
-                    src={cultureImage}
-                    alt="ACT Team Collaboration"
+                  <img 
+                    src={cultureImage} 
+                    alt="ACT Team Collaboration" 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -378,15 +269,14 @@ const CareersPage = () => {
         </section>
 
         {/* Core Values Section */}
-        <section ref={valuesRef} className="py-20 bg-card/30">
+        <section 
+          ref={valuesRef}
+          className="py-20 bg-card/30"
+        >
           <div className="container-width px-4 md:px-8">
-            <div
-              className={`text-center max-w-3xl mx-auto mb-12 transition-all duration-700 ${
-                isValuesInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-10"
-              }`}
-            >
+            <div className={`text-center max-w-3xl mx-auto mb-12 transition-all duration-700 ${
+              isValuesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                 Our <span className="text-gradient">Values</span>
               </h2>
@@ -394,21 +284,16 @@ const CareersPage = () => {
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
               {coreValues.map((value, idx) => (
-                <Card
+                <Card 
                   key={idx}
                   className={`group border-border/50 bg-card/50 hover:bg-primary hover:border-primary transition-all duration-500 ${
-                    isValuesInView
-                      ? "opacity-100 translate-y-0"
-                      : "opacity-1 translate-y-10"
+                    isValuesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                   }`}
                   style={{ transitionDelay: `${idx * 100}ms` }}
                 >
                   <CardContent className="p-6 md:p-8 text-center">
                     <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-primary/10 group-hover:bg-white/20 flex items-center justify-center mx-auto mb-4 transition-colors">
-                      <value.icon
-                        className="h-7 w-7 md:h-8 md:w-8 text-primary group-hover:text-white transition-colors"
-                        strokeWidth={1.5}
-                      />
+                      <value.icon className="h-7 w-7 md:h-8 md:w-8 text-primary group-hover:text-white transition-colors" strokeWidth={1.5} />
                     </div>
                     <h3 className="text-sm md:text-base font-semibold text-foreground group-hover:text-white transition-colors">
                       {value.title}
@@ -421,20 +306,19 @@ const CareersPage = () => {
         </section>
 
         {/* Why Build Your Career at ACT */}
-        <section ref={whyRef} className="py-20">
+        <section 
+          ref={whyRef}
+          className="py-20"
+        >
           <div className="container-width px-4 md:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div
-                className={`order-2 lg:order-1 relative transition-all duration-700 delay-200 ${
-                  isWhyInView
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-1 -translate-x-10"
-                }`}
-              >
+              <div className={`order-2 lg:order-1 relative transition-all duration-700 delay-200 ${
+                isWhyInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}>
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img
-                    src={whyActImage}
-                    alt="ACT Building"
+                  <img 
+                    src={whyActImage} 
+                    alt="ACT Building" 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -442,21 +326,14 @@ const CareersPage = () => {
                 <div className="absolute -top-4 -right-4 w-32 h-32 bg-accent/10 rounded-full -z-10" />
               </div>
 
-              <div
-                className={`order-1 lg:order-2 transition-all duration-700 ${
-                  isWhyInView
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-1 translate-x-10"
-                }`}
-              >
-                <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-                  Why ACT?
-                </span>
+              <div className={`order-1 lg:order-2 transition-all duration-700 ${
+                isWhyInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}>
+                <span className="text-primary font-semibold text-sm uppercase tracking-wider">Why ACT?</span>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-8">
-                  Why Build Your Career at{" "}
-                  <span className="text-gradient">ACT?</span>
+                  Why Build Your Career at <span className="text-gradient">ACT?</span>
                 </h2>
-
+                
                 <ul className="space-y-4">
                   {whyACT.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-4">
@@ -472,152 +349,31 @@ const CareersPage = () => {
           </div>
         </section>
 
-        {/* Current Openings */}
-        <section ref={openingsRef} className="py-20 bg-card/30">
-          <div className="container-width px-4 md:px-8">
-            <div
-              className={`text-center max-w-3xl mx-auto mb-12 transition-all duration-700 ${
-                isOpeningsInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-10"
-              }`}
-            >
-              <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-                Join Our Team
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-                Current <span className="text-gradient">Openings</span>
-              </h2>
-            </div>
-
-            {/* Search and Filter */}
-            <div className="max-w-2xl mx-auto mb-8">
-              <div className="flex flex-col sm:flex-row gap-4">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                  <select
-                    value={departmentFilter}
-                    onChange={(e) => setDepartmentFilter(e.target.value)}
-                    className="w-full pl-10 pr-4 py-3 rounded-lg border border-border bg-card text-foreground focus:outline-none focus:ring-2 focus:ring-primary appearance-none cursor-pointer"
-                  >
-                    <option value="">All Departments</option>
-                    {departments.map((dept) => (
-                      <option key={dept} value={dept}>
-                        {dept}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            {isLoadingJobs ? (
-              <div className="flex items-center justify-center py-12">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                <span className="ml-3 text-muted-foreground">
-                  Loading openings...
-                </span>
-              </div>
-            ) : filteredOpenings.length === 0 ? (
-              <div className="text-center py-12">
-                <p className="text-muted-foreground">
-                  No openings available at the moment.
-                </p>
-              </div>
-            ) : (
-              <div className="max-w-2xl mx-auto space-y-4">
-                {filteredOpenings.map((job, idx) => (
-                  <Link
-                    key={job.id}
-                    to={`/careers/${job.slug}`}
-                    className="block"
-                  >
-                    <Card
-                      className={`group border-border/50 bg-card/50 hover:border-primary transition-all duration-300 cursor-pointer ${
-                        isOpeningsInView
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-1 translate-y-10"
-                      }`}
-                      style={{ transitionDelay: `${idx * 100}ms` }}
-                    >
-                      <CardContent className="p-6">
-                        <div className="flex items-start justify-between">
-                          <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                              <Briefcase className="h-6 w-6 text-primary" />
-                            </div>
-                            <div>
-                              <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-                                {job.title}
-                              </h3>
-                              <p className="text-sm text-muted-foreground mb-2">
-                                {job.department}
-                              </p>
-                              <div className="flex flex-wrap gap-3 text-sm">
-                                <span className="flex items-center gap-1 text-muted-foreground">
-                                  <MapPin className="h-4 w-4" />
-                                  {job.location}
-                                </span>
-                                <span className="flex items-center gap-1 text-muted-foreground">
-                                  <Clock className="h-4 w-4" />
-                                  {job.type}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <ArrowRight className="h-5 w-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0 mt-1" />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                ))}
-              </div>
-            )}
-
-            <div
-              className={`text-center mt-8 transition-all duration-700 delay-300 ${
-                isOpeningsInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-10"
-              }`}
-            >
-              <Button variant="accent" size="lg" asChild>
-                <Link to="/careers/openings">
-                  View All Openings
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+{/* Current Openings - commented out */}
 
         {/* ACT Graduate Academy */}
-        <section ref={academyRef} className="py-20">
+        <section 
+          ref={academyRef}
+          className="py-20"
+        >
           <div className="container-width px-4 md:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div
-                className={`transition-all duration-700 ${
-                  isAcademyInView
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-1 -translate-x-10"
-                }`}
-              >
+              <div className={`transition-all duration-700 ${
+                isAcademyInView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+              }`}>
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
                     <GraduationCap className="h-6 w-6 text-primary" />
                   </div>
-                  <span className="text-primary font-semibold">
-                    Internships & Graduate Programs
-                  </span>
+                  <span className="text-primary font-semibold">Internships & Graduate Programs</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                   ACT <span className="text-gradient">Graduate Academy</span>
                 </h2>
                 <p className="text-lg text-muted-foreground mb-6">
-                  Our flagship four-month graduate program helps young
-                  professionals build a successful career in ICT.
+                  Our flagship four-month graduate program helps young professionals build a successful career in ICT.
                 </p>
-
+                
                 <ul className="space-y-3 mb-8">
                   {academyFeatures.map((feature, idx) => (
                     <li key={idx} className="flex items-center gap-3">
@@ -628,22 +384,18 @@ const CareersPage = () => {
                 </ul>
 
                 <p className="text-muted-foreground mb-6 italic">
-                  This is more than training — it's your first step toward a
-                  meaningful ICT career in Egypt.
+                  This is more than training — it's your first step toward a meaningful ICT career in Egypt.
                 </p>
+
               </div>
 
-              <div
-                className={`relative transition-all duration-700 delay-200 ${
-                  isAcademyInView
-                    ? "opacity-100 translate-x-0"
-                    : "opacity-1 translate-x-10"
-                }`}
-              >
+              <div className={`relative transition-all duration-700 delay-200 ${
+                isAcademyInView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+              }`}>
                 <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                  <img
-                    src={internshipsImage}
-                    alt="ACT Graduate Academy"
+                  <img 
+                    src={internshipsImage} 
+                    alt="ACT Graduate Academy" 
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -655,18 +407,15 @@ const CareersPage = () => {
         </section>
 
         {/* Employee Reviews Section */}
-        <section ref={reviewsRef} className="py-20 bg-card/30 overflow-hidden">
+        <section 
+          ref={reviewsRef}
+          className="py-20 bg-card/30 overflow-hidden"
+        >
           <div className="container-width px-4 md:px-8 mb-12">
-            <div
-              className={`text-center max-w-3xl mx-auto transition-all duration-700 ${
-                isReviewsInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-10"
-              }`}
-            >
-              <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-                What Our Team Says
-              </span>
+            <div className={`text-center max-w-3xl mx-auto transition-all duration-700 ${
+              isReviewsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}>
+              <span className="text-primary font-semibold text-sm uppercase tracking-wider">What Our Team Says</span>
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2">
                 Employee <span className="text-gradient">Reviews</span>
               </h2>
@@ -674,22 +423,12 @@ const CareersPage = () => {
           </div>
 
           {/* Auto-scrolling Reviews */}
-          {isLoadingReviews ? (
-            <div className="flex items-center justify-center py-12">
-              <Loader2 className="h-8 w-8 animate-spin text-primary" />
-              <span className="ml-3 text-muted-foreground">Loading reviews...</span>
-            </div>
-          ) : (
-          <div
+          <div 
             ref={reviewsScrollRef}
             className={`w-full overflow-x-auto transition-all duration-700 ${
-              isReviewsInView ? "opacity-100" : "opacity-1"
+              isReviewsInView ? 'opacity-100' : 'opacity-0'
             }`}
-            style={{
-              scrollBehavior: "auto",
-              scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
+            style={{ scrollBehavior: 'auto', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             <div className="flex gap-6 px-4 md:px-8 py-4 w-max">
               {duplicatedReviews.map((review, index) => (
@@ -697,11 +436,18 @@ const CareersPage = () => {
                   key={index}
                   className="flex-shrink-0 w-[350px] md:w-[400px] p-6 rounded-2xl bg-card border border-border/50 hover:border-primary/50 transition-all duration-300"
                 >
+                  {/* Stars */}
+                  {/* <div className="flex gap-1 mb-4">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 fill-primary text-primary" />
+                    ))}
+                  </div> */}
+                  
                   {/* Quote */}
                   <p className="text-foreground mb-6 leading-relaxed">
                     "{review.quote}"
                   </p>
-
+                  
                   {/* Author */}
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
@@ -710,22 +456,15 @@ const CareersPage = () => {
                       </span>
                     </div>
                     <div>
-                      <p className="font-semibold text-foreground">
-                        {review.name}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        {(review as any).jobTitle || (review as any).title}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {(review as any).yearsAtCompany || (review as any).years}
-                      </p>
+                      <p className="font-semibold text-foreground">{review.name}</p>
+                      <p className="text-sm text-muted-foreground">{review.title}</p>
+                      <p className="text-xs text-muted-foreground">{review.years}</p>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          )}
         </section>
 
         {/* CTA Section */}
@@ -733,8 +472,7 @@ const CareersPage = () => {
           <div className="container-width px-4 md:px-8">
             <div className="text-center max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
-                Ready to <span className="text-gradient">ACT</span> and make a
-                difference?
+                Ready to <span className="text-gradient">ACT</span> and make a difference?
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
                 Explore opportunities, grow with us, and help shape what's next.

@@ -29,9 +29,10 @@ import { useInView } from "@/hooks/useInView";
 // Import assets
 import publicSectorHero from "@/assets/industries/public-sector.jpg";
 
-// Success stories
+// Success stories - use same images as case studies page
 import redseaBg from "@/assets/success-stories/redsea-bg.jpg";
 import redseaLogo from "@/assets/success-stories/redsea-logo.jpg";
+import damiettaPortImg from "@/assets/case-studies/damietta-port.jpg";
 
 // Partner logos
 import partnerCisco from "@/assets/partners/cisco.png";
@@ -135,15 +136,15 @@ const serviceAssurance = [
 
 const successStories = [
   {
-    id: "dpa-infrastructure",
+    id: "damietta-port-it",
     title: "Modernized IT Infrastructure for Damietta Port Authority",
     subtitle: "How ACT Modernized the IT Infrastructure for Damietta Port Authority (DPA)",
     company: "Damietta Port Authority",
-    backgroundImage: publicSectorHero,
+    backgroundImage: damiettaPortImg,
     logo: null,
   },
   {
-    id: "redsea-voip",
+    id: "redsea-container-voip",
     title: "Cloud VOIP Solution for Red Sea Container Terminal",
     subtitle: "How ACT Delivered a Cloud VOIP Solution for Red Sea Container Terminal S.A.E",
     company: "Red Sea Container Terminal",
@@ -248,45 +249,31 @@ const PublicSectorPage = () => {
       >
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src={publicSectorHero}
-            alt="Public Sector"
-            className="w-full h-full object-cover"
-          />
+          <img src={publicSectorHero} alt="Public Sector" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
         </div>
 
         <div className="container-width px-4 md:px-8 relative z-10">
           <div
             className={`max-w-3xl text-left transition-all duration-700 ${
-              isHeroInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isHeroInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-6 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-6 border-primary/50 text-primary">
               <Building2 className="w-3 h-3 mr-1" />
               Public Sector
             </Badge>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Driving Egypt's{" "}
-              <span className="text-primary">Public Sector</span> with
-              Citizen-Centric Digital Transformation
+              Driving Egypt's <span className="text-primary">Public Sector</span> with Citizen-Centric Digital
+              Transformation
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-              At ACT, we understand the mission-critical role of IT in the
-              public sector, where success is measured not by profit, but by
-              public value, trust, and accessibility. For over 35 years, we've
-              partnered with government and public organizations to deliver
-              end-to-end ICT solutions that enhance services, improve
-              efficiency, and ensure compliance while enabling secure, equitable
-              digital access for all. From cloud computing and cybersecurity to
-              data protection, smart city networking, and modern data centers,
-              ACT empowers government entities to meet today’s needs while
-              future-proofing for tomorrow.
+              At ACT, we understand the mission-critical role of IT in the public sector, where success is measured not
+              by profit, but by public value, trust, and accessibility. For over 35 years, we've partnered with
+              government and public organizations to deliver end-to-end ICT solutions that enhance services, improve
+              efficiency, and ensure compliance while enabling secure, equitable digital access for all. From cloud
+              computing and cybersecurity to data protection, smart city networking, and modern data centers, ACT
+              empowers government entities to meet today’s needs while future-proofing for tomorrow.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild variant="hero" size="lg">
@@ -310,20 +297,14 @@ const PublicSectorPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isPillarsInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isPillarsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Our Expertise
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              The Strategic Pillars of ACT's{" "}
-              <span className="text-primary">Public Sector Expertise</span>
+              The Strategic Pillars of ACT's <span className="text-primary">Public Sector Expertise</span>
             </h2>
             {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               From digital transformation and citizen services to governance, security, and organizational modernization.
@@ -335,9 +316,7 @@ const PublicSectorPage = () => {
               <Card
                 key={pillar.title}
                 className={`group border-border/50 bg-card/50 hover:bg-card hover:border-primary/50 transition-all duration-500 ${
-                  isPillarsInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isPillarsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -348,9 +327,7 @@ const PublicSectorPage = () => {
                   <h3 className="font-display text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {pillar.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {pillar.description}
-                  </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{pillar.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -363,20 +340,14 @@ const PublicSectorPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isSolutionsInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isSolutionsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               IT Solutions
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Core IT Solutions for the{" "}
-              <span className="text-primary">Public Sector</span>
+              Core IT Solutions for the <span className="text-primary">Public Sector</span>
             </h2>
             {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Comprehensive technology solutions enabling secure, equitable digital access for all citizens.
@@ -388,9 +359,7 @@ const PublicSectorPage = () => {
               <Card
                 key={solution.title}
                 className={`group border-border/50 bg-background/50 hover:border-primary/50 transition-all duration-500 ${
-                  isSolutionsInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isSolutionsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -402,9 +371,7 @@ const PublicSectorPage = () => {
                     <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {solution.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {solution.description}
-                    </p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{solution.description}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -418,20 +385,14 @@ const PublicSectorPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isServiceInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isServiceInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Service Assurance
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Service Assurance for{" "}
-              <span className="text-primary">Public Sector</span>
+              Service Assurance for <span className="text-primary">Public Sector</span>
             </h2>
             {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Reliable support and consultation services to ensure your IT infrastructure meets government objectives.
@@ -443,9 +404,7 @@ const PublicSectorPage = () => {
               <Card
                 key={service.title}
                 className={`group border-border/50 bg-card/50 hover:bg-primary hover:border-primary transition-all duration-500 ${
-                  isServiceInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isServiceInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -471,21 +430,15 @@ const PublicSectorPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isStoriesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               <Award className="w-3 h-3 mr-1" />
               Success Stories
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              ACT Public Sector{" "}
-              <span className="text-primary">Success Stories</span>
+              ACT Public Sector <span className="text-primary">Success Stories</span>
             </h2>
           </div>
 
@@ -496,9 +449,7 @@ const PublicSectorPage = () => {
                 key={story.id}
                 to={`/case-study/${story.id}`}
                 className={`group relative rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer hover:scale-[1.02] ${
-                  isStoriesInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -518,11 +469,7 @@ const PublicSectorPage = () => {
                   {story.logo && (
                     <div className="absolute top-4 right-4 z-20">
                       <div className="w-14 h-14 md:w-16 md:h-16 bg-white rounded-xl p-2 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
-                        <img
-                          src={story.logo}
-                          alt={`${story.company} logo`}
-                          className="w-full h-full object-contain"
-                        />
+                        <img src={story.logo} alt={`${story.company} logo`} className="w-full h-full object-contain" />
                       </div>
                     </div>
                   )}
@@ -542,9 +489,7 @@ const PublicSectorPage = () => {
                     <h3 className="font-display text-lg font-bold text-white mb-2 group-hover:translate-x-1 transition-transform">
                       {story.title}
                     </h3>
-                    <p className="text-sm text-white/80 leading-relaxed mb-4">
-                      {story.subtitle}
-                    </p>
+                    <p className="text-sm text-white/80 leading-relaxed mb-4">{story.subtitle}</p>
 
                     {/* Read Case Study Button */}
                     <Button variant="hero" size="sm" className="group/btn">
@@ -560,9 +505,7 @@ const PublicSectorPage = () => {
           {/* View All Button */}
           <div
             className={`text-center mt-12 transition-all duration-700 delay-300 ${
-              isStoriesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-8"
+              isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             <Button asChild variant="outline" size="lg" className="group">
@@ -579,8 +522,7 @@ const PublicSectorPage = () => {
       <section className="py-16 border-y border-border/50 overflow-hidden">
         <div className="container-width px-4 md:px-8">
           <h3 className="text-center font-display text-xl font-semibold text-foreground mb-10">
-            Our Strategic Partners in{" "}
-            <span className="text-primary">Public Sector IT</span>
+            Our Strategic Partners in <span className="text-primary">Public Sector IT</span>
           </h3>
         </div>
 
@@ -588,11 +530,7 @@ const PublicSectorPage = () => {
         <div
           ref={scrollRef}
           className="w-full overflow-x-auto"
-          style={{
-            scrollBehavior: "auto",
-            scrollbarWidth: "none",
-            msOverflowStyle: "none",
-          }}
+          style={{ scrollBehavior: "auto", scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           <div className="flex items-center gap-12 px-8 py-6 w-max">
             {duplicatedPartners.map((partner, index) => (
@@ -616,20 +554,14 @@ const PublicSectorPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isWhyInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isWhyInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Why ACT
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Why Choose ACT for{" "}
-              <span className="text-primary">Public Sector IT</span>
+              Why Choose ACT for <span className="text-primary">Public Sector IT</span>
             </h2>
             {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               ACT empowers government entities to meet today's needs while future-proofing for tomorrow.
@@ -641,9 +573,7 @@ const PublicSectorPage = () => {
               <div
                 key={item.title}
                 className={`flex items-start gap-4 p-6 rounded-xl border border-border/50 bg-card/30 hover:border-primary/30 transition-all duration-500 ${
-                  isWhyInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isWhyInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -651,12 +581,8 @@ const PublicSectorPage = () => {
                   <item.icon size={24} />
                 </div>
                 <div>
-                  <h3 className="font-display font-semibold text-foreground mb-1">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {item.description}
-                  </p>
+                  <h3 className="font-display font-semibold text-foreground mb-1">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -668,12 +594,10 @@ const PublicSectorPage = () => {
       <section className="py-20 md:py-28 bg-gradient-to-b from-background to-card/50">
         <div className="container-width px-4 md:px-8 text-center">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
-            Ready to Transform Your{" "}
-            <span className="text-primary">Public Services</span>?
+            Ready to Transform Your <span className="text-primary">Public Services</span>?
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Partner with ACT to deliver secure, citizen-centric digital
-            transformation for your government organization.
+            Partner with ACT to deliver secure, citizen-centric digital transformation for your government organization.
           </p>
           <Button asChild variant="hero" size="lg">
             <Link to="/contact">

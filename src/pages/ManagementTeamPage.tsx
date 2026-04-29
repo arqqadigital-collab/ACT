@@ -11,7 +11,7 @@ const ManagementTeamPage = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-
+      
       <main className="pt-24 pb-20">
         <section ref={ref} className="py-12 relative overflow-hidden">
           {/* Background Elements */}
@@ -20,8 +20,8 @@ const ManagementTeamPage = () => {
 
           <div className="container-width px-4 md:px-8 relative z-10">
             {/* Back Link */}
-            <Link
-              to="/about"
+            <Link 
+              to="/about" 
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
             >
               <ArrowLeft size={20} />
@@ -29,11 +29,9 @@ const ManagementTeamPage = () => {
             </Link>
 
             {/* Section Header */}
-            <div
+            <div 
               className={`text-center mb-16 transition-all duration-700 ${
-                isInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-8"
+                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
             >
               <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-4">
@@ -43,22 +41,19 @@ const ManagementTeamPage = () => {
                 Our <span className="text-gradient">Management Team</span>
               </h1>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Meet the visionary leaders driving ACT's mission to transform
-                Egypt's digital landscape and deliver technology excellence
-                across the region.
+                Meet the visionary leaders driving ACT's mission to transform Egypt's digital landscape 
+                and deliver technology excellence across the region.
               </p>
             </div>
 
             {/* Team Grid */}
-            <div
+            <div 
               className={`grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 transition-all duration-700 delay-200 ${
-                isInView
-                  ? "opacity-100 translate-y-0"
-                  : "opacity-1 translate-y-8"
+                isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
             >
               {teamMembers.map((member, index) => (
-                <Link
+                <Link 
                   key={member.id}
                   to={`/team/${member.id}`}
                   className="glass-card rounded-2xl overflow-hidden group hover:card-shadow-hover transition-all duration-300 cursor-pointer"
@@ -66,24 +61,20 @@ const ManagementTeamPage = () => {
                 >
                   {/* Image */}
                   <div className="aspect-square overflow-hidden">
-                    <img
-                      src={member.image}
+                    <img 
+                      src={member.image} 
                       alt={member.name}
                       className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-
+                  
                   {/* Info */}
                   <div className="p-5">
                     <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors">
                       {member.name}
                     </h3>
-                    <p className="text-primary font-medium text-sm mt-1">
-                      {member.title}
-                    </p>
-                    <p className="text-muted-foreground text-sm mt-3 line-clamp-2">
-                      {member.shortBio}
-                    </p>
+                    <p className="text-primary font-medium text-sm mt-1">{member.title}</p>
+                    <p className="text-muted-foreground text-sm mt-3 line-clamp-2">{member.shortBio}</p>
                   </div>
                 </Link>
               ))}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -30,24 +30,7 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { useInView } from "@/hooks/useInView";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import {
-  fetchFnBHardwareSolutions,
-  FnBHardwareSolutionsData,
-} from "@/services/fnbHardwareSolutionsService";
-import {
-  fetchFnBBusinessIntelligence,
-  FnBBusinessIntelligenceData,
-} from "@/services/fnbBusinessIntelligenceService";
-import {
-  fetchFnBSuccessStories,
-  FnBSuccessStoriesData,
-} from "@/services/fnbSuccessStoriesService";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 // Partner logos
 import ciscoLogo from "@/assets/partners/cisco.png";
@@ -64,19 +47,15 @@ import biInventory from "@/assets/fnb/bi-inventory.jpg";
 import biReporting from "@/assets/fnb/bi-reporting.jpg";
 import biHr from "@/assets/fnb/bi-hr.jpg";
 import biAccounting from "@/assets/fnb/bi-accounting.jpg";
-
-// Utility function to map icon strings to Lucide icon components
-const getIconComponent = (iconName: string) => {
-  const icons: Record<string, any> = {
-    Monitor,
-    Tablet,
-    CreditCard,
-    Package,
-    Receipt,
-    // Add more icons as needed
-  };
-  return icons[iconName] || Monitor;
-};
+import kdsImage from "@/assets/fnb/kds.webp";
+import selfOrderKioskImage from "@/assets/fnb/self-order-kiosk.webp";
+import oracleMicrosTabletImage from "@/assets/fnb/oracle-micros-tablet.webp";
+import oracleMicrosWorkstationImage from "@/assets/fnb/oracle-micros-workstation.webp";
+import accessoriesImage from "@/assets/fnb/accessories.webp";
+import restaurantLoyaltyImg from "@/assets/fnb/restaurant-loyalty.png";
+import onlineOrderingImg from "@/assets/fnb/online-ordering.png";
+import deliveryManagementImg from "@/assets/fnb/delivery-management.png";
+import callCenterImg from "@/assets/fnb/call-center.png";
 
 const FnBPage = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
@@ -88,61 +67,6 @@ const FnBPage = () => {
   const [benefitsRef, benefitsInView] = useInView({ threshold: 0.1 });
   const [storiesRef, storiesInView] = useInView({ threshold: 0.1 });
 
-  const [hardwareSolutionsData, setHardwareSolutionsData] =
-    useState<FnBHardwareSolutionsData | null>(null);
-  const [businessIntelligenceData, setBusinessIntelligenceData] =
-    useState<FnBBusinessIntelligenceData | null>(null);
-  const [successStoriesData, setSuccessStoriesData] =
-    useState<FnBSuccessStoriesData | null>(null);
-
-  // Fetch hardware solutions data
-  useEffect(() => {
-    const loadHardwareSolutions = async () => {
-      console.log("🔄 Fetching FnB Hardware Solutions...");
-      const data = await fetchFnBHardwareSolutions();
-      console.log("📦 Hardware Solutions Data:", data);
-      if (data) {
-        setHardwareSolutionsData(data);
-        console.log("✅ Hardware Solutions loaded successfully");
-      } else {
-        console.warn("⚠️ No hardware solutions data received from API");
-      }
-    };
-    loadHardwareSolutions();
-  }, []);
-
-  // Fetch business intelligence data
-  useEffect(() => {
-    const loadBusinessIntelligence = async () => {
-      console.log("🔄 Fetching FnB Business Intelligence...");
-      const data = await fetchFnBBusinessIntelligence();
-      console.log("📦 Business Intelligence Data:", data);
-      if (data) {
-        setBusinessIntelligenceData(data);
-        console.log("✅ Business Intelligence loaded successfully");
-      } else {
-        console.warn("⚠️ No business intelligence data received from API");
-      }
-    };
-    loadBusinessIntelligence();
-  }, []);
-
-  // Fetch success stories data
-  useEffect(() => {
-    const loadSuccessStories = async () => {
-      console.log("🔄 Fetching FnB Success Stories...");
-      const data = await fetchFnBSuccessStories();
-      console.log("📦 Success Stories Data:", data);
-      if (data) {
-        setSuccessStoriesData(data);
-        console.log("✅ Success Stories loaded successfully");
-      } else {
-        console.warn("⚠️ No success stories data received from API");
-      }
-    };
-    loadSuccessStories();
-  }, []);
-
   const whyChoosePoints = [
     "End-to-end restaurant platform: POS, hardware, analytics, delivery, and compliance.",
     "Scales from 1 outlet to global groups — from cafés to franchises.",
@@ -150,65 +74,31 @@ const FnBPage = () => {
     "Local presence — offices in Egypt, Dubai, KSA, and Germany for on-ground support.",
   ];
 
-  // Default hardware features (fallback if API fails)
-  const defaultHardwareFeatures = [
-    {
-      icon: Monitor,
-      title: "Kitchen Display Systems (KDS)",
-      desc: "Streamline orders and eliminate paper tickets.",
-    },
-    {
-      icon: Tablet,
-      title: "Self-Order Kiosks",
-      desc: "Empower guests with faster, contactless ordering.",
-    },
-    {
-      icon: Tablet,
-      title: "Oracle Micros Tablet 700 Series",
-      desc: "Tableside ordering for ultimate convenience.",
-    },
-    {
-      icon: Monitor,
-      title: "Oracle Micros Workstations 6 & 8",
-      desc: "High-performance touch POS for peak hours.",
-    },
-    {
-      icon: CreditCard,
-      title: "Accessories",
-      desc: "Printers, EMV readers, wallet readers, and cash drawers.",
-    },
+  const hardwareFeatures = [
+    { image: kdsImage, title: "Kitchen Display Systems (KDS)", desc: "Streamline orders and eliminate paper tickets." },
+    { image: selfOrderKioskImage, title: "Self-Order Kiosks", desc: "Empower guests with faster, contactless ordering." },
+    { image: oracleMicrosTabletImage, title: "Oracle Micros Tablet 700 Series", desc: "Tableside ordering for ultimate convenience." },
+    { image: oracleMicrosWorkstationImage, title: "Oracle Micros Workstations 6 & 8", desc: "High-performance touch POS for peak hours." },
+    { image: accessoriesImage, title: "Accessories", desc: "Printers, EMV readers, wallet readers, and cash drawers." },
   ];
 
-  // Map API data to component format with icon components
-  const hardwareFeatures = hardwareSolutionsData
-    ? hardwareSolutionsData.hardwareFeatures.map((feature) => ({
-        icon: getIconComponent(feature.icon),
-        title: feature.title,
-        desc: feature.desc,
-      }))
-    : defaultHardwareFeatures;
-
-  // Default intelligence features (fallback if API fails)
-  const defaultIntelligenceFeatures = [
+  const intelligenceFeatures = [
     {
       id: "inventory",
       title: "Inventory Management Software",
-      description:
-        "Monitor stock levels, prevent waste, and optimize purchasing through real-time tracking.",
+      description: "Monitor stock levels, prevent waste, and optimize purchasing through real-time tracking.",
       image: biInventory,
     },
     {
       id: "analytics",
       title: "Restaurant  Analytics & Reporting",
-      description:
-        "Access detailed performance dashboards for revenue, operations, and cost control.",
+      description: "Access detailed performance dashboards for revenue, operations, and cost control.",
       image: biReporting,
     },
     {
       id: "table",
       title: "Table Management Systems",
-      description:
-        "Enhance seating efficiency, reduce wait times, and improve guest turnover.",
+      description: "Enhance seating efficiency, reduce wait times, and improve guest turnover.",
       image: biTable,
     },
     {
@@ -221,41 +111,33 @@ const FnBPage = () => {
     {
       id: "accounting",
       title: "Accounting Software",
-      description:
-        "Integrate finance, payroll, and scheduling into a unified, accurate platform.",
+      description: "Integrate finance, payroll, and scheduling into a unified, accurate platform.",
       image: biAccounting,
     },
   ];
 
-  // Use dynamic data or fallback to defaults
-  const intelligenceFeatures = businessIntelligenceData
-    ? businessIntelligenceData.intelligenceFeatures
-    : defaultIntelligenceFeatures;
-
-  const [activeIntelligenceId, setActiveIntelligenceId] = useState(
-    intelligenceFeatures[0].id,
-  );
+  const [activeIntelligenceId, setActiveIntelligenceId] = useState(intelligenceFeatures[0].id);
 
   const experienceFeatures = [
     {
-      icon: Heart,
-      title: "Restaurant  Loyalty Programs",
+      image: restaurantLoyaltyImg,
+      title: "Restaurant Loyalty Programs",
       desc: "Create personalized reward programs that boost retention and average check size.",
     },
     {
-      icon: ShoppingCart,
-      title: "Online Ordering & Menu management solutions",
+      image: onlineOrderingImg,
+      title: "Online Ordering & Menu Management Solutions",
       desc: "Enable seamless self-ordering, menu updates, and dynamic promotions.",
     },
     {
-      icon: Headphones,
-      title: "Call Center Module",
-      desc: "Centralize delivery operations, integrate with Talabat, Jahez, HungerStation and ensure fast fulfillment.",
+      image: deliveryManagementImg,
+      title: "Delivery Management Software",
+      desc: "Track every order from kitchen to doorstep with real-time delivery analytics, smart routing, and driver performance monitoring.",
     },
     {
-      icon: Truck,
-      title: "Delivery Management Software",
-      desc: "Track every order from kitchen to doorstep with real-time delivery analytics,smart routing, and driver performance monitoring to guarantee on-timeservice and customer satisfaction.",
+      image: callCenterImg,
+      title: "Call Center Module",
+      desc: "Centralize delivery operations, integrate with Talabat, Jahez, HungerStation and ensure fast fulfillment.",
     },
   ];
 
@@ -283,11 +165,7 @@ const FnBPage = () => {
       title: "Efficiency",
       desc: "Automate manual tasks, reduce order delays, and streamline kitchen workflows.",
     },
-    {
-      icon: Settings,
-      title: "Control",
-      desc: "Unify POS, inventory, HR, and analytics in one connected ecosystem.",
-    },
+    { icon: Settings, title: "Control", desc: "Unify POS, inventory, HR, and analytics in one connected ecosystem." },
     {
       icon: TrendingUp,
       title: "Growth",
@@ -305,38 +183,50 @@ const FnBPage = () => {
     },
   ];
 
-  // Default success stories (fallback if API fails)
-  const defaultSuccessStories = [
+  const successStories = [
     {
       category: "Coffee & Café",
       title: "Specialty Coffee",
       subtitle:
         "Implemented Egypt's first AI-powered cashless café with 30% faster delivery time and higher repeat orders.",
-      image:
-        "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=800",
+      image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=800",
     },
     {
       category: "Quick Service",
       title: "BRGR",
-      subtitle:
-        "Deployed kiosks and tablets for 40% faster order times during peak hours operations.",
-      image:
-        "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800",
+      subtitle: "Deployed kiosks and tablets for 40% faster order times during peak hours operations.",
+      image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&q=80&w=800",
     },
     {
       category: "Fine Dining",
       title: "Garten",
-      subtitle:
-        "Unified POS and accounting systems for improved operational control.",
-      image:
-        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800",
+      subtitle: "Unified POS and accounting systems for improved operational control.",
+      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800",
     },
   ];
 
-  // Use dynamic data or fallback to defaults
-  const successStories = successStoriesData
-    ? successStoriesData.successStories
-    : defaultSuccessStories;
+  const faqs = [
+    {
+      q: "Is Oracle Simphony POS suitable for small cafés?",
+      a: "Yes — it's scalable from small cafés to global chains with flexible modules.",
+    },
+    {
+      q: "Can ACT integrate with Talabat or HungerStation?",
+      a: "Absolutely — ACT's platform supports leading delivery and payment integrations.",
+    },
+    {
+      q: "What are the costs and setup timelines?",
+      a: "Implementation typically ranges from 2–6 weeks, depending on scale and modules.",
+    },
+    {
+      q: "How does ACT help with tax compliance?",
+      a: "ACT's POS integrates directly with Egypt's ETA and Gulf VAT systems for full e-invoice compliance.",
+    },
+    {
+      q: "Does ACT provide training and after-sales service?",
+      a: "Yes, our certified teams provide onboarding, training, and 24/7 SLA-driven support.",
+    },
+  ];
 
   const partners = [
     { name: "Cisco", logo: ciscoLogo },
@@ -355,13 +245,7 @@ const FnBPage = () => {
       >
         {/* Video Background */}
         <div className="absolute inset-0 z-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-          >
+          <video autoPlay loop muted playsInline className="w-full h-full object-cover">
             <source src="/videos/fnb-hero.mp4" type="video/mp4" />
           </video>
           <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
@@ -381,14 +265,13 @@ const FnBPage = () => {
             </div>
 
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-              Your Trusted Partner for{" "}
-              <span className="text-primary">Smarter, Scalable</span> Restaurant
-              Management & POS Solutions
+              Your Trusted Partner for <span className="text-primary">Smarter, Scalable</span> Restaurant Management &
+              POS Solutions
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl">
-              From fine dining to quick service, ACT empowers every F&B business
-              with the technology to run smarter, faster, and more connected.
+              From fine dining to quick service, ACT empowers every F&B business with the technology to run smarter,
+              faster, and more connected.
             </p>
 
             {/* <div className="flex flex-col sm:flex-row gap-4">
@@ -419,11 +302,7 @@ const FnBPage = () => {
       </section>
 
       {/* Why Choose ACT Section */}
-      <section
-        id="why-act"
-        ref={whyRef as React.RefObject<HTMLElement>}
-        className="py-24 bg-muted/30"
-      >
+      <section id="why-act" ref={whyRef as React.RefObject<HTMLElement>} className="py-24 bg-muted/30">
         <div className="container-width px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -432,18 +311,13 @@ const FnBPage = () => {
             className="max-w-3xl mb-16"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Why ACT
-              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-primary">Why ACT</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              Why Choose ACT for F&B
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Why Choose ACT for F&B</h2>
             <p className="text-lg text-muted-foreground">
-              The food & beverage industry moves fast, and success depends on
-              more than just great food. With ACT, restaurants get a single
-              ecosystem that drives efficiency, reduces costs, and delivers
-              unforgettable guest experiences.
+              The food & beverage industry moves fast, and success depends on more than just great food. With ACT,
+              restaurants get a single ecosystem that drives efficiency, reduces costs, and delivers unforgettable guest
+              experiences.
             </p>
           </motion.div>
 
@@ -467,10 +341,7 @@ const FnBPage = () => {
       </section>
 
       {/* Core Restaurant Operations Section */}
-      <section
-        ref={operationsRef as React.RefObject<HTMLElement>}
-        className="py-24"
-      >
+      <section ref={operationsRef as React.RefObject<HTMLElement>} className="py-24">
         <div className="container-width px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -479,13 +350,9 @@ const FnBPage = () => {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Core Operations
-              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-primary">Core Operations</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              Core Restaurant Operations
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Core Restaurant Operations</h2>
           </motion.div>
 
           {/* Oracle Simphony POS */}
@@ -503,8 +370,7 @@ const FnBPage = () => {
                 Oracle Simphony POS – Cloud-Based Restaurant Management
               </h3>
               <p className="text-muted-foreground mb-6">
-                The all-in-one, cloud-based POS system for restaurants built on
-                Oracle Micros technology.
+                The all-in-one, cloud-based POS system for restaurants built on Oracle Micros technology.
               </p>
               <ul className="space-y-3">
                 {[
@@ -528,11 +394,7 @@ const FnBPage = () => {
               className="relative"
             >
               <div className="aspect-video rounded-3xl overflow-hidden border border-border/30">
-                <img
-                  src={restaurantPosImage}
-                  alt="Restaurant POS System"
-                  className="w-full h-full object-cover"
-                />
+                <img src={restaurantPosImage} alt="Restaurant POS System" className="w-full h-full object-cover" />
               </div>
             </motion.div>
           </div>
@@ -544,15 +406,12 @@ const FnBPage = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <div className="text-center mb-12">
-              <h3 className="font-display text-2xl md:text-3xl font-bold mb-4">
-                {hardwareSolutionsData?.sectionTitle ||
-                  "Restaurant Hardware Solutions"}
-              </h3>
+              <h3 className="font-display text-2xl md:text-3xl font-bold mb-4">Restaurant Hardware Solutions</h3>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                {hardwareSolutionsData?.sectionDescription ||
-                  "Built for speed, durability, and reliability. Designed to thrive in demanding environments."}
+                Built for speed, durability, and reliability. Designed to thrive in demanding environments.
               </p>
             </div>
+
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {hardwareFeatures.map((feature, index) => (
                 <motion.div
@@ -560,17 +419,19 @@ const FnBPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={operationsInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="p-6 rounded-2xl bg-card border border-border/30 hover:border-primary/30 transition-all group"
+                  className="rounded-2xl bg-card border border-border/30 hover:border-primary/30 transition-all group overflow-hidden"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                    <feature.icon className="w-6 h-6 text-primary" />
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img
+                      src={feature.image}
+                      alt={feature.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
                   </div>
-                  <h4 className="font-semibold text-foreground mb-2">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    {feature.desc}
-                  </p>
+                  <div className="p-5">
+                    <h4 className="font-semibold text-foreground mb-2">{feature.title}</h4>
+                    <p className="text-sm text-muted-foreground">{feature.desc}</p>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -579,10 +440,7 @@ const FnBPage = () => {
       </section>
 
       {/* Business Intelligence Section - Hover Reveal Style */}
-      <section
-        ref={intelligenceRef as React.RefObject<HTMLElement>}
-        className="py-24 bg-muted/30"
-      >
+      <section ref={intelligenceRef as React.RefObject<HTMLElement>} className="py-24 bg-muted/30">
         <div className="container-width px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -590,15 +448,7 @@ const FnBPage = () => {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold">
-              {businessIntelligenceData?.sectionTitle ||
-                "Business Intelligence & Control"}
-            </h2>
-            {businessIntelligenceData?.sectionDescription && (
-              <p className="text-lg text-muted-foreground mt-4">
-                {businessIntelligenceData.sectionDescription}
-              </p>
-            )}
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold">Business Intelligence & Control</h2>
           </motion.div>
 
           {/* Hover Reveal Container */}
@@ -608,7 +458,7 @@ const FnBPage = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="w-full bg-card rounded-3xl overflow-hidden border border-border/30 shadow-2xl"
           >
-            <div className="flex flex-col lg:flex-row min-h-[500px]">
+            <div className="flex flex-col lg:flex-row min-h-[420px]">
               {/* Left Side: Service List */}
               <div className="flex-1 p-8 md:p-12 flex flex-col justify-center gap-2">
                 {intelligenceFeatures.map((feature) => (
@@ -616,20 +466,16 @@ const FnBPage = () => {
                     key={feature.id}
                     onMouseEnter={() => setActiveIntelligenceId(feature.id)}
                     className={`group relative py-6 cursor-pointer border-b border-border/30 transition-all duration-300 ${
-                      activeIntelligenceId === feature.id
-                        ? "opacity-100"
-                        : "opacity-40 hover:opacity-70"
+                      activeIntelligenceId === feature.id ? "opacity-100" : "opacity-40 hover:opacity-70"
                     }`}
                   >
                     <div className="flex items-center justify-between">
-                      <h3 className="text-lg font-display font-medium tracking-tight text-foreground">
+                      <h3 className="text-xl md:text-2xl lg:text-3xl font-display font-medium tracking-tight text-foreground">
                         {feature.title}
                       </h3>
                       <ArrowRight
                         className={`text-primary transition-all duration-500 ${
-                          activeIntelligenceId === feature.id
-                            ? "translate-x-0 opacity-100"
-                            : "-translate-x-4 opacity-0"
+                          activeIntelligenceId === feature.id ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
                         }`}
                         size={32}
                       />
@@ -637,14 +483,10 @@ const FnBPage = () => {
                     {/* Mobile-only description */}
                     <div
                       className={`lg:hidden overflow-hidden transition-all duration-500 ${
-                        activeIntelligenceId === feature.id
-                          ? "max-h-40 mt-4 opacity-100"
-                          : "max-h-0 opacity-0"
+                        activeIntelligenceId === feature.id ? "max-h-40 mt-4 opacity-100" : "max-h-0 opacity-0"
                       }`}
                     >
-                      <p className="text-muted-foreground text-sm leading-relaxed">
-                        {feature.description}
-                      </p>
+                      <p className="text-muted-foreground text-sm leading-relaxed">{feature.description}</p>
                     </div>
                   </div>
                 ))}
@@ -662,27 +504,17 @@ const FnBPage = () => {
                     }`}
                   >
                     {/* Background Image */}
-                    <img
-                      src={`/api/strapi${feature.image?.url || ""}`}
-                      alt={feature.title}
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={feature.image} alt={feature.title} className="w-full h-full object-cover" />
 
                     {/* Content - Aligned to Bottom */}
                     <div className="absolute inset-0 flex flex-col justify-end p-12 bg-gradient-to-t from-background/90 via-background/50 to-transparent">
                       <div
                         className={`transition-all duration-500 delay-100 ${
-                          activeIntelligenceId === feature.id
-                            ? "translate-y-0 opacity-100"
-                            : "translate-y-8 opacity-0"
+                          activeIntelligenceId === feature.id ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                         }`}
                       >
-                        <h3 className="text-3xl font-display font-bold text-primary mb-4">
-                          {feature.title}
-                        </h3>
-                        <p className="text-foreground text-xl leading-relaxed max-w-md">
-                          {feature.description}
-                        </p>
+                        <h3 className="text-3xl font-display font-bold text-primary mb-4">{feature.title}</h3>
+                        <p className="text-foreground text-xl leading-relaxed max-w-md">{feature.description}</p>
                       </div>
                     </div>
                   </div>
@@ -694,48 +526,44 @@ const FnBPage = () => {
       </section>
 
       {/* Guest Experience Section */}
-      <section
-        ref={experienceRef as React.RefObject<HTMLElement>}
-        className="py-24"
-      >
+      <section ref={experienceRef as React.RefObject<HTMLElement>} className="py-16">
         <div className="container-width px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={experienceInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-10"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Engagement
-              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-primary">Engagement</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+             <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
               Guest Experience & Engagement
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Your guests deserve more than service — they deserve experiences
-              that make them return.
+            <p className="text-base text-muted-foreground">
+              Your guests deserve more than service — they deserve experiences that make them return.
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {experienceFeatures.map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                animate={experienceInView ? { opacity: 1, x: 0 } : {}}
+                initial={{ opacity: 0, y: 20 }}
+                animate={experienceInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex items-start gap-5 p-6 rounded-2xl bg-card border border-border/30 hover:border-primary/30 transition-all"
+                className="rounded-2xl bg-card border border-border/30 hover:border-primary/30 transition-all group overflow-hidden"
               >
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center flex-shrink-0">
-                  <feature.icon className="w-7 h-7 text-primary" />
+                <div className="aspect-[16/9] overflow-hidden">
+                  <img
+                    src={feature.image}
+                    alt={feature.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
                 </div>
-                <div>
-                  <h4 className="font-semibold text-lg text-foreground mb-2">
-                    {feature.title}
-                  </h4>
-                  <p className="text-muted-foreground">{feature.desc}</p>
+                <div className="p-5">
+                  <h4 className="font-semibold text-foreground mb-2">{feature.title}</h4>
+                  <p className="text-sm text-muted-foreground">{feature.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -744,10 +572,7 @@ const FnBPage = () => {
       </section>
 
       {/* Compliance Section */}
-      <section
-        ref={complianceRef as React.RefObject<HTMLElement>}
-        className="py-24 bg-muted/30"
-      >
+      <section ref={complianceRef as React.RefObject<HTMLElement>} className="py-24 bg-muted/30">
         <div className="container-width px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -756,13 +581,9 @@ const FnBPage = () => {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Compliance
-              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-primary">Compliance</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              Compliance & Integration
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Compliance & Integration</h2>
             <p className="text-lg text-muted-foreground">
               Stay compliant, connected, and secure across every transaction.
             </p>
@@ -787,12 +608,8 @@ const FnBPage = () => {
                 </div>
                 {/* Content */}
                 <div className="p-6 bg-card">
-                  <h4 className="font-semibold text-lg text-foreground mb-2">
-                    {feature.title}
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    {feature.desc}
-                  </p>
+                  <h4 className="font-semibold text-lg text-foreground mb-2">{feature.title}</h4>
+                  <p className="text-sm text-muted-foreground">{feature.desc}</p>
                 </div>
               </motion.div>
             ))}
@@ -801,10 +618,7 @@ const FnBPage = () => {
       </section>
 
       {/* Benefits Section */}
-      <section
-        ref={benefitsRef as React.RefObject<HTMLElement>}
-        className="py-24"
-      >
+      <section ref={benefitsRef as React.RefObject<HTMLElement>} className="py-24">
         <div className="container-width px-4 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -813,16 +627,12 @@ const FnBPage = () => {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Benefits
-              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-primary">Benefits</span>
             </div>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
               Benefits of Partnering with ACT
             </h2>
-            <p className="text-lg text-muted-foreground">
-              With ACT, restaurants achieve measurable results.
-            </p>
+            <p className="text-lg text-muted-foreground">With ACT, restaurants achieve measurable results.</p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -837,9 +647,7 @@ const FnBPage = () => {
                 <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-primary to-primary/50 flex items-center justify-center mb-4 mx-auto">
                   <benefit.icon className="w-7 h-7 text-primary-foreground" />
                 </div>
-                <h4 className="font-bold text-foreground mb-2">
-                  {benefit.title}
-                </h4>
+                <h4 className="font-bold text-foreground mb-2">{benefit.title}</h4>
                 <p className="text-sm text-muted-foreground">{benefit.desc}</p>
               </motion.div>
             ))}
@@ -848,10 +656,7 @@ const FnBPage = () => {
       </section>
 
       {/* Success Stories Section - Image Card Style */}
-      <section
-        ref={storiesRef as React.RefObject<HTMLElement>}
-        className="py-24 bg-muted/30 relative overflow-hidden"
-      >
+      <section ref={storiesRef as React.RefObject<HTMLElement>} className="py-24 bg-muted/30 relative overflow-hidden">
         {/* Gradient Line */}
         <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
@@ -864,28 +669,19 @@ const FnBPage = () => {
             className="text-center max-w-3xl mx-auto mb-16"
           >
             <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-4">
-              {successStoriesData?.sectionTitle || "Success Stories"}
+              Success Stories
             </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              {successStoriesData?.sectionSubtitle ||
-                "Real results from F&B leaders who trusted "}
-              <span className="text-gradient">ACT</span>
+              Real results from F&B leaders who trusted <span className="text-gradient">ACT</span>
             </h2>
           </motion.div>
 
           {/* Stories Grid - Image Cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {successStories.map((story: any, index) => (
-              <div
-                key={index}
-                className="group relative overflow-hidden rounded-2xl aspect-[4/3]"
-              >
+            {successStories.map((story, index) => (
+              <div key={index} className="group relative overflow-hidden rounded-2xl aspect-[4/3]">
                 {/* Background Image */}
-                <img
-                  src={`/api/strapi${story.image?.url || ""}`}
-                  alt={story.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
+                <img src={story.image} alt={story.title} className="absolute inset-0 w-full h-full object-cover" />
 
                 {/* Gradient Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
@@ -899,12 +695,8 @@ const FnBPage = () => {
 
                 {/* Content - Bottom */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-display text-xl md:text-2xl font-bold text-primary mb-2">
-                    {story.title}
-                  </h3>
-                  <p className="text-white/90 text-sm leading-relaxed">
-                    {story.subtitle}
-                  </p>
+                  <h3 className="font-display text-xl md:text-2xl font-bold text-primary mb-2">{story.title}</h3>
+                  <p className="text-white/90 text-sm leading-relaxed">{story.subtitle}</p>
                 </div>
               </div>
             ))}
@@ -912,18 +704,15 @@ const FnBPage = () => {
         </div>
       </section>
 
+
       {/* FAQ Section */}
-      {/* <section className="py-24">
+      <section className="py-24">
         <div className="container-width px-4 md:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <span className="text-xs font-semibold uppercase tracking-wider text-primary">
-                FAQ
-              </span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-primary">FAQ</span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-              Frequently Asked Questions
-            </h2>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">Frequently Asked Questions</h2>
           </div>
 
           <div className="max-w-3xl mx-auto">
@@ -937,15 +726,13 @@ const FnBPage = () => {
                   <AccordionTrigger className="text-left font-semibold text-foreground hover:no-underline py-5">
                     {faq.q}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-5">
-                    {faq.a}
-                  </AccordionContent>
+                  <AccordionContent className="text-muted-foreground pb-5">{faq.a}</AccordionContent>
                 </AccordionItem>
               ))}
             </Accordion>
           </div>
         </div>
-      </section> */}
+      </section>
 
       {/* CTA Section */}
       <section className="py-24 bg-gradient-to-b from-muted/30 to-background">
@@ -954,8 +741,7 @@ const FnBPage = () => {
             Where Great Hospitality Begins
           </h2>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-            Partner with ACT to unlock efficiency, innovation, and growth in
-            every meal served.
+            Partner with ACT to unlock efficiency, innovation, and growth in every meal served.
           </p>
           <Button variant="accent" size="lg" asChild>
             <Link to="/support">

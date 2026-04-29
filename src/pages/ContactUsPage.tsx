@@ -1,45 +1,36 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { useState, useEffect } from "react";
-import { MapPin, Phone, Mail, Loader2 } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
-import { useInView } from "@/hooks/useInView";
-import {
-  fetchContactInfo,
-  submitContactForm,
-  type ContactInfo,
-} from "@/services/contactService";
+import emailjs from '@emailjs/browser';
+import { MapPin, Phone, Mail } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Card, CardContent } from '@/components/ui/card';
+import { useToast } from '@/hooks/use-toast';
+import { useInView } from '@/hooks/useInView';
 
 const contactSchema = z.object({
-  firstName: z.string().trim().min(1, "First name is required").max(50),
-  lastName: z.string().trim().min(1, "Last name is required").max(50),
-  email: z.string().trim().email("Invalid email address").max(255),
-  country: z.string().trim().min(1, "Country is required").max(100),
+  firstName: z.string().trim().min(1, 'First name is required').max(50),
+  lastName: z.string().trim().min(1, 'Last name is required').max(50),
+  email: z.string().trim().email('Invalid email address').max(255),
+  country: z.string().trim().min(1, 'Country is required').max(100),
   jobTitle: z.string().trim().max(100).optional(),
   company: z.string().trim().max(100).optional(),
-  message: z.string().trim().min(1, "Message is required").max(1000),
+  message: z.string().trim().min(1, 'Message is required').max(1000),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const ContactUsPage = () => {
   const { toast } = useToast();
-
+  
   const [heroRef, isHeroInView] = useInView<HTMLDivElement>();
   const [formRef, isFormInView] = useInView<HTMLDivElement>();
   const [officesRef, isOfficesInView] = useInView<HTMLDivElement>();
-
-  // State for dynamic contact info
-  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
 
   const {
     register,
@@ -50,75 +41,78 @@ const ContactUsPage = () => {
     resolver: zodResolver(contactSchema),
   });
 
-  // Fetch contact info on mount
-  useEffect(() => {
-    const loadContactInfo = async () => {
-      setIsLoading(true);
-      const data = await fetchContactInfo();
-      console.log(data);
-      setContactInfo(data);
-      setIsLoading(false);
-    };
-    loadContactInfo();
-  }, []);
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      // EmailJS configuration - these should be set in your environment variables
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'YOUR_SERVICE_ID';
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'YOUR_TEMPLATE_ID';
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'YOUR_PUBLIC_KEY';
 
-  const onSubmit = async (data: any) => {
-    const result = await submitContactForm(data);
+      // Prepare template parameters matching your EmailJS template variables
+      const templateParams = {
+        from_name: `${data.firstName} ${data.lastName}`,
+        from_email: data.email,
+        country: data.country,
+        job_title: data.jobTitle || 'Not provided',
+        company: data.company || 'Not provided',
+        message: data.message,
+        to_email: 'customer.experience@act.eg',
+      };
 
-    if (result.success) {
+      // Send email via EmailJS
+      const result = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+      console.log('Email sent successfully:', result);
       toast({
-        title: "Message Sent!",
-        description: "Our team will respond within 24 hours.",
+        title: 'Message Sent!',
+        description: 'Our team will respond within 24 hours.',
       });
       reset();
-    } else {
+    } catch (error) {
+      console.error('Failed to send email:', error);
       toast({
-        title: "Submission Failed",
-        description: result.error || "Please try again later.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Failed to send message. Please try again or contact us directly.',
+        variant: 'destructive',
       });
     }
   };
-  console.log(contactInfo);
-  // Default values if API fails
-  const offices = contactInfo?.offices || [
+
+  const offices = [
     {
-      name: "ACT Headquarters – Cairo, Egypt",
-      address:
-        "Smart Villages Company, Building B92 A13, Al Giza Desert, Giza Governorate",
-      fax: "+20 2 33440230",
+      name: 'ACT Headquarters – Cairo, Egypt',
+      address: 'Smart Villages Company, Building B92 A13, Al Giza Desert, Giza Governorate',
+      fax: '+20 2 33440230',
     },
     {
-      name: "ACT International – Ismailia, Egypt",
-      address: "Ismailia Public Free Zone, Ismailia Governorate, Egypt",
-      fax: "+20 33440230",
+      name: 'ACT International – Ismailia, Egypt',
+      address: 'Ismailia Public Free Zone, Ismailia Governorate, Egypt',
+      fax: '+20 33440230',
     },
     {
-      name: "ACT Middle East – Dubai, UAE",
-      address: "Al Thuraya Tower 1, Office 1608, Media City, Dubai, UAE",
-      fax: "+971 4 5726398",
+      name: 'ACT Middle East – Dubai, UAE',
+      address: 'Al Thuraya Tower 1, Office 1608, Media City, Dubai, UAE',
+      fax: '+971 4 5726398',
     },
     {
-      name: "ACT Technology – Riyadh, Saudi Arabia",
-      address:
-        "Al Imam Saud Ibn Faisal Rd., Al Malqa, Riyadh 13522, Saudi Arabia",
-      fax: "+966 11445 5883",
+      name: 'ACT Technology – Riyadh, Saudi Arabia',
+      address: "Al Imam Saud Ibn Faisal Rd., Al Malqa, Riyadh 13522, Saudi Arabia",
+      fax: '+966 11445 5883',
     },
   ];
 
-  const contactInfoCards = [
+  const contactInfo = [
     {
       icon: Phone,
-      title: "Hotline",
-      value: contactInfo?.hotline || "19488",
-      description: contactInfo?.hotlineDescription || "24/7 Support Available",
+      title: 'Hotline',
+      value: '19488',
+      description: '24/7 Support Available',
     },
     {
       icon: Mail,
-      title: "Email",
-      value: contactInfo?.email || "customer.experience@act.eg",
-      description:
-        contactInfo?.emailDescription || "Get response within 24 hours",
+      title: 'Email',
+      value: 'customer.experience@act.eg',
+      description: 'Get response within 24 hours',
     },
   ];
 
@@ -129,12 +123,10 @@ const ContactUsPage = () => {
         {/* Hero Section */}
         <section className="relative py-24 md:py-32 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-          <div
+          <div 
             ref={heroRef}
             className={`container-width px-4 md:px-8 relative z-10 transition-all duration-1000 ${
-              isHeroInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isHeroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <div className="text-center max-w-3xl mx-auto">
@@ -145,9 +137,8 @@ const ContactUsPage = () => {
                 Contact Us
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                At ACT, we combine 24/7 availability with local expertise to
-                ensure your business receives the support it needs, whenever and
-                wherever you need it.
+                At ACT, we combine 24/7 availability with local expertise to ensure your business 
+                receives the support it needs, whenever and wherever you need it.
               </p>
             </div>
           </div>
@@ -156,77 +147,52 @@ const ContactUsPage = () => {
         {/* Contact Info Cards */}
         <section className="py-12 border-y border-border/50">
           <div className="container-width px-4 md:px-8">
-            {isLoading ? (
-              <div className="flex items-center justify-center py-8">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                <span className="ml-3 text-muted-foreground">
-                  Loading contact information...
-                </span>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                {contactInfoCards.map((info, idx) => (
-                  <Card
-                    key={idx}
-                    className={`group border-border/50 bg-card/50 hover:bg-primary hover:border-primary transition-all duration-500 ${
-                      isHeroInView
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-1 translate-y-10"
-                    }`}
-                    style={{ transitionDelay: `${idx * 100}ms` }}
-                  >
-                    <CardContent className="p-6 text-center">
-                      <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-white/20 flex items-center justify-center mx-auto mb-4 transition-colors">
-                        <info.icon
-                          className="h-7 w-7 text-primary group-hover:text-white transition-colors"
-                          strokeWidth={1.5}
-                        />
-                      </div>
-                      <h3 className="text-sm font-medium text-muted-foreground group-hover:text-white/80 transition-colors mb-1">
-                        {info.title}
-                      </h3>
-                      <p className="text-lg font-semibold text-foreground group-hover:text-white transition-colors mb-1">
-                        {info.value}
-                      </p>
-                      <p className="text-sm text-muted-foreground group-hover:text-white/70 transition-colors">
-                        {info.description}
-                      </p>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+              {contactInfo.map((info, idx) => (
+                <Card 
+                  key={idx}
+                  className={`group border-border/50 bg-card/50 hover:bg-primary hover:border-primary transition-all duration-500 ${
+                    isHeroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${idx * 100}ms` }}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="w-14 h-14 rounded-xl bg-primary/10 group-hover:bg-white/20 flex items-center justify-center mx-auto mb-4 transition-colors">
+                      <info.icon className="h-7 w-7 text-primary group-hover:text-white transition-colors" strokeWidth={1.5} />
+                    </div>
+                    <h3 className="text-sm font-medium text-muted-foreground group-hover:text-white/80 transition-colors mb-1">
+                      {info.title}
+                    </h3>
+                    <p className="text-lg font-semibold text-foreground group-hover:text-white transition-colors mb-1">
+                      {info.value}
+                    </p>
+                    <p className="text-sm text-muted-foreground group-hover:text-white/70 transition-colors">
+                      {info.description}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* Form Section */}
-        <section className="py-16 md:py-24 relative overflow-hidden">
-          {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
-          
-          <div
+        <section className="py-16 md:py-24">
+          <div 
             ref={formRef}
-            className={`container-width px-4 md:px-8 relative z-10 transition-all duration-1000 ${
-              isFormInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+            className={`container-width px-4 md:px-8 transition-all duration-1000 ${
+              isFormInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
               {/* Form */}
-              <div className="bg-gradient-to-br from-card/90 to-card/70 backdrop-blur-xl rounded-2xl p-6 md:p-8 border border-border/50 shadow-2xl shadow-primary/5">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-white" />
-                  </div>
-                  <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground">
-                    Send Us a Message
-                  </h2>
-                </div>
+              <div className="bg-card/50 rounded-2xl p-6 md:p-8 border border-border/50">
+                <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
+                  Send Us a Message
+                </h2>
                 <p className="text-muted-foreground mb-8">
-                  For inquiries regarding sales, IT support, or partnerships,
-                  please fill out our contact form. Our experts will respond
-                  within 24 hours to assist you.
+                  For inquiries regarding sales, IT support, or partnerships, please fill out our contact form. 
+                  Our experts will respond within 24 hours to assist you.
                 </p>
 
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
@@ -236,13 +202,11 @@ const ContactUsPage = () => {
                       <Input
                         id="firstName"
                         placeholder="John"
-                        {...register("firstName")}
-                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
+                        {...register('firstName')}
+                        className="bg-card/50 border-border/50 focus:border-primary"
                       />
                       {errors.firstName && (
-                        <p className="text-sm text-destructive">
-                          {errors.firstName.message}
-                        </p>
+                        <p className="text-sm text-destructive">{errors.firstName.message}</p>
                       )}
                     </div>
                     <div className="space-y-2">
@@ -250,13 +214,11 @@ const ContactUsPage = () => {
                       <Input
                         id="lastName"
                         placeholder="Doe"
-                        {...register("lastName")}
-                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
+                        {...register('lastName')}
+                        className="bg-card/50 border-border/50 focus:border-primary"
                       />
                       {errors.lastName && (
-                        <p className="text-sm text-destructive">
-                          {errors.lastName.message}
-                        </p>
+                        <p className="text-sm text-destructive">{errors.lastName.message}</p>
                       )}
                     </div>
                   </div>
@@ -268,13 +230,11 @@ const ContactUsPage = () => {
                         id="email"
                         type="email"
                         placeholder="john@company.com"
-                        {...register("email")}
-                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
+                        {...register('email')}
+                        className="bg-card/50 border-border/50 focus:border-primary"
                       />
                       {errors.email && (
-                        <p className="text-sm text-destructive">
-                          {errors.email.message}
-                        </p>
+                        <p className="text-sm text-destructive">{errors.email.message}</p>
                       )}
                     </div>
                     <div className="space-y-2">
@@ -282,13 +242,11 @@ const ContactUsPage = () => {
                       <Input
                         id="country"
                         placeholder="Egypt"
-                        {...register("country")}
-                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
+                        {...register('country')}
+                        className="bg-card/50 border-border/50 focus:border-primary"
                       />
                       {errors.country && (
-                        <p className="text-sm text-destructive">
-                          {errors.country.message}
-                        </p>
+                        <p className="text-sm text-destructive">{errors.country.message}</p>
                       )}
                     </div>
                   </div>
@@ -299,8 +257,8 @@ const ContactUsPage = () => {
                       <Input
                         id="jobTitle"
                         placeholder="IT Manager"
-                        {...register("jobTitle")}
-                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
+                        {...register('jobTitle')}
+                        className="bg-card/50 border-border/50 focus:border-primary"
                       />
                     </div>
                     <div className="space-y-2">
@@ -308,8 +266,8 @@ const ContactUsPage = () => {
                       <Input
                         id="company"
                         placeholder="Your Company"
-                        {...register("company")}
-                        className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all"
+                        {...register('company')}
+                        className="bg-card/50 border-border/50 focus:border-primary"
                       />
                     </div>
                   </div>
@@ -320,24 +278,22 @@ const ContactUsPage = () => {
                       id="message"
                       placeholder="How can we help you?"
                       rows={5}
-                      {...register("message")}
-                      className="bg-background/50 border-border/50 focus:border-primary focus:bg-background/80 transition-all resize-none"
+                      {...register('message')}
+                      className="bg-card/50 border-border/50 focus:border-primary resize-none"
                     />
                     {errors.message && (
-                      <p className="text-sm text-destructive">
-                        {errors.message.message}
-                      </p>
+                      <p className="text-sm text-destructive">{errors.message.message}</p>
                     )}
                   </div>
 
-                  <Button
-                    type="submit"
-                    variant="accent"
-                    size="lg"
+                  <Button 
+                    type="submit" 
+                    variant="accent" 
+                    size="lg" 
                     className="w-full md:w-auto"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </div>
@@ -371,12 +327,10 @@ const ContactUsPage = () => {
 
         {/* Offices Section */}
         <section className="py-16 md:py-24 bg-card/30 border-t border-border/50">
-          <div
+          <div 
             ref={officesRef}
             className={`container-width px-4 md:px-8 transition-all duration-1000 ${
-              isOfficesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isOfficesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             <div className="text-center max-w-3xl mx-auto mb-12">
@@ -387,56 +341,36 @@ const ContactUsPage = () => {
                 ACT Offices Location
               </h2>
               <p className="text-muted-foreground">
-                With offices across the Middle East, we're always close to where
-                you need us.
+                With offices across the Middle East, we're always close to where you need us.
               </p>
             </div>
 
-            {isLoading ? (
-              <div className="flex items-center justify-center py-8">
-                <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                <span className="ml-3 text-muted-foreground">
-                  Loading offices...
-                </span>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {offices.map((office, idx) => (
-                  <Card
-                    key={idx}
-                    className={`group border-border/50 bg-card/50 hover:border-primary/50 transition-all duration-500 ${
-                      isOfficesInView
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-1 translate-y-10"
-                    }`}
-                    style={{ transitionDelay: `${idx * 100}ms` }}
-                  >
-                    <CardContent className="p-6">
-                      <div className="flex gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <MapPin
-                            className="h-6 w-6 text-primary"
-                            strokeWidth={1.5}
-                          />
-                        </div>
-                        <div>
-                          <h3 className="font-semibold text-foreground mb-2">
-                            {office.name}
-                          </h3>
-                          <p className="text-sm text-muted-foreground mb-2">
-                            {office.address}
-                          </p>
-                          <p className="text-sm text-muted-foreground">
-                            <span className="text-foreground/70">Fax:</span>{" "}
-                            {office.fax}
-                          </p>
-                        </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {offices.map((office, idx) => (
+                <Card 
+                  key={idx}
+                  className={`group border-border/50 bg-card/50 hover:border-primary/50 transition-all duration-500 ${
+                    isOfficesInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${idx * 100}ms` }}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex gap-4">
+                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+                        <MapPin className="h-6 w-6 text-primary" strokeWidth={1.5} />
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            )}
+                      <div>
+                        <h3 className="font-semibold text-foreground mb-2">{office.name}</h3>
+                        <p className="text-sm text-muted-foreground mb-2">{office.address}</p>
+                        <p className="text-sm text-muted-foreground">
+                          <span className="text-foreground/70">Fax:</span> {office.fax}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
       </main>

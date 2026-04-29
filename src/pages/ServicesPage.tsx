@@ -53,109 +53,36 @@ import {
 } from "lucide-react";
 import { useInView } from "@/hooks/useInView";
 import { useTypewriter } from "@/hooks/useTypewriter";
-import {
-  fetchServicesPageHero,
-  fetchServices,
-  getStrapiImageUrl,
-  type ServicesPageHero,
-  type Service,
-} from "@/services/servicesService";
 import servicesHeaderBg from "@/assets/services/services-hero-bg.png";
+
+// Import service images
+import infrastructureImg from "@/assets/services/infrastructure.jpg";
+import digitalImg from "@/assets/services/digital-transformation.jpg";
+import securityImg from "@/assets/services/security.jpg";
+import dataCenterImg from "@/assets/services/data-center.jpg";
+import managedOperationsImg from "@/assets/services/managed-operations.jpg";
 import HowItWorksTimeline from "@/components/services/HowItWorksTimeline";
-
-// Import service images dynamically
-const serviceImages: Record<string, string> = {
-  infrastructure: new URL("@/assets/services/infrastructure.jpg", import.meta.url).href,
-  "digital-transformation": new URL("@/assets/services/digital-transformation.jpg", import.meta.url).href,
-  security: new URL("@/assets/services/security.jpg", import.meta.url).href,
-  "data-center": new URL("@/assets/services/data-center.jpg", import.meta.url).href,
-  "managed-operations": new URL("@/assets/services/managed-operations.jpg", import.meta.url).href,
-};
-
-// Icon mapping function
-const getIconComponent = (iconName: string) => {
-  const iconMap: Record<string, typeof Server> = {
-    Server,
-    Cpu,
-    Database,
-    Settings,
-    Shield,
-    Monitor,
-    Users,
-    CloudCog,
-    Layers,
-    Lock,
-    Eye,
-    Mail,
-    AlertTriangle,
-    Radar,
-    Globe,
-    Zap,
-    Cable,
-    Flame,
-    Fingerprint,
-    Wind,
-    Headset,
-    UserPlus,
-    Briefcase,
-    ShieldCheck,
-    Network,
-    Gauge,
-    Activity,
-    Search,
-    Wrench,
-    FileText,
-    Rocket,
-    BarChart3,
-    Phone,
-    MapPin,
-    Calendar,
-    Bell,
-    Upload,
-    GraduationCap,
-    MessageCircle,
-    Lightbulb,
-    BrainCircuit,
-    Bot,
-    Clock,
-    CheckCircle2,
-  };
-  return iconMap[iconName] || Server;
-};
 
 const ServicesPage = () => {
   const location = useLocation();
   const [heroRef, isHeroInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
   const [scrollY, setScrollY] = useState(0);
-  const [heroData, setHeroData] = useState<ServicesPageHero | null>(null);
-  const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
 
   // Section refs for scroll animations
+  const [infrastructureRef, isInfrastructureInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const [digitalRef, isDigitalInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const [securityRef, isSecurityInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const [dataCenterRef, isDataCenterInView] = useInView<HTMLElement>({ threshold: 0.1 });
+  const [managedRef, isManagedInView] = useInView<HTMLElement>({ threshold: 0.1 });
   const [tiersRef, isTiersInView] = useInView<HTMLElement>({ threshold: 0.1 });
   const [howItWorksRef, isHowItWorksInView] = useInView<HTMLElement>({ threshold: 0.1 });
 
   const { displayedText, isComplete } = useTypewriter({
-    text:
-      heroData?.headline ||
-      "Building Smarter, Safer, and Scalable IT with ACT",
+    text: "Building Smarter, Safer, and Scalable IT with ACT",
     speed: 40,
     delay: 500,
-    enabled: isHeroInView && !!heroData,
+    enabled: isHeroInView,
   });
-
-  useEffect(() => {
-    const loadData = async () => {
-      const [heroContent, servicesData] = await Promise.all([
-        fetchServicesPageHero(),
-        fetchServices(),
-      ]);
-      setHeroData(heroContent);
-      setServices(servicesData);
-      setLoading(false);
-    };
-    loadData();
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -174,6 +101,120 @@ const ServicesPage = () => {
       }
     }
   }, [location]);
+
+  const infrastructureItems = [
+    {
+      icon: Server,
+      title: "Computing",
+      description: "High-performance servers and storage powering critical applications.",
+    },
+    {
+      icon: Monitor,
+      title: "Operating Systems (O.S.)",
+      description: "Expert management of Windows, Linux & hybrid environments.",
+    },
+    { icon: Users, title: "Active Directory (AD)", description: "Centralized identity & permissions management." },
+    {
+      icon: CloudCog,
+      title: "Virtualization",
+      description: "Maximize resources with virtualized systems to cut costs.",
+    },
+    { icon: Layers, title: "VDI", description: "Secure remote desktop access for a mobile workforce." },
+  ];
+
+  const digitalTransformationItems = [
+    {
+      icon: Shield,
+      title: "Data Protection & Continuity",
+      description: "Ensure business continuity with robust data protection strategies.",
+    },
+    {
+      icon: Gauge,
+      title: "Application Performance Monitoring (APM)",
+      description: "Monitor and optimize application performance in real-time.",
+    },
+    {
+      icon: Activity,
+      title: "IT Operations Management (ITOM)",
+      description: "Streamline IT operations with intelligent management tools.",
+    },
+    {
+      icon: BrainCircuit,
+      title: "Automation & AI Workflows",
+      description: "Automate processes with AI-powered workflow solutions.",
+    },
+    {
+      icon: Bot,
+      title: "AI Powered Chatbots",
+      description: "Enhance customer experience with intelligent chatbot solutions.",
+    },
+  ];
+
+  const securityItems = [
+    {
+      icon: AlertTriangle,
+      title: "Red Team Services",
+      description: "Ethical hacking and penetration testing to identify vulnerabilities.",
+    },
+    { icon: Lock, title: "Firewalls & NAC", description: "Network access control and advanced firewall protection." },
+    { icon: Eye, title: "24/7 SOC", description: "Around-the-clock security operations center monitoring." },
+    { icon: Mail, title: "Mail Security", description: "Protect your email communications from threats." },
+    {
+      icon: Radar,
+      title: "Endpoint Detection (EDR/XDR)",
+      description: "Advanced endpoint detection and response capabilities.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "SIEM & SOAR Solutions",
+      description: "Security information and event management with orchestration.",
+    },
+    { icon: Globe, title: "DNS Security", description: "Protect your DNS infrastructure from attacks." },
+    { icon: CloudCog, title: "SASE", description: "Cloud-based secure access service edge solutions." },
+  ];
+
+  const dataCenterItems = [
+    { icon: Zap, title: "Power & Backup Systems", description: "Reliable power infrastructure with backup solutions." },
+    {
+      icon: Cable,
+      title: "Civil Preparation & Cabling",
+      description: "Professional infrastructure setup and cabling services.",
+    },
+    {
+      icon: Flame,
+      title: "Fire Protection & Suppression",
+      description: "Advanced fire detection and suppression systems.",
+    },
+    {
+      icon: Fingerprint,
+      title: "Access Control & CCTV",
+      description: "Comprehensive security monitoring and access management.",
+    },
+    { icon: Wind, title: "Cooling & Lighting Systems", description: "Optimal environmental control for data centers." },
+  ];
+
+  const managedOperationsItems = [
+    {
+      icon: Headset,
+      title: "Fully Managed Services",
+      description: "End-to-end IT outsourcing.",
+    },
+    {
+      icon: UserPlus,
+      title: "Co-Managed / Staff Augmentation",
+      description: "Support for your IT team.",
+    },
+    {
+      icon: Briefcase,
+      title: "Project-Based Engagements",
+      description: "Specialized support for specific IT initiatives.",
+    },
+    {
+      icon: ShieldCheck,
+      title: "MSSP Managed Security Services",
+      description: "Outsourced cyber defense.",
+    },
+  ];
 
   const supportTiers = [
     {
@@ -209,180 +250,391 @@ const ServicesPage = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {/* Hero Section */}
-        {loading ? (
-          <section className="relative min-h-screen flex items-center justify-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-          </section>
-        ) : (
-          <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-32">
-            {/* Background Image with Parallax and Animation */}
-            <div className="absolute inset-0 z-0" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
-              <img
-                src={
-                  heroData?.backgroundImage?.url
-                    ? getStrapiImageUrl(heroData.backgroundImage.url)
-                    : servicesHeaderBg
-                }
-                alt="Services Background"
-                className="w-full h-[120%] object-cover object-center animate-float-slow"
-              />
-              <div className="absolute inset-0 bg-black/50" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-background" />
-            </div>
+        {/* Hero Section - Styled like AboutHero */}
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-32">
+          {/* Background Image with Parallax and Animation */}
+          <div className="absolute inset-0 z-0" style={{ transform: `translateY(${scrollY * 0.3}px)` }}>
+            <img
+              src={servicesHeaderBg}
+              alt="Services Background"
+              className="w-full h-[120%] object-cover object-center animate-float-slow"
+            />
+            {/* Reduced Dark Overlay for more visibility */}
+            <div className="absolute inset-0 bg-black/50" />
+            {/* Gradient Overlay for better text visibility */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-background" />
+          </div>
 
-            {/* Content */}
-            <div
-              ref={heroRef}
-              className={`relative z-10 container-width px-4 md:px-8 text-center transition-all duration-1000 ${
-                isHeroInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          {/* Content */}
+          <div
+            ref={heroRef}
+            className={`relative z-10 container-width px-4 md:px-8 text-center transition-all duration-1000 ${
+              isHeroInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            }`}
+          >
+            <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-6">
+              Our Services
+            </span>
+
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6 max-w-5xl mx-auto min-h-[1.2em]">
+              {displayedText.split("Scalable IT").map((part, i) =>
+                i === 0 ? (
+                  <span key={i}>
+                    {part}
+                    {displayedText.includes("Scalable IT") && <span className="text-gradient">Scalable IT</span>}
+                  </span>
+                ) : (
+                  <span key={i}>{part}</span>
+                ),
+              )}
+              {!isComplete && <span className="inline-block w-[3px] h-[1em] bg-primary ml-1 animate-pulse" />}
+            </h1>
+
+            <p
+              className={`text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed transition-all duration-700 delay-500 ${
+                isComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-6">
-                {heroData?.badge || "Our Services"}
-              </span>
+              Your IT infrastructure is more than technology; it's the foundation of your business success. For over 35
+              years, ACT has been at the forefront of delivering enterprise-grade IT services.in Egypt and the MENA
+              region, empowering organizations with secure, scalable, and high-performing solutions. From infrastructure
+              and security to digital transformation, data centers, and managed operations, ACT helps enterprises
+              modernize, optimize, and unlock innovation.
+            </p>
 
-              <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6 max-w-5xl mx-auto min-h-[1.2em]">
-                {heroData?.highlightText
-                  ? displayedText
-                      .split(heroData.highlightText)
-                      .map((part, i) =>
-                        i === 0 ? (
-                          <span key={i}>
-                            {part}
-                            {displayedText.includes(
-                              heroData.highlightText!,
-                            ) && (
-                              <span className="text-gradient">
-                                {heroData.highlightText}
-                              </span>
-                            )}
-                          </span>
-                        ) : (
-                          <span key={i}>{part}</span>
-                        ),
-                      )
-                  : displayedText}
-                {!isComplete && <span className="inline-block w-[3px] h-[1em] bg-primary ml-1 animate-pulse" />}
-              </h1>
-
-              <p
-                className={`text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed transition-all duration-700 delay-500 ${
-                  isComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                }`}
-              >
-                {heroData?.description}
-                {heroData?.subDescription && (
-                  <>
-                    <br />
-                    <br />
-                    {heroData.subDescription}
-                  </>
-                )}
-              </p>
-
-              <div
-                className={`mt-8 transition-all duration-700 delay-700 ${
-                  isComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                }`}
-              >
-                <Button variant="accent" size="lg" asChild>
-                  <Link to={heroData?.ctaLink || "/contact"}>
-                    {heroData?.ctaText || "Let's Talk"}
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-
-            {/* Parallax Transition to Next Section */}
             <div
-              className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent z-10"
-              style={{ transform: `translateY(${scrollY * 0.1}px)` }}
-            />
-          </section>
-        )}
-
-        {/* Dynamic Service Sections */}
-        {services.map((service, index) => {
-          const isEven = index % 2 === 0;
-          const ServiceIcon = getIconComponent(service.icon);
-          const serviceImage = serviceImages[service.slug] || serviceImages.infrastructure;
-
-          return (
-            <section
-              key={service.id}
-              id={service.slug}
-              className={`py-20 ${!isEven ? "bg-card/30" : ""} scroll-mt-24`}
+              className={`mt-8 transition-all duration-700 delay-700 ${
+                isComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+              }`}
             >
-              <div className="container-width px-4 md:px-8">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
-                  {/* Image Column */}
-                  <div
-                    className={`relative ${isEven ? "order-2" : "order-2 lg:order-1"} transition-all duration-700 delay-200 opacity-100 translate-x-0`}
-                  >
-                    <div className="aspect-[4/3] rounded-2xl overflow-hidden">
-                      <img
-                        src={serviceImage}
-                        alt={`${service.label}.`}
-                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className={`absolute -bottom-4 ${isEven ? "-left-4" : "-right-4"} w-24 h-24 ${isEven ? "bg-primary/20" : "bg-accent/20"} rounded-2xl -z-10`} />
-                    <div className={`absolute -top-4 ${isEven ? "-right-4" : "-left-4"} w-32 h-32 ${isEven ? "bg-accent/10" : "bg-primary/10"} rounded-full -z-10`} />
-                  </div>
+              <Button variant="accent" size="lg" asChild>
+                <Link to="/contact">
+                  Let's Talk
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
+          </div>
 
-                  {/* Text Column */}
-                  <div
-                    className={`${isEven ? "order-1" : "order-1 lg:order-2"} transition-all duration-700 opacity-100 translate-x-0`}
-                  >
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                        <ServiceIcon className="h-6 w-6 text-primary" />
-                      </div>
-                      <span className="text-primary font-semibold">{service.label}</span>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                      {service.pageTitle || service.label}
-                    </h2>
-                    <p className="text-lg text-muted-foreground mb-8">
-                      {service.pageDescription || service.description}
-                    </p>
-                    <ul className="space-y-4">
-                      {service.items?.map((item, idx) => {
-                        const ItemIcon = getIconComponent(item.icon);
-                        return (
-                          <li key={idx} className="flex items-start gap-3">
-                            <ItemIcon className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
-                            <div>
-                              <span className="font-semibold text-foreground">{item.title}</span>
-                              <span className="text-muted-foreground"> – {item.description}</span>
-                            </div>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                    <div className="mt-8">
-                      <Button variant="outline" asChild>
-                        <Link to="/contact">
-                          Book a Consultation
-                          <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                      </Button>
-                    </div>
+          {/* Parallax Transition to Next Section */}
+          <div
+            className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background via-background/80 to-transparent z-10"
+            style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+          />
+        </section>
+
+        {/* Infrastructure Services - 2 Column */}
+        <section ref={infrastructureRef} id="infrastructure" className="py-20 scroll-mt-24">
+          <div className="container-width px-4 md:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Text Column */}
+              <div
+                className={`transition-all duration-700 ${
+                  isInfrastructureInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Server className="h-6 w-6 text-primary" />
                   </div>
+                  <span className="text-primary font-semibold">Infrastructure Services</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  The Foundation of Every IT Environment
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Ensuring your business runs smoothly, securely, and efficiently with enterprise-grade infrastructure.
+                </p>
+                <ul className="space-y-4">
+                  {infrastructureItems.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <item.icon className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-foreground">{item.title}</span>
+                        <span className="text-muted-foreground"> – {item.description}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8">
+                  <Button variant="outline" asChild>
+                    <Link to="/contact">
+                      Book a Consultation
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
-            </section>
-          );
-        })}
+              {/* Image Column */}
+              <div
+                className={`relative transition-all duration-700 delay-200 ${
+                  isInfrastructureInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+                }`}
+              >
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                  <img
+                    src={infrastructureImg}
+                    alt="Infrastructure Services."
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-primary/20 rounded-2xl -z-10" />
+                <div className="absolute -top-4 -right-4 w-32 h-32 bg-accent/10 rounded-full -z-10" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Digital Transformation Services - 2 Column (Reversed) */}
+        <section ref={digitalRef} id="digital-transformation" className="py-20 bg-card/30 scroll-mt-24">
+          <div className="container-width px-4 md:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Image Column */}
+              <div
+                className={`relative order-2 lg:order-1 transition-all duration-700 delay-200 ${
+                  isDigitalInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                }`}
+              >
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                  <img
+                    src={digitalImg}
+                    alt="Digital Transformation."
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-accent/20 rounded-2xl -z-10" />
+                <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary/10 rounded-full -z-10" />
+              </div>
+              {/* Text Column */}
+              <div
+                className={`order-1 lg:order-2 transition-all duration-700 ${
+                  isDigitalInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Cpu className="h-6 w-6 text-primary" />
+                  </div>
+                  <span className="text-primary font-semibold">Digital Transformation</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+                  Modernize Your Business Operations
+                </h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Helping organizations modernize operations and customer experiences with advanced technologies.
+                </p>
+                <ul className="space-y-4">
+                  {digitalTransformationItems.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <item.icon className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-foreground">{item.title}</span>
+                        <span className="text-muted-foreground"> – {item.description}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8">
+                  <Button variant="outline" asChild>
+                    <Link to="/contact">
+                      Book a Consultation
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Security Services - 2 Column */}
+        <section ref={securityRef} id="security" className="py-20 scroll-mt-24">
+          <div className="container-width px-4 md:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Text Column */}
+              <div
+                className={`transition-all duration-700 ${
+                  isSecurityInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Shield className="h-6 w-6 text-primary" />
+                  </div>
+                  <span className="text-primary font-semibold">Security Services</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Enterprise-Grade Protection</h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Cybersecurity is mission-critical. ACT delivers end-to-end protection with enterprise-grade security
+                  solutions.
+                </p>
+                <ul className="space-y-4">
+                  {securityItems.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <item.icon className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-foreground">{item.title}</span>
+                        <span className="text-muted-foreground"> – {item.description}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8">
+                  <Button variant="outline" asChild>
+                    <Link to="/contact">
+                      Book a Consultation
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+              {/* Image Column */}
+              <div
+                className={`relative transition-all duration-700 delay-200 ${
+                  isSecurityInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+                }`}
+              >
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                  <img
+                    src={securityImg}
+                    alt="Security Services."
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-primary/20 rounded-2xl -z-10" />
+                <div className="absolute -top-4 -right-4 w-32 h-32 bg-accent/10 rounded-full -z-10" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Data Center Services - 2 Column (Reversed) */}
+        <section ref={dataCenterRef} id="data-center" className="py-20 bg-card/30 scroll-mt-24">
+          <div className="container-width px-4 md:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Image Column */}
+              <div
+                className={`relative order-2 lg:order-1 transition-all duration-700 delay-200 ${
+                  isDataCenterInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                }`}
+              >
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                  <img
+                    src={dataCenterImg}
+                    alt="Data Center Services."
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-accent/20 rounded-2xl -z-10" />
+                <div className="absolute -top-4 -left-4 w-32 h-32 bg-primary/10 rounded-full -z-10" />
+              </div>
+              {/* Text Column */}
+              <div
+                className={`order-1 lg:order-2 transition-all duration-700 ${
+                  isDataCenterInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Database className="h-6 w-6 text-primary" />
+                  </div>
+                  <span className="text-primary font-semibold">Data Center Services</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Secure and Scalable Facilities</h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Designing, building, and managing secure, reliable, and scalable facilities for your mission-critical
+                  operations.
+                </p>
+                <ul className="space-y-4">
+                  {dataCenterItems.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <item.icon className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-foreground">{item.title}</span>
+                        <span className="text-muted-foreground"> – {item.description}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8">
+                  <Button variant="outline" asChild>
+                    <Link to="/contact">
+                      Book a Consultation
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Managed Operations - 2 Column */}
+        <section ref={managedRef} id="managed-operations" className="py-20 scroll-mt-24">
+          <div className="container-width px-4 md:px-8">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Text Column */}
+              <div
+                className={`transition-all duration-700 ${
+                  isManagedInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+                }`}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Settings className="h-6 w-6 text-primary" />
+                  </div>
+                  <span className="text-primary font-semibold">Managed Operations</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Focus on Growth, We Handle IT</h2>
+                <p className="text-lg text-muted-foreground mb-8">
+                  Outsource IT management to ACT so your team can focus on growth while we handle the complexity.
+                </p>
+                <ul className="space-y-4">
+                  {managedOperationsItems.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
+                      <item.icon className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                      <div>
+                        <span className="font-semibold text-foreground">{item.title}</span>
+                        <span className="text-muted-foreground"> – {item.description}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8">
+                  <Button variant="outline" asChild>
+                    <Link to="/contact">
+                      Book a Consultation
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+              {/* Image Column */}
+              <div
+                className={`relative transition-all duration-700 delay-200 ${
+                  isManagedInView ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+                }`}
+              >
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden">
+                  <img
+                    src={managedOperationsImg}
+                    alt="Managed Operations."
+                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-primary/20 rounded-2xl -z-10" />
+                <div className="absolute -top-4 -right-4 w-32 h-32 bg-accent/10 rounded-full -z-10" />
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Support Tiers - Interactive with Orange Hover */}
         <section ref={tiersRef} className="py-20 bg-card/30">
           <div className="container-width px-4 md:px-8">
             <div
               className={`text-center mb-12 transition-all duration-700 ${
-                isTiersInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-10"
+                isTiersInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Our Support Tiers</h2>

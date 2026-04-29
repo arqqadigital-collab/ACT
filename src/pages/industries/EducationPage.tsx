@@ -27,6 +27,9 @@ import { useInView } from "@/hooks/useInView";
 import educationHero from "@/assets/industries/education.jpg";
 import sewedyBg from "@/assets/success-stories/sewedy-bg.jpg";
 import sewedyLogo from "@/assets/success-stories/sewedy-logo.jpg";
+// Case study images
+import mustUniversityImg from "@/assets/case-studies/must-university.jpg";
+import alAzharLibraryImg from "@/assets/case-studies/al-azhar-library.jpg";
 
 // Partner logos (white versions for dark background)
 import partnerHpe from "@/assets/industries/partner-hpe-white.png";
@@ -188,42 +191,29 @@ const EducationPage = () => {
       >
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src={educationHero}
-            alt="Education Industry"
-            className="w-full h-full object-cover"
-          />
+          <img src={educationHero} alt="Education Industry" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
         </div>
 
         <div className="container-width px-4 md:px-8 relative z-10">
           <div
             className={`max-w-3xl text-left transition-all duration-700 ${
-              isHeroInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isHeroInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-6 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-6 border-primary/50 text-primary">
               <GraduationCap className="w-3 h-3 mr-1" />
               Education Industry
             </Badge>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Smart, Sustainable Technology Solutions for{" "}
-              <span className="text-primary">Schools</span>
+              Smart, Sustainable Technology Solutions for <span className="text-primary">Schools</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-              At ACT, we believe education is the foundation of the future. For
-              over 35 years, we've partnered with schools, universities, and
-              educational institutions across Egypt and MENA to design and
-              deliver end-to-end, technology-driven learning ecosystems. From
-              hybrid classrooms and student safety to cybersecurity, device
-              management, and smart campuses, ACT enables schools to adopt
-              future- ready education models that empower students, support
-              teachers, and transform operations.
+              At ACT, we believe education is the foundation of the future. For over 35 years, we've partnered with
+              schools, universities, and educational institutions across Egypt and MENA to design and deliver
+              end-to-end, technology-driven learning ecosystems. From hybrid classrooms and student safety to
+              cybersecurity, device management, and smart campuses, ACT enables schools to adopt future- ready education
+              models that empower students, support teachers, and transform operations.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild variant="hero" size="lg">
@@ -245,20 +235,14 @@ const EducationPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isPillarsInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isPillarsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Our Expertise
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              The Strategic Pillars of ACT's{" "}
-              <span className="text-primary">Education Expertise</span>
+              The Strategic Pillars of ACT's <span className="text-primary">Education Expertise</span>
             </h2>
             {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               From hybrid classrooms and student safety to cybersecurity, device management, and smart campuses.
@@ -270,9 +254,7 @@ const EducationPage = () => {
               <Card
                 key={pillar.title}
                 className={`group border-border/50 bg-card/50 hover:bg-card hover:border-primary/50 transition-all duration-500 ${
-                  isPillarsInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isPillarsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -283,9 +265,7 @@ const EducationPage = () => {
                   <h3 className="font-display text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {pillar.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {pillar.description}
-                  </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{pillar.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -298,20 +278,14 @@ const EducationPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isSolutionsInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isSolutionsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Technology Solutions
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              ACT's Education{" "}
-              <span className="text-primary">Technology Solutions</span>
+              ACT's Education <span className="text-primary">Technology Solutions</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Solutions for modern schools, universities, and smart campuses.
@@ -323,9 +297,7 @@ const EducationPage = () => {
               <Card
                 key={solution.title}
                 className={`group border-border/50 bg-background/50 hover:border-primary/50 transition-all duration-500 ${
-                  isSolutionsInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isSolutionsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -338,10 +310,7 @@ const EducationPage = () => {
                   </h3>
                   <ul className="space-y-2">
                     {solution.features.map((feature, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 text-muted-foreground text-sm"
-                      >
+                      <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm">
                         <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
@@ -359,21 +328,15 @@ const EducationPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isStoriesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               <Award className="w-3 h-3 mr-1" />
               Success Stories
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              ACT Education{" "}
-              <span className="text-primary">Success Stories</span>
+              ACT Education <span className="text-primary">Success Stories</span>
             </h2>
           </div>
 
@@ -384,9 +347,7 @@ const EducationPage = () => {
                 key={story.id}
                 to={`/case-study/${story.id}`}
                 className={`group relative rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer hover:scale-[1.02] ${
-                  isStoriesInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -432,9 +393,7 @@ const EducationPage = () => {
 
                     {/* Arrow */}
                     <div className="mt-4 flex items-center gap-2 text-white/60 group-hover:text-white transition-colors">
-                      <span className="text-sm font-medium">
-                        Read the case study
-                      </span>
+                      <span className="text-sm font-medium">Read the case study</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
@@ -446,9 +405,7 @@ const EducationPage = () => {
           {/* View All Button */}
           <div
             className={`text-center mt-12 transition-all duration-700 delay-300 ${
-              isStoriesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-8"
+              isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             <Button asChild variant="outline" size="lg" className="group">
@@ -489,20 +446,14 @@ const EducationPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isWhyInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isWhyInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Why ACT
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              Why Choose ACT for{" "}
-              <span className="text-primary">Education IT</span>
+              Why Choose ACT for <span className="text-primary">Education IT</span>
             </h2>
           </div>
 
@@ -511,21 +462,15 @@ const EducationPage = () => {
               <div
                 key={item.title}
                 className={`text-center p-6 transition-all duration-500 ${
-                  isWhyInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isWhyInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
                   <item.icon size={32} />
                 </div>
-                <h3 className="font-display text-lg font-semibold text-foreground mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {item.description}
-                </p>
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.description}</p>
               </div>
             ))}
           </div>
@@ -537,12 +482,10 @@ const EducationPage = () => {
         <div className="container-width px-4 md:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Start Your Education Transformation with{" "}
-              <span className="text-primary">ACT</span>
+              Start Your Education Transformation with <span className="text-primary">ACT</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Let ACT be your trusted IT partner to build safe, connected, and
-              future-ready schools.
+              Let ACT be your trusted IT partner to build safe, connected, and future-ready schools.
             </p>
             <Button asChild variant="hero" size="lg">
               <Link to="/contact">

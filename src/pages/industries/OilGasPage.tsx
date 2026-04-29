@@ -168,45 +168,31 @@ const OilGasPage = () => {
       >
         {/* Background Image - More visible */}
         <div className="absolute inset-0">
-          <img
-            src={oilGasHero}
-            alt="Oil & Gas Industry"
-            className="w-full h-full object-cover"
-          />
+          <img src={oilGasHero} alt="Oil & Gas Industry" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
         </div>
 
         <div className="container-width px-4 md:px-8 relative z-10">
           <div
             className={`max-w-3xl text-left transition-all duration-700 ${
-              isHeroInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isHeroInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-6 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-6 border-primary/50 text-primary">
               <Fuel className="w-3 h-3 mr-1" />
               Oil & Gas Industry
             </Badge>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Empowering Egypt's{" "}
-              <span className="text-primary">Oil & Gas Sector</span> with
-              Integrated IT Excellence
+              Empowering Egypt's <span className="text-primary">Oil & Gas Sector</span> with Integrated IT Excellence
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-              At ACT, we understand the critical demands of the Oil & Gas
-              industry, from exploration sites to headquarters. For over 35
-              years, we've delivered end-to-end, on-premises IT solutions that
-              transform manual operations into dynamic, automated ecosystems
-              From enterprise networking and cybersecurity to data protection,
-              IP video surveillance, and data center infrastructure, ACT ensures
-              your operations are connected, resilient, and secure. With a
-              nationwide presence and SLA-driven service teams, we guarantee
-              seamless connectivity across branches, centralized monitoring
-              through a single pane of glass, and uncompromised data security.
+              At ACT, we understand the critical demands of the Oil & Gas industry, from exploration sites to
+              headquarters. For over 35 years, we've delivered end-to-end, on-premises IT solutions that transform
+              manual operations into dynamic, automated ecosystems From enterprise networking and cybersecurity to data
+              protection, IP video surveillance, and data center infrastructure, ACT ensures your operations are
+              connected, resilient, and secure. With a nationwide presence and SLA-driven service teams, we guarantee
+              seamless connectivity across branches, centralized monitoring through a single pane of glass, and
+              uncompromised data security.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild variant="hero" size="lg">
@@ -230,20 +216,14 @@ const OilGasPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isPillarsInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isPillarsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Our Expertise
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              The Strategic Pillars of ACT's{" "}
-              <span className="text-primary">Oil & Gas Expertise</span>
+              The Strategic Pillars of ACT's <span className="text-primary">Oil & Gas Expertise</span>
             </h2>
             {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               From enterprise networking and cybersecurity to data protection, IP video surveillance, and data center infrastructure.
@@ -255,9 +235,7 @@ const OilGasPage = () => {
               <Card
                 key={pillar.title}
                 className={`group border-border/50 bg-card/50 hover:bg-card hover:border-primary/50 transition-all duration-500 ${
-                  isPillarsInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isPillarsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -268,9 +246,7 @@ const OilGasPage = () => {
                   <h3 className="font-display text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {pillar.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {pillar.description}
-                  </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{pillar.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -283,25 +259,18 @@ const OilGasPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isSolutionsInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isSolutionsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Digital Innovation
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              Core Oil & Gas{" "}
-              <span className="text-primary">Digital Solutions</span>
+              Core Oil & Gas <span className="text-primary">Digital Solutions</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Driving Innovation and Operational Excellence Across Exploration,
-              Production, and Refinery Management Through Advanced Digital
-              Technologies.
+              Driving Innovation and Operational Excellence Across Exploration, Production, and Refinery Management
+              Through Advanced Digital Technologies.
             </p>
           </div>
 
@@ -310,9 +279,7 @@ const OilGasPage = () => {
               <Card
                 key={solution.title}
                 className={`group border-border/50 bg-background/50 hover:border-primary/50 transition-all duration-500 ${
-                  isSolutionsInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isSolutionsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -324,9 +291,7 @@ const OilGasPage = () => {
                     <h3 className="font-display text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
                       {solution.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed">
-                      {solution.description}
-                    </p>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{solution.description}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -340,21 +305,15 @@ const OilGasPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isStoriesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               <Award className="w-3 h-3 mr-1" />
               Success Stories
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              ACT Oil & Gas{" "}
-              <span className="text-primary">Success Stories</span>
+              ACT Oil & Gas <span className="text-primary">Success Stories</span>
             </h2>
           </div>
 
@@ -365,9 +324,7 @@ const OilGasPage = () => {
                 key={story.id}
                 to={`/case-study/${story.id}`}
                 className={`group relative rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer hover:scale-[1.02] ${
-                  isStoriesInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -386,11 +343,7 @@ const OilGasPage = () => {
                   {/* Logo Top Right */}
                   <div className="absolute top-4 right-4 z-20">
                     <div className="w-14 h-14 md:w-16 md:h-16 bg-white rounded-xl p-2 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
-                      <img
-                        src={story.logo}
-                        alt={`${story.company} logo`}
-                        className="w-full h-full object-contain"
-                      />
+                      <img src={story.logo} alt={`${story.company} logo`} className="w-full h-full object-contain" />
                     </div>
                   </div>
 
@@ -409,9 +362,7 @@ const OilGasPage = () => {
                     <h3 className="font-display text-lg font-bold text-white mb-2 group-hover:translate-x-1 transition-transform">
                       {story.title}
                     </h3>
-                    <p className="text-sm text-white/80 leading-relaxed">
-                      {story.subtitle}
-                    </p>
+                    <p className="text-sm text-white/80 leading-relaxed">{story.subtitle}</p>
 
                     {/* Arrow */}
                     <div className="mt-4 flex items-center gap-2 text-white/60 group-hover:text-white transition-colors">
@@ -427,9 +378,7 @@ const OilGasPage = () => {
           {/* View All Button */}
           <div
             className={`text-center mt-12 transition-all duration-700 delay-300 ${
-              isStoriesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-8"
+              isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             <Button asChild variant="outline" size="lg" className="group">
@@ -470,20 +419,14 @@ const OilGasPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isWhyInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isWhyInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Why ACT
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              Why Choose ACT for{" "}
-              <span className="text-primary">Oil & Gas IT</span>
+              Why Choose ACT for <span className="text-primary">Oil & Gas IT</span>
             </h2>
           </div>
 
@@ -492,21 +435,15 @@ const OilGasPage = () => {
               <div
                 key={item.title}
                 className={`text-center p-6 transition-all duration-500 ${
-                  isWhyInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isWhyInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
                   <item.icon size={32} />
                 </div>
-                <h3 className="font-display text-lg font-semibold text-foreground mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {item.description}
-                </p>
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.description}</p>
               </div>
             ))}
           </div>
@@ -518,12 +455,11 @@ const OilGasPage = () => {
         <div className="container-width px-4 md:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Start Your Transformation Journey with{" "}
-              <span className="text-primary">ACT</span>
+              Start Your Transformation Journey with <span className="text-primary">ACT</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Let ACT be your trusted IT partner to drive efficiency, security,
-              and innovation across your Oil and Gas enterprise.
+              Let ACT be your trusted IT partner to drive efficiency, security, and innovation across your Oil and Gas
+              enterprise.
             </p>
             <Button asChild variant="hero" size="lg">
               <Link to="/contact">

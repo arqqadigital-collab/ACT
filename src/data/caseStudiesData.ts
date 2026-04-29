@@ -9,6 +9,20 @@ import publicSectorImg from "@/assets/industries/public-sector.jpg";
 import telecomImg from "@/assets/industries/telecom.jpg";
 import educationImg from "@/assets/industries/education.jpg";
 import hospitalityImg from "@/assets/industries/hospitality.jpg";
+import movenpickImg from "@/assets/case-studies/movenpick.jpg";
+import orascomImg from "@/assets/case-studies/orascom.jpg";
+import accorImg from "@/assets/case-studies/accor.jpg";
+import millenniumImg from "@/assets/case-studies/millennium.jpg";
+import pinkberryImg from "@/assets/case-studies/pinkberry.jpg";
+import rotanaImg from "@/assets/case-studies/rotana.jpg";
+import madenImg from "@/assets/case-studies/maden-hotels.jpg";
+import cityHotelImg from "@/assets/case-studies/city-hotel.jpg";
+import luxuryResortImg from "@/assets/case-studies/luxury-resort.jpg";
+import mustUniversityImg from "@/assets/case-studies/must-university.jpg";
+import alAzharLibraryImg from "@/assets/case-studies/al-azhar-library.jpg";
+import damiettaPortImg from "@/assets/case-studies/damietta-port.jpg";
+import modCapitalImg from "@/assets/case-studies/mod-capital.jpg";
+import semafImg from "@/assets/case-studies/semaf.jpg";
 
 export interface CaseStudy {
   id: string;
@@ -32,6 +46,20 @@ export const getCaseStudyImage = (caseStudy: CaseStudy): string => {
     "redsea-container-voip": redseaBg,
     "telecom-egypt-data": telecomBg,
     "knowledge-hub-aruba": sewedyBg,
+    "movenpick-cloud-migration": movenpickImg,
+    "orascom-digital-transformation": orascomImg,
+    "accor-opera-cloud": accorImg,
+    "millennium-opera-cloud": millenniumImg,
+    "pinkberry-symphony": pinkberryImg,
+    "rotana-cloud-finance": rotanaImg,
+    "maden-hotels-cloud": madenImg,
+    "city-hotel-hospitality": cityHotelImg,
+    "luxury-resort-hospitality": luxuryResortImg,
+    "must-university-campus": mustUniversityImg,
+    "al-azhar-library": alAzharLibraryImg,
+    "damietta-port-it": damiettaPortImg,
+    "mod-admin-capital": modCapitalImg,
+    "semaf-digital-transformation": semafImg,
   };
 
   if (specificImages[caseStudy.id]) {
@@ -484,7 +512,7 @@ export const caseStudies: CaseStudy[] = [
       "Peak hour congestion eliminated with smart queue management",
     ],
     technologies: ["Oracle OPERA PMS", "Self-Service Kiosks", "Smart Room Integration"],
-    image: hospitalityImg,
+    image: cityHotelImg,
   },
   {
     id: "luxury-resort-hospitality",
@@ -512,7 +540,7 @@ export const caseStudies: CaseStudy[] = [
       "Revenue per available room increased through personalized upselling",
     ],
     technologies: ["Oracle OPERA PMS", "Guest Experience Automation", "Unified Booking Platform"],
-    image: hospitalityImg,
+    image: luxuryResortImg,
   },
   // {
   //   id: "maden-hotels-hospitality",
@@ -542,6 +570,126 @@ export const caseStudies: CaseStudy[] = [
   //   technologies: ["Spa Management System", "Access Control", "RFID Technology", "Membership Platform"],
   //   image: hospitalityImg,
   // },
+  {
+    id: "movenpick-cloud-migration",
+    company: "Mövenpick Hotels & Resorts",
+    industry: "Hospitality",
+    title: "A Global Cloud Migration: Empowering a Hospitality Leader with Operational Freedom",
+    description:
+      "Mövenpick Hotels & Resorts managed over 50 properties worldwide on legacy Oracle PMS. ACT led the world's first PMS cloud migration project of its scale, migrating the entire global estate to Oracle OPERA Cloud over three years.",
+    challenges: [
+      "Outdated legacy infrastructure across 50+ global properties",
+      "Rigid systems unable to support modern mobile workflows",
+      "Operational inefficiencies preventing staff from focusing on guest experience",
+      "Need for standardized operations and reduced costs across all properties",
+    ],
+    solution: [
+      "World-first global PMS cloud migration to Oracle OPERA Cloud",
+      "Strategic transformation beyond a technical lift-and-shift",
+      "Three-year phased migration of entire global property estate",
+      "Mobile-enabled front desk operations for anywhere guest service",
+    ],
+    results: [
+      "Unprecedented operational mobility with mobile device support",
+      "Enhanced workforce efficiency with real-time updates",
+      "Seamlessly integrated ecosystem with Oracle POS and kitchen management",
+      "Strategic shift from managing IT complexities to delivering guest experiences",
+    ],
+    technologies: ["Oracle OPERA Cloud", "Oracle POS", "Oracle Kitchen Management", "Cloud Infrastructure"],
+    image: movenpickImg,
+  },
+  {
+    id: "orascom-digital-transformation",
+    company: "Orascom Hotels Management",
+    industry: "Hospitality",
+    title: "Digital Transformation with Oracle OPERA Cloud – 2024 Hotel Visionary Award Winner",
+    description:
+      "Orascom Hotels Management partnered with ACT for a bold digital transformation using Oracle OPERA Cloud PMS, integrated with mobile tools and AI-driven personalization, eliminating over 30 manual processes and earning the 2024 Hotel Visionary Award.",
+    challenges: [
+      "Operational inefficiencies and fragmented guest experiences",
+      "High dependency on third-party distribution channels",
+      "Over 30 manual processes slowing operations",
+      "Lack of mobile-enabled workflows for staff",
+    ],
+    solution: [
+      "Implemented Oracle OPERA Cloud PMS with mobile tools and AI-driven personalization",
+      "Redesigned hotel workflows and digitized housekeeping",
+      "Enabled Experience Ambassadors with mobile check-ins and real-time service",
+      "Integrated proprietary booking engine to optimize direct distribution",
+    ],
+    results: [
+      "Eliminated over 30 manual processes across operations",
+      "Reduced task completion times by up to 90%",
+      "Cut room block update times by 99%",
+      "60% reduction in call handling time",
+      "Won 2024 Hotel Visionary Award for Guest Experience",
+      "First property rollout completed in just 12 days with 95%+ user satisfaction",
+    ],
+    technologies: ["Oracle OPERA Cloud PMS", "Oracle Cloud Infrastructure", "Hudini Staff Connect", "AI Personalization"],
+    image: orascomImg,
+  },
+  {
+    id: "accor-opera-cloud",
+    company: "Accor Group",
+    industry: "Hospitality",
+    title: "Accor Group Transforms Operations with OPERA Cloud",
+    description:
+      "Accor Group partnered with ACT to modernize property operations through Oracle OPERA Cloud, delivering measurable improvements in efficiency, guest experience, and data-driven decision-making across multiple departments.",
+    challenges: [
+      "Heavy dependency on printed task sheets across departments",
+      "Limited real-time coordination between reception, housekeeping, and maintenance",
+      "Lack of instant operational insights for management decision-making",
+      "Costly and time-consuming employee training processes",
+      "Inconsistent guest profile and loyalty recognition",
+    ],
+    solution: [
+      "Implemented OPERA Cloud PMS with mobile-first operations",
+      "Deployed real-time reporting and analytics dashboards",
+      "Leveraged built-in digital learning platform for staff training",
+      "Unified guest data for enhanced profiling and personalization",
+    ],
+    results: [
+      "Eliminated printed task sheets completely",
+      "Faster coordination between reception, housekeeping, and maintenance",
+      "Real-time analytics for accurate forecasting and KPI tracking",
+      "Reduced training time and costs with digital learning modules",
+      "Improved recognition and engagement of ALL loyalty members",
+      "Scalable mobile-first system across multi-property environment",
+    ],
+    technologies: ["Oracle OPERA Cloud PMS", "Mobile Operations Platform", "Digital Learning Platform", "Real-time Analytics"],
+    image: accorImg,
+  },
+  {
+    id: "millennium-opera-cloud",
+    company: "Millennium Hotels & Resorts",
+    industry: "Hospitality",
+    title: "Millennium Hotels Modernizes Portfolio with OPERA Cloud Migration",
+    description:
+      "Millennium Hotels & Resorts is leading a group-wide digital transformation by transitioning from on-premises systems to OPERA Cloud, with 15 hotels successfully migrated and a full portfolio rollout underway.",
+    challenges: [
+      "Outdated on-premises systems restricting scalability and innovation",
+      "Heavy reliance on on-site servers and manual processes",
+      "Fragmented data across properties slowing decision-making",
+      "Rising operational costs from maintaining legacy infrastructure",
+      "Limited system accessibility for cross-functional teams",
+    ],
+    solution: [
+      "Phased strategic migration to Oracle OPERA Cloud",
+      "Fully cloud-based PMS eliminating physical servers",
+      "Real-time data access across departments and properties",
+      "Mobile-enabled operations for front office, housekeeping, and management",
+      "Centralized reporting, analytics, and modern guest profiling",
+    ],
+    results: [
+      "Eliminated hardware maintenance and on-site server costs",
+      "Real-time operational visibility across all migrated hotels",
+      "Streamlined workflows improving staff productivity",
+      "Flexible architecture supporting portfolio expansion",
+      "More accurate unified guest data and faster service delivery",
+    ],
+    technologies: ["Oracle OPERA Cloud", "Cloud Infrastructure", "Mobile Operations", "Centralized Analytics"],
+    image: millenniumImg,
+  },
 ];
 
 export const getIndustryColor = (industry: string): string => {

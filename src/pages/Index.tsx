@@ -8,8 +8,8 @@ import SuccessStoriesSection from '@/components/SuccessStoriesSection';
 import PartnersSection from '@/components/PartnersSection';
 import GlobalMapSection from '@/components/GlobalMapSection';
 import CTASection from '@/components/CTASection';
-import Footer from '@/components/Footer';
 import NewsletterSection from '@/components/NewsletterSection';
+import Footer from '@/components/Footer';
 
 const Index = () => {
   return (
@@ -25,8 +25,8 @@ const Index = () => {
         <PartnersSection />
         <GlobalMapSection />
         <CTASection />
+        <NewsletterSection />
       </main>
-      <NewsletterSection />
       <Footer />
     </div>
   );

@@ -190,45 +190,30 @@ const TelecomPage = () => {
       >
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src={telecomHero}
-            alt="Telecom Industry"
-            className="w-full h-full object-cover"
-          />
+          <img src={telecomHero} alt="Telecom Industry" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40" />
         </div>
 
         <div className="container-width px-4 md:px-8 relative z-10">
           <div
             className={`max-w-3xl text-left transition-all duration-700 ${
-              isHeroInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isHeroInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-6 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-6 border-primary/50 text-primary">
               <Radio className="w-3 h-3 mr-1" />
               Telecom Industry
             </Badge>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6 leading-tight">
-              Telecom Solutions for{" "}
-              <span className="text-primary">
-                Next-Generation Connectivity in Egypt & MENA
-              </span>
+              Telecom Solutions for <span className="text-primary">Next-Generation Connectivity in Egypt & MENA</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-8">
-              In today's digital-first landscape where connectivity is
-              everything, ACT is more than an IT and telecom integrator — we are
-              your strategic partner in next-generation network evolution. We
-              design, build, and manage future-ready telecom solutions , from
-              the disaggregated power of Open RAN to the data-driven
-              intelligence of Deep Packet Inspection (DPI) and the
-              transformative speed of 5G in Egypt and MENA. With ACT, you don’t
-              just connect; you unlock new revenue streams, optimize operations,
-              improve resilience, and secure your competitive edge.
+              In today's digital-first landscape where connectivity is everything, ACT is more than an IT and telecom
+              integrator — we are your strategic partner in next-generation network evolution. We design, build, and
+              manage future-ready telecom solutions , from the disaggregated power of Open RAN to the data-driven
+              intelligence of Deep Packet Inspection (DPI) and the transformative speed of 5G in Egypt and MENA. With
+              ACT, you don’t just connect; you unlock new revenue streams, optimize operations, improve resilience, and
+              secure your competitive edge.
             </p>
             <div className="flex flex-wrap gap-4">
               <Button asChild variant="hero" size="lg">
@@ -252,20 +237,14 @@ const TelecomPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isPillarsInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isPillarsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Our Expertise
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-              The Strategic Pillars of ACT's{" "}
-              <span className="text-primary">Telecom Expertise</span>
+              The Strategic Pillars of ACT's <span className="text-primary">Telecom Expertise</span>
             </h2>
             {/* <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               From Open RAN and 5G to Deep Packet Inspection and edge computing solutions.
@@ -277,9 +256,7 @@ const TelecomPage = () => {
               <Card
                 key={pillar.title}
                 className={`group border-border/50 bg-card/50 hover:bg-card hover:border-primary/50 transition-all duration-500 ${
-                  isPillarsInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isPillarsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -290,9 +267,7 @@ const TelecomPage = () => {
                   <h3 className="font-display text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                     {pillar.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {pillar.description}
-                  </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{pillar.description}</p>
                 </CardContent>
               </Card>
             ))}
@@ -305,15 +280,10 @@ const TelecomPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isSolutionsInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isSolutionsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Core Solutions
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -329,9 +299,7 @@ const TelecomPage = () => {
               <Card
                 key={solution.title}
                 className={`group border-border/50 bg-background/50 hover:border-primary/50 transition-all duration-500 ${
-                  isSolutionsInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isSolutionsInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -344,10 +312,7 @@ const TelecomPage = () => {
                   </h3>
                   <ul className="space-y-2">
                     {solution.features.map((feature, i) => (
-                      <li
-                        key={i}
-                        className="flex items-start gap-2 text-muted-foreground text-sm"
-                      >
+                      <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm">
                         <CheckCircle className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
                         <span>{feature}</span>
                       </li>
@@ -365,21 +330,15 @@ const TelecomPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isStoriesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               <Award className="w-3 h-3 mr-1" />
               Success Stories
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              Telecom <span className="text-primary">Success Stories</span> with
-              ACT
+              Telecom <span className="text-primary">Success Stories</span> with ACT
             </h2>
           </div>
 
@@ -390,9 +349,7 @@ const TelecomPage = () => {
                 key={story.id}
                 to={`/case-study/${story.id}`}
                 className={`group relative rounded-2xl overflow-hidden transition-all duration-500 cursor-pointer hover:scale-[1.02] ${
-                  isStoriesInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -411,11 +368,7 @@ const TelecomPage = () => {
                   {/* Logo Top Right */}
                   <div className="absolute top-4 right-4 z-20">
                     <div className="w-14 h-14 md:w-16 md:h-16 bg-white rounded-xl p-2 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-500">
-                      <img
-                        src={story.logo}
-                        alt={`${story.company} logo`}
-                        className="w-full h-full object-contain"
-                      />
+                      <img src={story.logo} alt={`${story.company} logo`} className="w-full h-full object-contain" />
                     </div>
                   </div>
 
@@ -434,9 +387,7 @@ const TelecomPage = () => {
                     <h3 className="font-display text-lg font-bold text-white mb-2 group-hover:translate-x-1 transition-transform">
                       {story.title}
                     </h3>
-                    <p className="text-sm text-white/80 leading-relaxed">
-                      {story.subtitle}
-                    </p>
+                    <p className="text-sm text-white/80 leading-relaxed">{story.subtitle}</p>
 
                     {/* Arrow */}
                     <div className="mt-4 flex items-center gap-2 text-white/60 group-hover:text-white transition-colors">
@@ -452,9 +403,7 @@ const TelecomPage = () => {
           {/* View All Button */}
           <div
             className={`text-center mt-12 transition-all duration-700 delay-300 ${
-              isStoriesInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-8"
+              isStoriesInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
             }`}
           >
             <Button asChild variant="outline" size="lg" className="group">
@@ -495,20 +444,14 @@ const TelecomPage = () => {
         <div className="container-width px-4 md:px-8">
           <div
             className={`text-center mb-16 transition-all duration-700 ${
-              isWhyInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isWhyInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
             }`}
           >
-            <Badge
-              variant="outline"
-              className="mb-4 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-4 border-primary/50 text-primary">
               Why ACT
             </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-              Why Choose ACT for{" "}
-              <span className="text-primary">Telecom Solutions</span>
+              Why Choose ACT for <span className="text-primary">Telecom Solutions</span>
             </h2>
           </div>
 
@@ -517,21 +460,15 @@ const TelecomPage = () => {
               <div
                 key={item.title}
                 className={`text-center p-6 transition-all duration-500 ${
-                  isWhyInView
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-1 translate-y-10"
+                  isWhyInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
                 <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mx-auto mb-4">
                   <item.icon size={32} />
                 </div>
-                <h3 className="font-display text-lg font-semibold text-foreground mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">
-                  {item.description}
-                </p>
+                <h3 className="font-display text-lg font-semibold text-foreground mb-2">{item.title}</h3>
+                <p className="text-muted-foreground text-sm">{item.description}</p>
               </div>
             ))}
           </div>
@@ -543,13 +480,11 @@ const TelecomPage = () => {
         <div className="container-width px-4 md:px-8">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
-              Unlock Next-Generation Connectivity with{" "}
-              <span className="text-primary">ACT</span>
+              Unlock Next-Generation Connectivity with <span className="text-primary">ACT</span>
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              With ACT, you don't just connect — you unlock new revenue streams,
-              optimize operations, improve resilience, and secure your
-              competitive edge.
+              With ACT, you don't just connect — you unlock new revenue streams, optimize operations, improve
+              resilience, and secure your competitive edge.
             </p>
             <Button asChild variant="hero" size="lg">
               <Link to="/contact">

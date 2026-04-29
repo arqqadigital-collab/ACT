@@ -1,37 +1,17 @@
-import { useState, useEffect } from "react";
-import { ArrowLeft, Calendar, Clock, FileText } from "lucide-react";
-import { Link } from "react-router-dom";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { fetchBlogs, getStrapiImageUrl, Blog } from "@/services/blogsService";
-import { useInView } from "@/hooks/useInView";
-import insightsHeroBg from "@/assets/insights/insights-hero-bg.jpg";
+import { ArrowLeft, Calendar, Clock, FileText } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { blogPosts } from '@/data/blogData';
+import { useInView } from '@/hooks/useInView';
+import insightsHeroBg from '@/assets/insights/insights-hero-bg.jpg';
 
 const AllBlogsPage = () => {
   const [heroRef, isHeroInView] = useInView<HTMLDivElement>({ threshold: 0.2 });
-  const [blogsRef, isBlogsInView] = useInView<HTMLDivElement>({
-    threshold: 0.1,
-  });
-  const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const loadBlogs = async () => {
-      try {
-        const data = await fetchBlogs();
-        setBlogs(data);
-      } catch (error) {
-        console.error("Error loading blogs:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadBlogs();
-  }, []);
+  const [blogsRef, isBlogsInView] = useInView<HTMLDivElement>({ threshold: 0.1 });
 
   return (
     <div className="min-h-screen bg-background">
@@ -55,9 +35,7 @@ const AllBlogsPage = () => {
         <div className="container-width px-4 md:px-8 relative z-10">
           <div
             className={`max-w-3xl mx-auto text-center transition-all duration-700 ${
-              isHeroInView
-                ? "opacity-100 translate-y-0"
-                : "opacity-1 translate-y-10"
+              isHeroInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
             {/* Back Button */}
@@ -72,10 +50,7 @@ const AllBlogsPage = () => {
               </Link>
             </Button>
 
-            <Badge
-              variant="outline"
-              className="mb-6 border-primary/50 text-primary"
-            >
+            <Badge variant="outline" className="mb-6 border-primary/50 text-primary">
               <FileText className="w-3 h-3 mr-1" />
               All Articles
             </Badge>
@@ -83,8 +58,7 @@ const AllBlogsPage = () => {
               Our <span className="text-primary">Blog</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Explore all our articles on technology, digital transformation,
-              and industry insights.
+              Explore all our articles on technology, digital transformation, and industry insights.
             </p>
           </div>
         </div>
@@ -93,61 +67,40 @@ const AllBlogsPage = () => {
       {/* All Blogs Grid */}
       <section ref={blogsRef} className="py-20 md:py-28">
         <div className="container-width px-4 md:px-8">
-          {isLoading ? (
-            <div className="text-center py-16">
-              <p className="text-muted-foreground text-lg">Loading blogs...</p>
-            </div>
-          ) : blogs.length === 0 ? (
-            <div className="text-center py-16">
-              <p className="text-muted-foreground text-lg">
-                No blog posts available.
-              </p>
-            </div>
-          ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {blogs.map((post, idx) => (
-                <Link key={post.slug} to={`/blog/${post.slug}`}>
-                  <Card
-                    className={`group h-full border-border/50 bg-card/50 hover:bg-card hover:border-primary/50 transition-all duration-500 cursor-pointer ${
-                      isBlogsInView
-                        ? "opacity-100 translate-y-0"
-                        : "opacity-1 translate-y-10"
-                    }`}
-                    style={{ transitionDelay: `${(idx % 6) * 100}ms` }}
-                  >
-                    <CardContent className="p-6 flex flex-col h-full">
-                      <Badge
-                        variant="secondary"
-                        className="mb-4 bg-primary/10 text-primary border-0 w-fit"
-                      >
-                        {post.category}
-                      </Badge>
-                      <h3 className="font-display text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      {post.excerpt && (
-                        <p className="text-muted-foreground text-sm mb-4 line-clamp-3 flex-grow">
-                          {post.excerpt}
-                        </p>
-                      )}
-                      <div className="flex items-center gap-4 text-xs text-muted-foreground mt-auto">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3 h-3" />
-                          {new Date(post.date).toLocaleDateString()}
-                        </span>
-                        {post.readTime && (
-                          <span className="flex items-center gap-1">
-                            <Clock className="w-3 h-3" />
-                            {post.readTime}
-                          </span>
-                        )}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          )}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {blogPosts.map((post, idx) => (
+              <Link key={post.id} to={`/blog/${post.id}`}>
+                <Card
+                  className={`group h-full border-border/50 bg-card/50 hover:bg-card hover:border-primary/50 transition-all duration-500 cursor-pointer ${
+                    isBlogsInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                  }`}
+                  style={{ transitionDelay: `${(idx % 6) * 100}ms` }}
+                >
+                  <CardContent className="p-6 flex flex-col h-full">
+                    <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary border-0 w-fit">
+                      {post.category}
+                    </Badge>
+                    <h3 className="font-display text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 line-clamp-3 flex-grow">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center gap-4 text-xs text-muted-foreground mt-auto">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {post.date}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

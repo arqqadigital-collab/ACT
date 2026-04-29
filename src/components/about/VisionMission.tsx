@@ -23,18 +23,15 @@ const VisionMission = () => {
   ];
 
   return (
-    <section
-      ref={ref}
-      className="py-20 bg-secondary/30 relative overflow-hidden"
-    >
+    <section ref={ref} className="py-20 bg-secondary/30 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 glow-gradient opacity-30" />
-
+      
       <div className="container-width px-4 md:px-8 relative z-10">
         {/* Vision Section */}
-        <div
+        <div 
           className={`text-center mb-16 transition-all duration-700 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-8"
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-6">
@@ -42,23 +39,20 @@ const VisionMission = () => {
             Our Vision
           </div>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 max-w-4xl mx-auto">
-            The MENA Region's Preferred{" "}
-            <span className="text-gradient">IT Partner of Choice</span>
+            The MENA Region's Preferred <span className="text-gradient">IT Partner of Choice</span>
           </h2>
           <p className="text-muted-foreground max-w-3xl mx-auto leading-relaxed text-lg">
-            To establish ourselves as the preferred choice technology partner
-            across the industries we serve, recognized for our unrivaled
-            expertise, exceptional service, and unwavering commitment to
-            innovation. We aim to set the highest standards in system
-            integration and ICT solutions, consistently exceeding expectations
-            and driving transformative outcomes for our customers.
+            To establish ourselves as the preferred choice technology partner across the industries we serve, 
+            recognized for our unrivaled expertise, exceptional service, and unwavering commitment to innovation. 
+            We aim to set the highest standards in system integration and ICT solutions, consistently exceeding 
+            expectations and driving transformative outcomes for our customers.
           </p>
         </div>
 
         {/* Brand Promise Section */}
-        <div
+        <div 
           className={`transition-all duration-700 delay-200 ${
-            isInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-8"
+            isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
           <div className="text-center mb-10">
@@ -66,14 +60,13 @@ const VisionMission = () => {
               Our Brand Promise
             </h3>
             <p className="text-primary font-semibold text-lg">
-              We're on a mission to deliver IT excellence, wherever your
-              business operates.
+              We're on a mission to deliver IT excellence, wherever your business operates.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-6">
             {brandPromises.map((promise, index) => (
-              <div
+              <div 
                 key={index}
                 className="glass-card rounded-2xl p-8 glow-border hover:card-shadow-hover transition-all duration-500 group"
                 style={{ transitionDelay: `${index * 100}ms` }}
