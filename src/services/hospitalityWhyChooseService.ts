@@ -1,4 +1,4 @@
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://positive-actor-b87a792057.strapiapp.com';
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || '/api/strapi';
 
 export interface WhyChooseItem {
   icon: string;
@@ -25,7 +25,7 @@ interface StrapiWhyChooseItem {
 export const fetchHospitalityWhyChoose = async (): Promise<HospitalityWhyChooseData | null> => {
   try {
     const response = await fetch(
-      `${STRAPI_URL}/api/hospitality-why-chooses?populate=items`
+      `${STRAPI_URL}/api/hospitality-why-choose?populate=items`
     );
 
     if (!response.ok) {

@@ -39,14 +39,14 @@ const OurStory = () => {
               </p>
               <p>
                 For over three decades, we've been at the heart of Egypt's
-                digital transformation—building trust, driving innovation, and
+                digital transformation building trust, driving innovation, and
                 helping businesses and communities thrive in a connected world.
               </p>
               <p>
                 Today, with offices in Egypt, Dubai, KSA, and Germany, and
                 recognition from Oracle as a Global Partner Industry Solution,
                 ACT continues to bridge local roots with global
-                ambitions—empowering organizations to grow, innovate, and lead
+                ambitions empowering organizations to grow, innovate, and lead
                 into the future.
               </p>
             </div>

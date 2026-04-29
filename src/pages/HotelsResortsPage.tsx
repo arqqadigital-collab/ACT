@@ -872,10 +872,11 @@ const HotelsResortsPage = () => {
         </div>
       </section>
 
-      {/* Physical Security & Smart Solutions - Vertical Tabs */}
+      {/* Physical Security & Smart Solutions - Horizontal Tabs */}
       <section className="py-20 bg-card/30">
         <div className="container-width px-4 md:px-8">
-          <div className="mb-12">
+          {/* Title */}
+          <div className="mb-8">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
               {physicalSecurityData?.sectionTitle ||
                 "Physical Security & Smart Solutions"}
@@ -887,84 +888,79 @@ const HotelsResortsPage = () => {
             )}
           </div>
 
-          <div className="flex flex-col gap-8">
-            {/* Left Side - Tabs */}
-            <div className="flex w-full space-y-0">
-              {(physicalSecurityData?.systems &&
-              physicalSecurityData.systems.length > 0
-                ? physicalSecurityData.systems
-                : physicalSecuritySystems
-              ).map((system, index) => {
-                const IconComponent = system.icon;
-                return (
-                  <button
-                    key={system.title}
-                    onClick={() => setActiveSecurityTab(index)}
-                    className={`w-full text-left py-4 px-2 border-b border-border/30 transition-all ${
-                      activeSecurityTab === index
-                        ? "text-primary font-semibold"
-                        : "text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {system.title}
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Right Side - Content */}
-            <div className="w-full">
-              <motion.div
-                key={activeSecurityTab}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col gap-6"
+          {/* Horizontal Tabs */}
+          <div className="flex flex-wrap gap-2 mb-8 border-b border-border/30 pb-4">
+            {(physicalSecurityData?.systems &&
+            physicalSecurityData.systems.length > 0
+              ? physicalSecurityData.systems
+              : physicalSecuritySystems
+            ).map((system, index) => (
+              <button
+                key={system.title}
+                onClick={() => setActiveSecurityTab(index)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+                  activeSecurityTab === index
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-card/50 text-muted-foreground hover:text-foreground hover:bg-card"
+                }`}
               >
-                {(() => {
-                  const activeSystems =
-                    physicalSecurityData?.systems &&
-                    physicalSecurityData.systems.length > 0
-                      ? physicalSecurityData.systems
-                      : physicalSecuritySystems;
-                  const activeSystem = activeSystems[activeSecurityTab];
-
-                  return (
-                    <>
-                      {/* Image */}
-                      <div className="aspect-video rounded-xl overflow-hidden bg-muted/50 border border-border/30">
-                        <img
-                          src={activeSystem.image}
-                          alt={activeSystem.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-
-                      {/* Content */}
-                      <div>
-                        <h3 className="font-display text-2xl font-bold text-primary mb-4">
-                          {activeSystem.title}
-                        </h3>
-                        {activeSystem.items.length > 0 && (
-                          <ul className="space-y-3">
-                            {activeSystem.items.map((item, i) => (
-                              <li
-                                key={i}
-                                className="flex items-start gap-3 text-foreground"
-                              >
-                                <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0 mt-2" />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                      </div>
-                    </>
-                  );
-                })()}
-              </motion.div>
-            </div>
+                {system.title}
+              </button>
+            ))}
           </div>
+
+          {/* Content - Two Column: Text Left, Image Right */}
+          <motion.div
+            key={activeSecurityTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="grid lg:grid-cols-2 gap-8 items-start"
+          >
+            {(() => {
+              const activeSystems =
+                physicalSecurityData?.systems &&
+                physicalSecurityData.systems.length > 0
+                  ? physicalSecurityData.systems
+                  : physicalSecuritySystems;
+              const activeSystem = activeSystems[activeSecurityTab];
+
+              return (
+                <>
+                  {/* Left - Text Content */}
+                  <div className="order-2 lg:order-1">
+                    <h3 className="font-display text-2xl font-bold text-primary mb-4">
+                      {activeSystem.title}
+                    </h3>
+                    {activeSystem.items.length > 0 && (
+                      <ul className="space-y-3">
+                        {activeSystem.items.map((item, i) => (
+                          <li
+                            key={i}
+                            className="flex items-start gap-3 text-foreground"
+                          >
+                            <div className="w-2 h-2 rounded-full bg-primary flex-shrink-0 mt-2" />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* Right - Image */}
+                  <div className="order-1 lg:order-2">
+                    <div className="aspect-video rounded-xl overflow-hidden bg-muted/50 border border-border/30">
+                      <img
+                        src={activeSystem.image}
+                        alt={activeSystem.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </>
+              );
+            })()}
+          </motion.div>
         </div>
       </section>
 
@@ -1336,12 +1332,6 @@ const HotelsResortsPage = () => {
             new revenue streams.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/support">
-              <Button variant="accent" size="lg" className="group">
-                Get Started Today
-                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
             <Link to="/contact">
               <Button variant="outline" size="lg">
                 Contact Us

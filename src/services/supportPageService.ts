@@ -1,6 +1,6 @@
 import { Phone, Mail, MessageCircle, LucideIcon } from 'lucide-react';
 
-const API_URL = import.meta.env.VITE_STRAPI_URL || 'https://positive-actor-b87a792057.strapiapp.com';
+const API_URL = import.meta.env.VITE_STRAPI_URL || '/api/strapi';
 
 // Icon mapping for contact channels
 const iconMap: Record<string, LucideIcon> = {

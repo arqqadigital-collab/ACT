@@ -1,4 +1,4 @@
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://positive-actor-b87a792057.strapiapp.com';
+const API_URL = import.meta.env.VITE_STRAPI_URL || '/api/strapi';
 
 export interface Office {
   id?: number;
@@ -38,7 +38,7 @@ export interface ContactFormResponse {
  */
 export const fetchContactInfo = async (): Promise<ContactInfo | null> => {
   try {
-    const response = await fetch(`${STRAPI_URL}/api/contact-info?populate=*`);
+    const response = await fetch(`${API_URL}/api/contact-info?populate=*`);
     if (!response.ok) {
       throw new Error('Failed to fetch contact info');
     }
@@ -64,7 +64,7 @@ export const submitContactForm = async (
   formData: ContactFormData
 ): Promise<{ success: boolean; data?: ContactFormResponse; error?: string }> => {
   try {
-    const response = await fetch(`${STRAPI_URL}/api/contact-forms`, {
+    const response = await fetch(`${API_URL}/api/contact-forms`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -9,6 +9,7 @@ import PartnersSection from '@/components/PartnersSection';
 import GlobalMapSection from '@/components/GlobalMapSection';
 import CTASection from '@/components/CTASection';
 import Footer from '@/components/Footer';
+import NewsletterSection from '@/components/NewsletterSection';
 
 const Index = () => {
   return (
@@ -25,6 +26,7 @@ const Index = () => {
         <GlobalMapSection />
         <CTASection />
       </main>
+      <NewsletterSection />
       <Footer />
     </div>
   );

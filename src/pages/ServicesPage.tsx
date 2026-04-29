@@ -235,7 +235,7 @@ const ServicesPage = () => {
             <div
               ref={heroRef}
               className={`relative z-10 container-width px-4 md:px-8 text-center transition-all duration-1000 ${
-                isHeroInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-10"
+                isHeroInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
             >
               <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-6">
@@ -268,7 +268,7 @@ const ServicesPage = () => {
 
               <p
                 className={`text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed transition-all duration-700 delay-500 ${
-                  isComplete ? "opacity-100 translate-y-0" : "opacity-1 translate-y-4"
+                  isComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 }`}
               >
                 {heroData?.description}
@@ -283,7 +283,7 @@ const ServicesPage = () => {
 
               <div
                 className={`mt-8 transition-all duration-700 delay-700 ${
-                  isComplete ? "opacity-100 translate-y-0" : "opacity-1 translate-y-4"
+                  isComplete ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                 }`}
               >
                 <Button variant="accent" size="lg" asChild>
@@ -397,7 +397,7 @@ const ServicesPage = () => {
                 <Card
                   key={idx}
                   className={`group relative overflow-hidden transition-all duration-500 bg-card border-border/50 hover:bg-primary hover:border-primary cursor-pointer ${
-                    isTiersInView ? "opacity-100 translate-y-0" : "opacity-1 translate-y-10"
+                    isTiersInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                   }`}
                   style={{ transitionDelay: `${idx * 100}ms` }}
                 >
@@ -442,7 +442,7 @@ const ServicesPage = () => {
               <div className="lg:h-[600px] lg:flex lg:items-center">
                 <div
                   className={`lg:sticky lg:top-1/3 transition-all duration-700 ${
-                    isHowItWorksInView ? "opacity-100 translate-x-0" : "opacity-1 -translate-x-10"
+                    isHowItWorksInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
                   }`}
                 >
                   <span className="text-primary text-sm font-semibold uppercase tracking-wider mb-4 block">

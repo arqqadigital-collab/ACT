@@ -27,7 +27,7 @@ import {
   Zap,
 } from "lucide-react";
 
-const API_URL = import.meta.env.VITE_STRAPI_URL || "https://positive-actor-b87a792057.strapiapp.com";
+const API_URL = import.meta.env.VITE_STRAPI_URL || "/api/strapi";
 
 const iconMap: Record<string, LucideIcon> = {
   Users,

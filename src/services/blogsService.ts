@@ -1,4 +1,4 @@
-const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || 'https://positive-actor-b87a792057.strapiapp.com';
+const STRAPI_URL = import.meta.env.VITE_STRAPI_URL || '/api/strapi';
 
 export interface BlogTag {
   label: string;

@@ -10,6 +10,7 @@ interface MilestoneEvent {
 interface MilestoneEra {
   era: string;
   years: string;
+  image?: string;
   events: MilestoneEvent[];
 }
 
@@ -17,6 +18,7 @@ const milestoneData: MilestoneEra[] = [
   {
     era: 'The Beginning',
     years: '1988–1999',
+    image: '/assets/about/About%20Us%20-%20Milestone%20Images/The%20beginning.png',
     events: [
       { year: '1988', description: 'ACT was founded as the sole agent of Compaq in Egypt, pioneering Egypt\'s early IT transformation.' },
       { year: '1990', description: 'Entered the hospitality technology field by introducing Fidelio, the global hotel management system, revolutionizing hotel operations across Egypt.' },
@@ -27,6 +29,7 @@ const milestoneData: MilestoneEra[] = [
   {
     era: 'Building Partnerships',
     years: '2000–2009',
+    image: '/assets/about/About%20Us%20-%20Milestone%20Images/Building%20partnerships.jpg',
     events: [
       { year: '2002', description: 'Following the HP–Compaq merger, ACT became an HP Business Partner and was later recognized as Egypt\'s Best HP Service Provider.' },
       { year: '2003', description: 'Partnered with Infor, expanding ACT\'s enterprise software solutions.' },
@@ -37,6 +40,7 @@ const milestoneData: MilestoneEra[] = [
   {
     era: 'Driving Excellence',
     years: '2010–2018',
+    image: '/assets/about/About%20Us%20-%20Milestone%20Images/Driving%20excellence.jpg',
     events: [
       { year: '2012', description: 'Became an Aruba Gold Certified Partner, expanding wireless and mobility expertise.' },
       { year: '2014', description: 'After Oracle\'s acquisition of Micros, ACT took full ownership of the Middle East Hub and launched Advanced Global Services (AGS) — its hospitality implementation arm operating on a global scale.' },
@@ -47,6 +51,7 @@ const milestoneData: MilestoneEra[] = [
   {
     era: 'Global Expansion',
     years: '2019–2024',
+    image: '/assets/about/About%20Us%20-%20Milestone%20Images/Global%20Expansion.jpg',
     events: [
       { year: '2019', description: 'ACT entered a new era of growth by founding ACT Australia, ACT GlobalSoft, and transforming AGS into ACT International to drive its global expansion.' },
       { year: '2019', description: 'Established a joint venture with iKen, combining digital infrastructure, data center, and business solutions expertise.' },
@@ -57,6 +62,7 @@ const milestoneData: MilestoneEra[] = [
   {
     era: 'Global Recognition',
     years: '2025',
+    image: '/assets/about/About%20Us%20-%20Milestone%20Images/Global%20recognition.jpeg',
     events: [
       { year: '2025', description: 'Honored with Global Recognition at the Oracle Partner Awards, celebrating ACT\'s excellence in global delivery and partnership.' },
     ],
@@ -122,6 +128,17 @@ const TimelineEra = ({
           className={`text-orange-500 transition-transform duration-500 ease-out ${isOpen ? "rotate-180" : ""}`}
         />
       </button>
+
+      {/* Era Image - Displayed after header, before timeline */}
+      {isOpen && era.image && (
+        <div className="mb-6 overflow-hidden rounded-xl">
+          <img
+            src={era.image}
+            alt={`${era.era} era`}
+            className="w-full h-80 object-contain"
+          />
+        </div>
+      )}
 
       {/* Events Container with Smooth Animation */}
       <div

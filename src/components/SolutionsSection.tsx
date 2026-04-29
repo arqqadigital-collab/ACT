@@ -75,7 +75,7 @@ const SolutionsSection = () => {
       slider.addEventListener("scroll", checkScrollButtons);
       return () => slider.removeEventListener("scroll", checkScrollButtons);
     }
-  }, []);
+  }, [solutions]);
 
   const scroll = (direction: "left" | "right") => {
     if (sliderRef.current) {
@@ -102,7 +102,7 @@ const SolutionsSection = () => {
           }`}
         >
           <div>
-            <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-sm font-semibold mb-4">
+            <span className="inline-block px-4 py-1.5 rounded-full glass-card text-primary text-base font-semibold mb-4">
               Our Technology Solutions
             </span>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
@@ -179,7 +179,7 @@ const SolutionsSection = () => {
                     <h3 className="font-display text-2xl font-bold text-white mb-3">
                       {solution.title}
                     </h3>
-                    <p className="text-white/80 text-sm leading-relaxed opacity-1 group-hover:opacity-100 transition-opacity duration-500">
+                    <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                       {solution.shortDescription}
                     </p>
                   </div>
