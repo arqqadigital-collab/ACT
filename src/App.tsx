@@ -32,9 +32,9 @@ import HospitalityAboutPage from "./pages/HospitalityAboutPage";
 import HospitalityCareersPage from "./pages/HospitalityCareersPage";
 import HospitalityInsightsPage from "./pages/HospitalityInsightsPage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
-
 import NotFound from "./pages/NotFound";
 import ChatAgent from "./components/ChatAgent";
+import TermsConditionsPage from './pages/TermsConditionsPage';
 
 const queryClient = new QueryClient();
 
